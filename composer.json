@@ -4,7 +4,11 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.2.*"
+		"laravel/framework": "4.2.*",
+        "hybridauth/hybridauth": "v2.2.1",
+        "way/generators": "2.*",
+        "guzzlehttp/guzzle": "~4.0",
+        "laracasts/utilities": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -14,7 +18,10 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
+        "psr-4":{
+            "Crowdlinker\\": "app/Crowdlinker"
+        }
 	},
 	"scripts": {
 		"post-install-cmd": [
