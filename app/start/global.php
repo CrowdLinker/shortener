@@ -86,7 +86,7 @@ require app_path().'/filters.php';
  * -----------------------------------------------
  */
 
-$current_envrionment = App::envrionment();
+$current_envrionment = App::environment();
 
 if($current_envrionment == 'local')
 {
@@ -103,8 +103,8 @@ if($current_envrionment == 'local')
                                 "enabled" => true,
                                 "keys" =>
                                     [
-                                        "id" => "",
-                                        "secret" => ""
+                                        "id" => "649976575082242",
+                                        "secret" => "38a29d542d29216ce4add7ad428ad4c3"
                                     ]
                             ],
                         "Twitter" =>
@@ -112,8 +112,8 @@ if($current_envrionment == 'local')
                                 "enabled" => true,
                                 "keys" =>
                                     [
-                                        "key" => "",
-                                        "secret" => ""
+                                        "key" => "zKouBmVjW2i5IQBR9D95wDzFZ",
+                                        "secret" => "hcvD6FkzwjAYRgL1NXGQyDipjxOxDRFxiMqEHjcSfmaH7Ou5fT"
                                     ]
                             ]
                     ]
@@ -136,8 +136,8 @@ else
                                 "enabled" => true,
                                 "keys" =>
                                     [
-                                        "id" => "649976575082242",
-                                        "secret" => "38a29d542d29216ce4add7ad428ad4c3"
+                                        "id" => "649890621757504",
+                                        "secret" => "2bab84612c0edd8760cc68ed32574ece"
                                     ]
                             ],
                         "Twitter" =>
