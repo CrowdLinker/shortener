@@ -17,3 +17,4 @@ Route::get('/', function()
 });
 
 Route::get('/login',['as' => 'login','uses' => 'AuthController@index']);
+Route::get('/social/auth',['as' => 'auth','uses' => 'AuthContorller@authorize']);

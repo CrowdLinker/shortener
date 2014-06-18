@@ -7,6 +7,8 @@
     <title>Crowdlinker Shortener - Login</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap-social.css">
     <link rel="stylesheet" href="css/style.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,10 +24,10 @@
             <h3>Please Log In, or <a href="#">Sign Up</a></h3>
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="#" class="btn btn-lg btn-primary btn-block">Facebook</a>
+                    <a href="#" class="btn btn-social btn-facebook btn-block"><i class="fa fa-facebook"></i> Facebook</a>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="#" class="btn btn-lg btn-info btn-block">Twitter</a>
+                    <a href="#" class="btn btn-social btn-twitter btn-block"><i class="fa fa-twitter"></i> Twitter</a>
                 </div>
             </div>
             <div class="login-or">

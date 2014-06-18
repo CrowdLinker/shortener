@@ -1,0 +1,19 @@
+{
+  "name": "shortener",
+  "version": "1.0",
+  "homepage": "https://github.com/CrowdLinker/shortener",
+  "authors": [
+    "Meet Godhani"
+  ],
+  "description": "Crowdlinker URL Shortener",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendors",
+    "test",
+    "tests"
+  ]
+}
