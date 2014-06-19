@@ -86,71 +86,33 @@ require app_path().'/filters.php';
  * -----------------------------------------------
  */
 
-$current_envrionment = App::environment();
-
-if($current_envrionment == 'local')
+App::bind('Hybrid_Auth',function()
 {
-    App::bind('Hybrid_Auth',function()
-    {
-        return new Hybrid_Auth
-        (
-            [
-                "base_url" => URL::to('/social/auth'),
-                "providers" =>
-                    [
-                        "Facebook" =>
-                            [
-                                "enabled" => true,
-                                "keys" =>
-                                    [
-                                        "id" => "649976575082242",
-                                        "secret" => "38a29d542d29216ce4add7ad428ad4c3"
-                                    ]
-                            ],
-                        "Twitter" =>
-                            [
-                                "enabled" => true,
-                                "keys" =>
-                                    [
-                                        "key" => "zKouBmVjW2i5IQBR9D95wDzFZ",
-                                        "secret" => "hcvD6FkzwjAYRgL1NXGQyDipjxOxDRFxiMqEHjcSfmaH7Ou5fT"
-                                    ]
-                            ]
-                    ]
-            ]
-        );
-    });
-}
-else
-{
-    App::bind('Hybrid_Auth',function()
-    {
-        return new Hybrid_Auth
-        (
-            [
-                "base_url" => URL::to('/social/auth'),
-                "providers" =>
-                    [
-                        "Facebook" =>
-                            [
-                                "enabled" => true,
-                                "keys" =>
-                                    [
-                                        "id" => "649890621757504",
-                                        "secret" => "2bab84612c0edd8760cc68ed32574ece"
-                                    ]
-                            ],
-                        "Twitter" =>
-                            [
-                                "enabled" => true,
-                                "keys" =>
-                                    [
-                                        "key" => "zKouBmVjW2i5IQBR9D95wDzFZ",
-                                        "secret" => "hcvD6FkzwjAYRgL1NXGQyDipjxOxDRFxiMqEHjcSfmaH7Ou5fT"
-                                    ]
-                            ]
-                    ]
-            ]
-        );
-    });
-}
+    return new Hybrid_Auth
+    (
+        [
+            "base_url" => URL::to('/social/auth'),
+            "providers" =>
+                [
+                    "Facebook" =>
+                        [
+                            "enabled" => true,
+                            "keys" =>
+                                [
+                                    "id" => $_ENV['FACEBOOK_ID'],
+                                    "secret" => $_ENV['FACEBOOK_SECRET']
+                                ]
+                        ],
+                    "Twitter" =>
+                        [
+                            "enabled" => true,
+                            "keys" =>
+                                [
+                                    "key" => $_ENV['TWITTER_KEY'],
+                                    "secret" => $_ENV['TWITTER_SECRET']
+                                ]
+                        ]
+                ]
+        ]
+    );
+});

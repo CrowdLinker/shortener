@@ -24,10 +24,10 @@
             <h3>Please Log In, or <a href="#">Sign Up</a></h3>
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="#" class="btn btn-social btn-facebook btn-block"><i class="fa fa-facebook"></i> Facebook</a>
+                    <a href="/social/auth?provider=facebook" class="btn btn-social btn-facebook btn-block"><i class="fa fa-facebook"></i> Facebook</a>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="#" class="btn btn-social btn-twitter btn-block"><i class="fa fa-twitter"></i> Twitter</a>
+                    <a href="/social/auth?provider=twitter" class="btn btn-social btn-twitter btn-block"><i class="fa fa-twitter"></i> Twitter</a>
                 </div>
             </div>
             <div class="login-or">
