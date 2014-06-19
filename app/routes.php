@@ -15,12 +15,17 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
-
-Route::get('/login',['as' => 'login','uses' => 'AuthController@index']);
+Route::get('/login',['as' => 'login','before' => 'loggedin','uses' => 'AuthController@index']);
 Route::get('/register',['as' => 'register', 'uses' => 'AuthController@register']);
 Route::get('social/facebook',['as' => 'facebook','uses' => 'AuthController@facebook']);
 Route::get('social/twitter',['as' => 'twitter','uses' => 'AuthController@twitter']);
-
+Route::get('/logout',function()
+{
+    Auth::logout();
+    Session::flush();
+    return Redirect::to('/');
+});
+Route::get('dashboard',['as' => 'dashboard','before' => 'auth','uses' => 'DashboardController@index']);
 Route::group(['prefix' => 'api'],function()
 {
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);

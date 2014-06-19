@@ -7,7 +7,7 @@ interface UserInterface
      * @param $data
      * @return mixed
      */
-    public function create($data);
+    public function create($data,$socialmedia = false);
 
     /**
      * Check if user already exists
@@ -22,5 +22,12 @@ interface UserInterface
      * @return mixed
      */
     public function setPassword($email);
+
+    /**
+     * @param $email
+     * @param $provider_id
+     * @return mixed
+     */
+    public function setProviderFacebook($email,$provider_id);
 
 }

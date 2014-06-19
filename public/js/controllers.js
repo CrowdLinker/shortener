@@ -29,9 +29,9 @@ angular.module('shortenerApp.controllers',[])
         $scope.authorize = function()
         {
             User.authorize($scope.account)
-                .success(function()
+                .success(function(data)
                 {
-                    $window.location(shortener.url + '/dashboard');
+                        $window.location.replace(shortener.url + '/dashboard');
                 })
                 .error(function(data)
                 {

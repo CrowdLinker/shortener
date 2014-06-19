@@ -112,12 +112,18 @@ class AuthController extends ApiController {
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
 
-            $message = 'Your unique facebook user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
-            echo $message. "<br/>";
-
-            //Var_dump
-            //display whole array().
-            dd($result);
+            $checkemail = $this->user->checkUser($result['email']);
+            if($checkemail)
+            {
+                $user = $this->user->setProviderFacebook($result['email'],$result['id']);
+                Auth::loginUsingId((int)$user->id);
+                return Redirect::intended('dashboard');
+            }
+            else
+            {
+                $this->user->create($result,true);
+                return Redirect::intended('dashboard');
+            }
 
         }
         // if not ask for permission first
