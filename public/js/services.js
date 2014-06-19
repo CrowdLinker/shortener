@@ -5,8 +5,16 @@ angular.module('shortenerApp.services',[])
                 return $http({
                     method : 'POST',
                     url : shortener.url + '/api/user/create',
-                    data: data
+                    data : data
                 });
+            },
+            authorize: function(data)
+            {
+                return $http({
+                    method : 'POST',
+                    url : shortener.url + '/api/user/authorize',
+                    data : data
+                })
             }
         };
     })

@@ -18,35 +18,35 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-app="shortenerApp" ng-csp>
 <div class="container">
     <div class="row">
         <div class="main">
-            <div class="login-form-content">
+            <div class="login-form-content" ng-controller="AuthController">
                 <p class="text-center"><img src="/image/scrolllogo.svg" width="166"></p>
                 <h3>Please Log In, or <a href="/register">Sign Up</a></h3>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                        <p class="text-center"><a href="/social/auth?provider=facebook" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Facebook</a></p>
+                        <p class="text-center"><a href="/social/facebook" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Facebook</a></p>
                     </div>
                 </div>
                 <div class="login-or">
                     <hr class="hr-or">
                     <span class="span-or">or</span>
                 </div>
-                <form role="form">
+                <form ng-submit="authorize()" role="form">
                     <div class="form-group">
                         <label for="inputUsernameEmail">Email</label>
-                        <input type="text" class="form-control" id="inputUsernameEmail">
+                        <input type="email" ng-model="account.email" class="form-control" id="inputUsernameEmail">
                     </div>
                     <div class="form-group">
                         <a class="pull-right" href="#">Forgot password?</a>
                         <label for="inputPassword">Password</label>
-                        <input type="password" class="form-control" id="inputPassword">
+                        <input type="password" ng-model="account.password" class="form-control" id="inputPassword">
                     </div>
                     <div class="checkbox pull-right">
                         <label>
-                            <input type="checkbox">
+                            <input ng-model="account.remember" ng-true-value="yes" ng-false-value="no" type="checkbox">
                             Remember me </label>
                     </div>
                     <button type="submit" class="btn btn btn-primary">
@@ -57,9 +57,15 @@
         </div>
     </div>
 </div>
+@include('layout.partials.javascript')
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/services.js"></script>
+<Script src="/js/controllers.js"></Script>
+</body>
 </body>
 </html>

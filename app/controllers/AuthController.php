@@ -17,6 +17,7 @@ class AuthController extends ApiController {
      */
     public function index()
     {
+        JavaScript::put(['url' => URL::to('/')]);
         return View::make('login');
     }
 
@@ -30,6 +31,10 @@ class AuthController extends ApiController {
         return View::make('register');
     }
 
+    /**
+     * Create User Account
+     * @return mixed
+     */
     public function store()
     {
         $rules =
@@ -60,15 +65,34 @@ class AuthController extends ApiController {
         else
         {
             $this->user->create(Input::all());
-            return $this->setStatusCode(200)->respondWithSuccess('Successfully created account');
+            return $this->setStatusCode(201)->respondWithSuccess('Successfully created account');
         }
     }
 
-    public function authorize($provider)
-    {
 
+    /**
+     * Authorize user with email and password
+     * @return mixed
+     */
+    public function authorize()
+    {
+        $email = Input::get('email');
+        $password = Input::get('password');
+        $remember = Input::get('remember');
+        if (Auth::attempt(['email' => $email, 'password' => $password],$remember == 'yes' ? true : false))
+        {
+            return $this->setStatusCode(200)->respondWithSuccess('Successfully Authorized!');
+        }
+        else
+        {
+            return $this->setStatusCode(400)->respondWithError('Username or password is incorrect');
+        }
     }
 
+    /**
+     * Authorize user using Facebook Social Media
+     * @return mixed
+     */
     public function facebook()
     {
         // get data from input

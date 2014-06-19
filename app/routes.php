@@ -24,4 +24,5 @@ Route::get('social/twitter',['as' => 'twitter','uses' => 'AuthController@twitter
 Route::group(['prefix' => 'api'],function()
 {
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
+    Route::post('/user/authorize',['as' => 'api.authorize', 'uses' => 'AuthController@authorize']);
 });
