@@ -10,7 +10,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/bootstrap-social.css">
-    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,7 +23,7 @@
     <div class="row">
         <div class="main">
             <div class="login-form-content" ng-controller="AuthController">
-                <p class="text-center"><img src="/image/scrolllogo.svg" width="166"></p>
+                <p class="text-center"><a href="/"><img src="/image/scrolllogo.svg" width="166"></a></p>
                 <h3>Please Log In, or <a href="/register">Sign Up</a></h3>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -34,7 +34,7 @@
                     <hr class="hr-or">
                     <span class="span-or">or</span>
                 </div>
-                <div ng-if="error" class="alert alert-danger">Username or password is incorrect or does not exist</div>
+                <div ng-if="error" class="alert alert-danger" ng-cloak>Username or password is incorrect or does not exist</div>
                 <form ng-submit="authorize()" role="form">
                     <div class="form-group">
                         <label for="inputUsernameEmail">Email</label>

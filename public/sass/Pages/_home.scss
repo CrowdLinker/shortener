@@ -1,0 +1,66 @@
+body
+{
+  overflow-y:auto;
+  overflow-x:hidden;
+  font-size:12px;
+}
+
+.panel-background
+{
+  padding-top:150px;
+  padding-bottom:150px;
+}
+
+a.logo-scroll {
+  background: url(../image/scrolllogo.svg) no-repeat;
+  display: inline;
+  width: 136px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+h1,h2,h4 {
+  text-align: center;
+  margin-bottom: 1em;
+  font-family: 'Lato', sans-serif;
+}
+
+.output
+{
+  border: none;
+  box-shadow: none;
+  text-align: center;
+  font-size: 22px;
+  font-family: 'Lato', sans-serif;
+}
+
+
+
+#shorten-input {
+  height: 70px;
+  color: #999;
+  font-size: 1.9em;
+}
+
+.btn-specs
+{
+  height:70px;
+  font-family: 'Lato', sans-serif;
+}
+
+.error {
+  color: red;
+  font-style: italic;
+  text-align: center;
+  margin-top: 1em;
+}
+
+.header
+{
+  margin-top:50px;
+}
+
+.nav-pills {
+  font-size:16px;
+  font-family: 'Lato', sans-serif;
+}

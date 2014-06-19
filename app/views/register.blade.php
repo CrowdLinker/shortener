@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/bootstrap-social.css">
-    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="main">
             <div class="login-form-content" ng-controller="RegisterController">
-                <p class="text-center"><img src="/image/scrolllogo.svg" width="166"></p>
+                <p class="text-center"><a href="/"><img src="/image/scrolllogo.svg" width="166"></a></p>
                 <h3>Register</h3>
                 <div ng-if="success" class="alert alert-success">Registered successfully !. Please sign in</div>
                 <div ng-if="error" class="alert alert-danger">
