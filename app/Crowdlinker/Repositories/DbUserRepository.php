@@ -3,6 +3,12 @@ use Illuminate\Support\Facades\Hash;
 use User;
 class DbUserRepository implements UserInterface
 {
+    /**
+     * Create new account
+     * @param $data
+     * @param bool $socialmedia
+     * @return mixed|void
+     */
     public function create($data,$socialmedia = false)
     {
         $user = new User;
@@ -18,12 +24,23 @@ class DbUserRepository implements UserInterface
         $user->save();
     }
 
+    /**
+     * Check for existing user email
+     * @param $email
+     * @return bool|mixed
+     */
     public function checkUser($email)
     {
         $user = User::where('email','=',$email)->count();
         return $user > 0 ? true : false;
     }
 
+    /**
+     * Set provider for facebook
+     * @param $email
+     * @param $provider_id
+     * @return mixed
+     */
     public function setProviderFacebook($email,$provider_id)
     {
         $user = User::where('email','=',$email)->first();
@@ -32,6 +49,7 @@ class DbUserRepository implements UserInterface
         $user->save();
         return $user;
     }
+
 
     public function setPassword($email)
     {

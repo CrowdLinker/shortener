@@ -10,7 +10,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/bootstrap-social.css">
-    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -22,38 +22,26 @@
 <div class="container">
     <div class="row">
         <div class="main">
-            <div class="login-form-content" ng-controller="AuthController">
+            <div class="login-form-content" ng-controller="ResetController">
                 <p class="text-center"><img src="/image/scrolllogo.svg" width="166"></p>
-                <h3>Please Log In, or <a href="/register">Sign Up</a></h3>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <p class="text-center"><a href="/social/facebook" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Facebook</a></p>
-                    </div>
-                </div>
-                <div class="login-or">
-                    <hr class="hr-or">
-                    <span class="span-or">or</span>
-                </div>
-                <div ng-if="error" class="alert alert-danger">Username or password is incorrect or does not exist</div>
-                <form ng-submit="authorize()" role="form">
+                <h3>Forgot your password ?</h3>
+                @if(Session::has('error'))
+                <div class="alert alert-danger">{{ Session::get('error') }}</div>
+                @elseif(Session::has('status'))
+                <div class="alert alert-success">{{ Session::get('status') }}</div>
+                @endif
+                {{Form::open() }}
                     <div class="form-group">
                         <label for="inputUsernameEmail">Email</label>
-                        <input type="email" ng-model="account.email" class="form-control" id="inputUsernameEmail">
+                        <input type="email" name="email" class="form-control" id="inputUsernameEmail">
                     </div>
-                    <div class="form-group">
-                        <a class="pull-right" href="/password/remind">Forgot password?</a>
-                        <label for="inputPassword">Password</label>
-                        <input type="password" ng-model="account.password" class="form-control" id="inputPassword">
-                    </div>
-                    <div class="checkbox pull-right">
-                        <label>
-                            <input ng-model="account.remember" ng-true-value="yes" ng-false-value="no" type="checkbox">
-                            Remember me </label>
-                    </div>
-                    <button type="submit" class="btn btn btn-primary">
-                        Log In
+                    <button type="submit" class="btn btn-primary">
+                       Submit
                     </button>
-                </form>
+                    <a href="/login" class="btn btn-primary">
+                        Log in
+                    </a>
+                {{Form::close() }}
             </div>
         </div>
     </div>
