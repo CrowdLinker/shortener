@@ -17,4 +17,11 @@ Route::get('/', function()
 });
 
 Route::get('/login',['as' => 'login','uses' => 'AuthController@index']);
-Route::get('/social/{action?}',['as' => 'auth','uses' => 'AuthContorller@authorize']);
+Route::get('/register',['as' => 'register', 'uses' => 'AuthController@register']);
+Route::get('social/facebook',['as' => 'facebook','uses' => 'AuthController@facebook']);
+Route::get('social/twitter',['as' => 'twitter','uses' => 'AuthController@twitter']);
+
+Route::group(['prefix' => 'api'],function()
+{
+    Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
+});

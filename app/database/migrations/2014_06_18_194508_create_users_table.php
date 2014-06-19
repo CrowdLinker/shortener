@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration {
             $table->string('firstname');
             $table->string('lastname');
             $table->string('provider')->nullable();
-            $table->string('identifier')->nullable();
+            $table->string('provider_uid')->nullable();
 			$table->timestamps();
 		});
 	}

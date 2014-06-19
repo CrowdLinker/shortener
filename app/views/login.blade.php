@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/bootstrap-social.css">
     <link rel="stylesheet" href="css/style.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -21,38 +22,38 @@
 <div class="container">
     <div class="row">
         <div class="main">
-            <h3>Please Log In, or <a href="#">Sign Up</a></h3>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="/social/auth?provider=facebook" class="btn btn-social btn-facebook btn-block"><i class="fa fa-facebook"></i> Facebook</a>
+            <div class="login-form-content">
+                <p class="text-center"><img src="/image/scrolllogo.svg" width="166"></p>
+                <h3>Please Log In, or <a href="/register">Sign Up</a></h3>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <p class="text-center"><a href="/social/auth?provider=facebook" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Facebook</a></p>
+                    </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="/social/auth?provider=twitter" class="btn btn-social btn-twitter btn-block"><i class="fa fa-twitter"></i> Twitter</a>
+                <div class="login-or">
+                    <hr class="hr-or">
+                    <span class="span-or">or</span>
                 </div>
+                <form role="form">
+                    <div class="form-group">
+                        <label for="inputUsernameEmail">Email</label>
+                        <input type="text" class="form-control" id="inputUsernameEmail">
+                    </div>
+                    <div class="form-group">
+                        <a class="pull-right" href="#">Forgot password?</a>
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword">
+                    </div>
+                    <div class="checkbox pull-right">
+                        <label>
+                            <input type="checkbox">
+                            Remember me </label>
+                    </div>
+                    <button type="submit" class="btn btn btn-primary">
+                        Log In
+                    </button>
+                </form>
             </div>
-            <div class="login-or">
-                <hr class="hr-or">
-                <span class="span-or">or</span>
-            </div>
-            <form role="form">
-                <div class="form-group">
-                    <label for="inputUsernameEmail">Email</label>
-                    <input type="text" class="form-control" id="inputUsernameEmail">
-                </div>
-                <div class="form-group">
-                    <a class="pull-right" href="#">Forgot password?</a>
-                    <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="inputPassword">
-                </div>
-                <div class="checkbox pull-right">
-                    <label>
-                        <input type="checkbox">
-                        Remember me </label>
-                </div>
-                <button type="submit" class="btn btn btn-primary">
-                    Log In
-                </button>
-            </form>
         </div>
     </div>
 </div>
