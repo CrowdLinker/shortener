@@ -23,8 +23,7 @@ angular.module('shortenerApp.controllers',[])
         }
     })
     .controller('AuthController',
-    function($scope,User,$window)
-    {
+    function($scope,User,$window){
         $scope.error = false;
         $scope.authorize = function()
         {
@@ -44,3 +43,28 @@ angular.module('shortenerApp.controllers',[])
                 });
         }
     })
+    .controller('LinkDataController',
+    function($scope,Link)
+    {
+        Link.get()
+            .success(function(data)
+            {
+                $scope.shortlinks = data;
+            });
+
+        $scope.submitLink = function()
+        {
+            Link.create($scope.shortlink)
+                .success(function()
+                {
+                    Link.get()
+                        .success(function(data)
+                        {
+                            $scope.shortlinks = data;
+                        });
+                });
+        };
+    }
+);
+
+

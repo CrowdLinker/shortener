@@ -18,3 +18,20 @@ angular.module('shortenerApp.services',[])
             }
         };
     })
+    .factory('Link',function($http)
+    {
+        return {
+            create : function(data)
+            {
+                return $http({
+                    method : 'POST',
+                    url : shortener.url + '/api/create',
+                    data: data
+                });
+            },
+            get : function()
+            {
+                return $http.get(shortener.url + '/api/links');
+            }
+        }
+    });

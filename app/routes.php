@@ -26,6 +26,8 @@ Route::get('/logout',function()
 Route::get('dashboard',['as' => 'dashboard','before' => 'auth','uses' => 'DashboardController@index']);
 Route::group(['prefix' => 'api'],function()
 {
+    Route::get('links',['as' => 'api.urls','uses' => 'LinksController@getlinks']);
+    Route::post('create',['as' => 'api.create','uses' => 'LinksController@create']);
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
     Route::post('/user/authorize',['as' => 'api.authorize', 'uses' => 'AuthController@authorize']);
 });

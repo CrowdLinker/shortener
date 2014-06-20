@@ -4,6 +4,7 @@ use Crowdlinker\Shortener\Repositories\LinkRepositoryInterface as LinkRepo;
 use Crowdlinker\Shortener\Utilities\UrlHasher;
 use Crowdlinker\Shortener\Exceptions\NonExistentHashException;
 use Crowdlinker\Embedly\EmbedlyApi as Embedly;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
@@ -69,27 +70,10 @@ class ShortenerService
         });
         $domainprovider = $page_data['provider_display'];
         $pagetitle = $page_data['title'];
-        $user_id = (Session::has('user_data')) ? Session::get('user_data')['userid'] : NULL;
+        $user_id = (Auth::check()) ? Auth::user()->id : NULL;
         $this->linkRepo->createApi($url,$hash,$pagetitle,$domainprovider,$user_id);
         return $hash;
     }
-
-    /**
-     * Create Shortlink hash from Crowdlinker Dashboard
-     * @param $url
-     * @param $domainprovider
-     * @param $pagetitle
-     * @return string
-     */
-    private function makeHashFromApp($url,$domainprovider,$pagetitle)
-    {
-        $hash = $this->urlHasher->make($url);
-        $user_id = (Session::has('user_data')) ? Session::get('user_data')['userid'] : NULL;
-        $this->linkRepo->createApi($url,$hash,$pagetitle,$domainprovider,$user_id);
-        return $hash;
-    }
-
-
     /**
      * Increment Click
      * @param $slug

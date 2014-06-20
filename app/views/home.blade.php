@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=1024">
     <title>Crowdlinker - URL Shortener</title>
     <!-- Bootstrap -->
-    <!-- Bootstrap -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/bootstrap-social.css">
