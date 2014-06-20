@@ -102,4 +102,13 @@ class ShortenerService
     {
         $this->linkRepo->location($slug,$ip);
     }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function linkDetails($data)
+    {
+        return $this->linkRepo->linkDetails($data);
+    }
 }

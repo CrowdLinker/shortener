@@ -10,7 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+Route::model('shortlink', 'ShortLink');
 Route::get('/',['as' => 'home','before' => 'loggedin','uses' => 'LinksController@index']);
 Route::get('/login',['as' => 'login','before' => 'loggedin','uses' => 'AuthController@index']);
 Route::get('/register',['as' => 'register', 'uses' => 'AuthController@register']);
@@ -24,9 +24,11 @@ Route::get('/logout',function()
     return Redirect::to('/');
 });
 Route::get('dashboard',['as' => 'dashboard','before' => 'auth','uses' => 'DashboardController@index']);
+Route::get('dashboard/{id}',['as' => 'dashboard','before' => 'auth','uses' => 'DashboardController@analytics']);
 Route::group(['prefix' => 'api'],function()
 {
     Route::get('links',['as' => 'api.urls','uses' => 'LinksController@getlinks']);
+    Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','uses' => 'LinksController@detail']);
     Route::post('create',['as' => 'api.create','uses' => 'LinksController@create']);
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
     Route::post('/user/authorize',['as' => 'api.authorize', 'uses' => 'AuthController@authorize']);

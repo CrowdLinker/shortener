@@ -13,12 +13,21 @@ class ShortLink extends \Eloquent {
     }
 
     /**
+     * Has Many Locations
+     * @return mixed
+     */
+    public function locations()
+    {
+        return $this->hasMany('Location','shortlink_id');
+    }
+
+    /**
      * Has many referrers
      * @return mixed
      */
     public function referrers()
     {
-        return $this->hasMany('Referrer');
+        return $this->hasMany('Referrer','shortlink_id');
     }
 
     /**

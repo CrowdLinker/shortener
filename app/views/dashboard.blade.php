@@ -71,6 +71,7 @@
                     <td><% value.created_at %></td>
                     <td><h5><% value.pagetitle %><br/><small><% value.provider %></small></h5></td>
                     <td><% value.clicks %></td>
+                    <td><a href="#">Details</a></td>
                 </tr>
                 <tr ng-if="shortlinks.length === 0">
                     <td class="text-center" colspan=4"><h4>No short links created yet</h4></td>

@@ -63,4 +63,11 @@ interface LinkRepositoryInterface
      * @return mixed
      */
     public function location($slug,$ip);
+
+    /**
+     * Get Details and Analytics Data
+     * @param $data
+     * @return mixed
+     */
+    public function linkDetails($data);
 }
