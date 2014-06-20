@@ -3,8 +3,15 @@
 use Carbon\Carbon;
 use Illuminate\Support\Facades\URL;
 use ShortLink,Referrer,Location,LocationCity;
+use Crowdlinker\GeoIP\geoipApi as GeoApi;
+use Crowdlinker\SnowPlow\snowplowApi as SnowPlow;
 class DbLinkRepository implements LinkRepositoryInterface
 {
+    public function __construct(GeoApi $geoapi,SnowPlow $snowplow)
+    {
+        $this->geoip = $geoapi;
+        $this->snowplow = $snowplow;
+    }
 
     public function create(array $data)
     {
@@ -67,13 +74,58 @@ class DbLinkRepository implements LinkRepositoryInterface
     public function referrer($hash,$referrer)
     {
         $shortlink = ShortLink::where('hash','=',$hash)->first();
-
-
+        $source = $this->snowplow->parse($referrer,$hash);
+        $referrer = new Referrer;
+        $referrer->source = $source;
+        $referrer->shortlink()->associate($shortlink);
+        $referrer->save();
     }
 
     public function location($hash,$ip)
     {
-        
+        $shortlink = ShortLink::where('hash','=',$hash)->first();
+        $ip_compressed = md5($ip);
+        $data = Cache::remember("geoip-{$ip_compressed}",1440,function() use ($ip)
+        {
+            return $this->geoip->fetchdata($ip);
+        });
+        $lon = $data->longitude;
+        $lat = $data->latitude;
+        $city = $data->city;
+        $check = $this->checkLocationExists($lon,$lat);
+        if(!$check)
+        {
+            $this->insertLocation($shortlink,$city,$lat,$lon);
+        }
+        else
+        {
+            $location = Location::where('latitude','=',$lat)->where('longitude','=',$lon)->first();
+            $this->addLocationCity($location->id,$city);
+        }
+    }
+
+    private function insertLocation($slink,$city,$lat,$lon)
+    {
+        $location = new Location;
+        $location->latitude = $lat;
+        $location->longitude = $lon;
+        $location->shortlink()->associate($slink);
+        $location->cities()->city = $city;
+        $location->cities()->save();
+    }
+
+    private function addLocationCity($lid,$city)
+    {
+        $location = new LocationCity;
+        $location->city = $city;
+        $location->location_id = $lid;
+        $location->save();
+    }
+
+    private function checkLocationExists($lon,$lat)
+    {
+        $location = Location::where('latitude','=',$lat)->where('longitude','=',$lon)->count();
+        return $location > 0 ? true : false;
     }
 
 }

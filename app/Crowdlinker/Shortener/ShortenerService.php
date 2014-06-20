@@ -85,7 +85,7 @@ class ShortenerService
 
     public function trackReferrer($slug,$referrer)
     {
-
+        $this->linkRepo->referrer($slug,$referrer);
     }
 
     public function trackLocation($slug,$ip)

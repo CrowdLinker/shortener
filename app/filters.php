@@ -105,10 +105,14 @@ Route::filter('clicks_shorturl',function()
 
 Route::filter('track_referrer',function()
 {
-
+    $referrer = Request::server('HTTP_REFERER');
+    Shortener::trackReferrer(Request::segment(1),$referrer);
 });
 
 Route::filter('track_location',function()
 {
-
+    $request = Request::instance();
+    $request->setTrustedProxies(array('127.0.0.1'));
+    $ip = $request->getClientIp();
+    Shortener::trackLocation(Request::segment(1),$ip);
 });

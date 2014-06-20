@@ -8,7 +8,9 @@
         "way/generators": "2.*",
         "artdarek/oauth-4-laravel": "dev-master",
         "guzzlehttp/guzzle": "~4.0",
-        "laracasts/utilities": "dev-master"
+        "laracasts/utilities": "dev-master",
+        "snowplow/referer-parser": "dev-master",
+        "symfony/yaml": "2.5.*@dev"
 	},
 	"autoload": {
 		"classmap": [
