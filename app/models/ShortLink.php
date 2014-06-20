@@ -2,7 +2,7 @@
 
 class ShortLink extends \Eloquent {
 	protected $fillable = ['url','hash','pagetitle','domainprovider'];
-    protected $table = 'shortlinks';
+    protected $table = 'shortlink';
 
     /**
      * Belongs to User

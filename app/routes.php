@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('home');
-});
+Route::get('/',['as' => 'home','before' => 'loggedin','uses' => 'LinksController@index']);
 Route::get('/login',['as' => 'login','before' => 'loggedin','uses' => 'AuthController@index']);
 Route::get('/register',['as' => 'register', 'uses' => 'AuthController@register']);
 Route::controller('password', 'RemindersController');

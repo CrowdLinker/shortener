@@ -1,9 +1,9 @@
 <?php
 
 use Crowdlinker\Shortener\Exceptions\NonExistentHashException;
-use Crowdlinker\Repositories\UserRepositoryInterface as User;
+use Crowdlinker\Repositories\UserInterface as User;
 
-class LinksController extends \BaseController {
+class LinksController extends ApiController {
 
     protected $user;
 
@@ -23,8 +23,7 @@ class LinksController extends \BaseController {
      */
     public function index()
     {
-        Session::put('shortenerpage', str_random(40));
-        return View::make('urlshortener.index');
+        return View::make('home');
     }
 
     /**
@@ -37,12 +36,10 @@ class LinksController extends \BaseController {
         {
             $hash = Shortener::make(Input::get('url'));
         }
-
         catch (ValidationException $e)
         {
             return Redirect::home()->withErrors($e->getErrors())->withInput();
         }
-
         return Redirect::home()->with([
             'flash_message' => 'Here you go! ' . link_to($hash),
             'hashed'        => $hash
@@ -57,26 +54,15 @@ class LinksController extends \BaseController {
      */
     public function create()
     {
-        if(Session::has('user_data'))
+        try
         {
-            try
-            {
-               return Shortener::make(Input::get('url'));
-            }
-            catch (ValidationException $e)
-            {
-                return Response::json([
-                    'error' => $e->getErrors()
-                ],500);
-            }
+            $hash = Shortener::make(Input::get('url'));
+            return $this->setStatusCode(201)->respond(['hash' => $hash,'status_code' => 201]);
         }
-        else
+        catch (ValidationException $e)
         {
-            return Response::json([
-                'error' => ['API is secure. Need credentials.']
-            ],401);
+            return $this->setStatusCode(400)->respondWithError('Oops! there was some problem');
         }
-
     }
 
     /**
@@ -103,16 +89,14 @@ class LinksController extends \BaseController {
      */
     public function getlinks()
     {
-        if(Session::has('user_data'))
+        if(Auth::check())
         {
-            $data = Shortener::getLinksbyUser(Session::get('user_data')['userid']);
-            return Response::json($data,200);
+            $data = Shortener::getLinksbyUser(Auth::user()->id);
+            return $this->setStatusCode(200)->respond($data);
         }
         else
         {
-            return Response::json([
-                'error' => ['API is secure. Need credentials.']
-            ],401);
+            return $this->setStatusCode(401)->respondWithError('Unauthorized Access.');
         }
     }
 }
