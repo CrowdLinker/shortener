@@ -125,6 +125,9 @@ return array(
         'Artdarek\OAuth\OAuthServiceProvider',
         'Crowdlinker\Repositories\BackendServiceProvider',
         'Laracasts\Utilities\UtilitiesServiceProvider',
+        'Crowdlinker\Shortener\Repositories\BackendServiceProvider',
+        'Crowdlinker\Shortener\ShortenerServiceProvider',
+        'Crowdlinker\Shortener\Utilities\UtilitiesServiceProvider',
 	),
 
 	/*
@@ -192,6 +195,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
         'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
+        'Shortener'       => 'Crowdlinker\Shortener\Facades\Shortener',
 
 	),
 

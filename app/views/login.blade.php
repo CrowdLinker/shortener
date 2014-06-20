@@ -21,6 +21,15 @@
 <body ng-app="shortenerApp" ng-csp>
 <div class="container">
     <div class="row">
+        <div class="container">
+            <br/>
+            <ul class="nav nav-pills pull-right">
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
         <div class="main">
             <div class="login-form-content" ng-controller="AuthController">
                 <p class="text-center"><a href="/"><img src="/image/scrolllogo.svg" width="166"></a></p>
@@ -54,6 +63,8 @@
                         Log In
                     </button>
                 </form>
+                <br/>
+                <br/>
             </div>
         </div>
     </div>

@@ -32,3 +32,5 @@ Route::group(['prefix' => 'api'],function()
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
     Route::post('/user/authorize',['as' => 'api.authorize', 'uses' => 'AuthController@authorize']);
 });
+
+Route::post('links', 'LinksController@store');
