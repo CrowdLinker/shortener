@@ -83,13 +83,23 @@ class ShortenerService
         $this->linkRepo->increment($slug);
     }
 
+    /**
+     * Track Referrer Source
+     * @param $slug
+     * @param $referrer
+     */
     public function trackReferrer($slug,$referrer)
     {
         $this->linkRepo->referrer($slug,$referrer);
     }
 
+    /**
+     * Track Location of Client by Client IP Address
+     * @param $slug
+     * @param $ip
+     */
     public function trackLocation($slug,$ip)
     {
-
+        $this->linkRepo->location($slug,$ip);
     }
 }
