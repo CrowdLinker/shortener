@@ -1,6 +1,7 @@
 <?php  namespace Crowdlinker\Shortener\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\URL;
 use ShortLink,Referrer,Location,LocationCity;
 use Crowdlinker\GeoIP\geoipApi as GeoApi;
@@ -74,7 +75,7 @@ class DbLinkRepository implements LinkRepositoryInterface
     public function referrer($hash,$referrer)
     {
         $shortlink = ShortLink::where('hash','=',$hash)->first();
-        $source = $this->snowplow->parse($referrer,$hash);
+        $source = !is_null($referrer) ? $this->snowplow->parse($referrer,$hash) : 'direct';
         $referrer = new Referrer;
         $referrer->source = $source;
         $referrer->shortlink()->associate($shortlink);
@@ -89,9 +90,9 @@ class DbLinkRepository implements LinkRepositoryInterface
         {
             return $this->geoip->fetchdata($ip);
         });
-        $lon = $data->longitude;
-        $lat = $data->latitude;
-        $city = $data->city;
+        $lon = $data['longitude'];
+        $lat = $data['latitude'];
+        $city = $data['city'];
         $check = $this->checkLocationExists($lon,$lat);
         if(!$check)
         {
@@ -110,8 +111,13 @@ class DbLinkRepository implements LinkRepositoryInterface
         $location->latitude = $lat;
         $location->longitude = $lon;
         $location->shortlink()->associate($slink);
-        $location->cities()->city = $city;
-        $location->cities()->save();
+        $location->save();
+
+        $location_city = new LocationCity;
+        $location_city->city = $city;
+        $location_city->location()->associate($location);
+        $location_city->save();
+
     }
 
     private function addLocationCity($lid,$city)

@@ -12,8 +12,9 @@ class geoipApi
      */
     public function fetchdata($ip)
     {
-        $client = new Client(['base_url' => 'freegeoip.net']);
-        $request = $client->get('/json/'.$ip);
+        $url = 'http://freegeoip.net/json/'.$ip;
+        $client = new Client(['base_url' => $url]);
+        $request = $client->get();
         $response = json_encode($request->json());
         return json_decode($response,true);
     }
