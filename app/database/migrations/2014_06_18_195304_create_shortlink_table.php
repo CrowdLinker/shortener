@@ -22,7 +22,7 @@ class CreateShortlinkTable extends Migration {
             $table->integer('clicks');
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');;
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
 		});
 	}
 

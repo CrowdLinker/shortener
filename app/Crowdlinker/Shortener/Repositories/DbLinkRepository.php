@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\URL;
-use ShortLink;
+use ShortLink,Referrer,Location,LocationCity;
 class DbLinkRepository implements LinkRepositoryInterface
 {
 
@@ -62,6 +62,18 @@ class DbLinkRepository implements LinkRepositoryInterface
         $shortlink = ShortLink::where('hash','=',$hash)->first();
         $shortlink->increment('clicks');
         $shortlink->save();
+    }
+
+    public function referrer($hash,$referrer)
+    {
+        $shortlink = ShortLink::where('hash','=',$hash)->first();
+
+
+    }
+
+    public function location($hash,$ip)
+    {
+        
     }
 
 }

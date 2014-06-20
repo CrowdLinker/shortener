@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Crowdlinker Shortener - Login</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@crowdlinker">
+    <meta name="twitter:title" content="Crowdlinker - URL Shortener">
+    <meta property="og:site_name" content="Crowdlinker"/>
+    <meta property="og:title" content="Crowdlinker - URL Shortent" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shortener.crowdlinker.com" />
     <!-- Bootstrap -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">

@@ -13,6 +13,15 @@ class ShortLink extends \Eloquent {
     }
 
     /**
+     * Has many referrers
+     * @return mixed
+     */
+    public function referrers()
+    {
+        return $this->hasMany('Referrer');
+    }
+
+    /**
      * Refresh/remove cache on save & delete
      */
     public static function boot()

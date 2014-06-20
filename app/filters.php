@@ -96,3 +96,19 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+
+Route::filter('clicks_shorturl',function()
+{
+    \Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
+});
+
+Route::filter('track_referrer',function()
+{
+
+});
+
+Route::filter('track_location',function()
+{
+
+});

@@ -47,4 +47,20 @@ interface LinkRepositoryInterface
      * @return mixed
      */
     public function increment($hash);
+
+    /**
+     * Track Referrer
+     * @param $slug
+     * @param $referrer
+     * @return mixed
+     */
+    public function referrer($slug,$referrer);
+
+    /**
+     * Track Location
+     * @param $slug
+     * @param $ip
+     * @return mixed
+     */
+    public function location($slug,$ip);
 }
