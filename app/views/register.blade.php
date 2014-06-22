@@ -39,7 +39,7 @@
         <div class="main">
             <div class="login-form-content" ng-controller="RegisterController">
                 <p class="text-center"><a href="/"><img src="/image/scrolllogo.svg" width="166"></a></p>
-                <h3>Register</h3>
+                <h3 class="login">Register</h3>
                 <div ng-if="success" class="alert alert-success">Registered successfully !. Please sign in</div>
                 <div ng-if="error" class="alert alert-danger">
                     <ul>
@@ -83,6 +83,8 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+<script src="/js/angles.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/services.js"></script>
 <Script src="/js/controllers.js"></Script>

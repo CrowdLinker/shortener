@@ -14,5 +14,8 @@ return array(
 	*/
 
 	'debug' => true,
+    'providers' => array(
+       'Clockwork\Support\Laravel\ClockworkServiceProvider',
+    ),
 
 );

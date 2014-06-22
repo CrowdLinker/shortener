@@ -108,23 +108,23 @@ class AuthController extends ApiController {
 
             // This was a callback request from facebook, get the token
             $token = $fb->requestAccessToken( $code );
-
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
-
             $checkemail = $this->user->checkUser($result['email']);
+            //If user account's email is matching with Facebook account email and already exists
             if($checkemail)
             {
-                $user = $this->user->setProviderFacebook($result['email'],$result['id']);
+                //Add Facebook Token
+                $user = $this->user->setProviderFacebook($result['email'],$result['id'],$token);
+                //Get User Id and login
                 Auth::loginUsingId((int)$user->id);
-                return Redirect::intended('dashboard');
             }
             else
             {
-                $this->user->create($result,true);
-                return Redirect::intended('dashboard');
+                $this->user->create($result,true,$token);
             }
-
+            $this->insertSession($result['id'],$token->getAccessToken(),'facebook');
+            return Redirect::to('dashboard');
         }
         // if not ask for permission first
         else {
@@ -136,4 +136,29 @@ class AuthController extends ApiController {
         }
     }
 
+    /**
+     * Insert Session
+     * @param $id
+     * @param $token
+     * @param $provider
+     */
+    private function insertSession($id,$token,$provider)
+    {
+        $session =
+            [
+                'provider_name' => $provider,
+                'provider_uid' => $id,
+                'provider-token' => $token,
+                'provider-profile-image' => 'https://graph.facebook.com/'.$id.'/picture?width=140&height=140'
+            ];
+
+        if(Session::has('user'))
+        {
+            Session::push('users',$session);
+        }
+        else
+        {
+            Session::put('users',$session);
+        }
+    }
 }

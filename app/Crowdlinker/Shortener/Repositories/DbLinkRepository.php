@@ -154,6 +154,7 @@ class DbLinkRepository implements LinkRepositoryInterface
     {
         $details = $data->toArray();
         $sources = $this->referrerCount(array_fetch($details,'referrers'));
+        list($source,$count) = array_divide($sources);
         $output =
         [
             'pagetitle' => $details[0]['pagetitle'],
@@ -161,7 +162,12 @@ class DbLinkRepository implements LinkRepositoryInterface
             'domain' => $details[0]['domainprovider'],
             'hash' => $details[0]['hash'],
             'totalclicks' => $details[0]['clicks'],
-            'referrers' => $sources
+            'referrers' => $sources,
+            'graph_data' =>
+            [
+                'source' => $source,
+                'count' => $count,
+            ]
         ];
         return $output;
     }

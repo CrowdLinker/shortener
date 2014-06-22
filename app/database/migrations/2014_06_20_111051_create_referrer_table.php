@@ -14,6 +14,7 @@ class CreateReferrerTable extends Migration {
 	{
 		Schema::create('referrer', function(Blueprint $table)
 		{
+            $table->engine = 'InnoDB';
 			$table->increments('id');
             $table->string('source');
             $table->integer('shortlink_id')->unsigned()->index();

@@ -33,7 +33,7 @@
         <div class="main">
             <div class="login-form-content" ng-controller="ResetController">
                 <p class="text-center"><a href="/"><img src="/image/scrolllogo.svg" width="166"></a></p>
-                <h3>Forgot your password ?</h3>
+                <h3 class="login">Forgot your password ?</h3>
                 @if(Session::has('error'))
                 <div class="alert alert-danger">{{ Session::get('error') }}</div>
                 @elseif(Session::has('status'))

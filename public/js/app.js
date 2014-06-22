@@ -1,7 +1,8 @@
 
 angular.module('shortenerApp', [
     'shortenerApp.controllers',
-    'shortenerApp.services'
+    'shortenerApp.services',
+    'angles'
 ], function($interpolateProvider) {
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');

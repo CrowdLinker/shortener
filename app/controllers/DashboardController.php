@@ -11,17 +11,27 @@ class DashboardController extends ApiController {
 	public function index()
 	{
         JavaScript::put(['url' => URL::to('/')]);
-		return View::make('dashboard');
+        $title = 'Dashboard';
+		return View::make('dashboard',compact('title'));
 	}
 
     /**
-     * Shortlink detail analytics page
+     * Analytics Detail Page
+     * @param $id
      * @return mixed
      */
-    public function analytics()
+    public function analytics($id)
+    {
+        JavaScript::put(['url' => URL::to('/'),'id' => $id ]);
+        $title = 'Analytics';
+        return View::make('detail',compact('title'));
+    }
+
+    public function settings()
     {
         JavaScript::put(['url' => URL::to('/')]);
-        return View::make('detail');
+        $title = 'Settings';
+        return View::make('settings',compact('title'));
     }
 
     /**

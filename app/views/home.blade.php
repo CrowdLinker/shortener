@@ -9,7 +9,7 @@
     <meta name="twitter:site" content="@crowdlinker">
     <meta name="twitter:title" content="Crowdlinker - URL Shortener">
     <meta property="og:site_name" content="Crowdlinker"/>
-    <meta property="og:title" content="Crowdlinker - URL Shortent" />
+    <meta property="og:title" content="Crowdlinker - URL Shortener" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://shortener.crowdlinker.com" />
     <!-- Bootstrap -->
@@ -45,7 +45,7 @@
             </div>
             <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10 col-md-offset-1 col-xs-offset-1 col-sm-offset-1">
                 <br/>
-                <h1>Shorten a URL</h1>
+                <h1 class="mainpage">Shorten a URL</h1>
                 <div class="row">
                     <form method="POST" action="{{ URL::to('/links') }}" accept-charset="UTF-8">
                         <div class="form-group">

@@ -40,7 +40,7 @@
         <div class="main">
             <div class="login-form-content" ng-controller="AuthController">
                 <p class="text-center"><a href="/"><img src="/image/scrolllogo.svg" width="166"></a></p>
-                <h3>Please Log In, or <a href="/register">Sign Up</a></h3>
+                <h3 class="login">Please Log In, or <a href="/register">Sign Up</a></h3>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <p class="text-center"><a href="/social/facebook" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Facebook</a></p>
@@ -82,6 +82,8 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+<script src="/js/angles.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/services.js"></script>
 <Script src="/js/controllers.js"></Script>

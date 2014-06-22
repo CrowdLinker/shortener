@@ -5,9 +5,11 @@ interface UserInterface
     /**
      * Create new user account
      * @param $data
+     * @param bool $socialmedia
+     * @param $token
      * @return mixed
      */
-    public function create($data,$socialmedia = false);
+    public function create($data,$socialmedia = false,$token = NULL);
 
     /**
      * Check if user already exists
@@ -15,6 +17,14 @@ interface UserInterface
      * @return mixed
      */
     public function checkUser($email);
+
+
+    /**
+     * Set Email if one doesn't exists or user signed in with Social Media
+     * @param $email
+     * @return mixed
+     */
+    public function setEmail($email);
 
     /**
      * Set password if logged in using Social Media
@@ -24,10 +34,18 @@ interface UserInterface
     public function setPassword($email);
 
     /**
-     * @param $email
-     * @param $provider_id
+     * Check whether user already has username and password.
+     * @param $userid
      * @return mixed
      */
-    public function setProviderFacebook($email,$provider_id);
+    public function checkAccountPassword($userid);
+
+    /**
+     * @param $email
+     * @param $provider_id
+     * @param $token
+     * @return mixed
+     */
+    public function setProviderFacebook($email,$provider_id,$token);
 
 }

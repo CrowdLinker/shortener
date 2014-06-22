@@ -32,4 +32,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
        return $this->hasMany('ShortLink');
     }
 
+    /**
+     * User has many social Accounts
+     * @return mixed
+     */
+    public function accounts()
+    {
+        return $this->hasMany('Account');
+    }
+
 }

@@ -21,14 +21,16 @@ Route::get('/logout',function()
 {
     Auth::logout();
     Session::flush();
+    Cache::flush();
     return Redirect::to('/');
 });
 Route::get('dashboard',['as' => 'dashboard','before' => 'auth','uses' => 'DashboardController@index']);
+Route::get('dashboard/settings',['as' => 'dashboardsettings','before' => 'auth','uses' => 'DashboardController@settings']);
 Route::get('dashboard/{id}',['as' => 'dashboard','before' => 'auth','uses' => 'DashboardController@analytics']);
 Route::group(['prefix' => 'api'],function()
 {
     Route::get('links',['as' => 'api.urls','uses' => 'LinksController@getlinks']);
-    Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','uses' => 'LinksController@detail']);
+    Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','uses' => 'DashboardController@detail']);
     Route::post('create',['as' => 'api.create','uses' => 'LinksController@create']);
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
     Route::post('/user/authorize',['as' => 'api.authorize', 'uses' => 'AuthController@authorize']);

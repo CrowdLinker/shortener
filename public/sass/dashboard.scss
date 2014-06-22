@@ -1,0 +1,42 @@
+.container
+{
+  width:970px;
+  max-width: none !important;
+}
+
+a.logo-static {
+  background: url(../image/staticlogo.svg) no-repeat;
+  display: inline;
+  width: 150px;
+  margin-left: 10px;
+  margin-top:10px;
+}
+
+.shortlink-container
+{
+  margin-bottom:60px;
+
+  h1
+  {
+    font-family: 'Lato', sans-serif;
+  }
+}
+
+.created-links
+{
+  h2
+  {
+    font-family: 'Lato', sans-serif;
+  }
+}
+
+.container-analytics
+{
+  padding-top:30px;
+  padding-bottom:50px;
+  h1,
+  h3
+  {
+    font-family: 'Lato', sans-serif;
+  }
+}
