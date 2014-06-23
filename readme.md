@@ -18,6 +18,7 @@ Crowdlinker Shortener uses a number of open source projects to work properly:
 * [Gulp] - The streaming build system. Too minify and compile SASS/SCSS.
 * [jQuery] - duh 
 * [Vagrant] - Development Environment.
+* [Embedly] - For Extracting URL
 
 Installation
 --------------
@@ -32,6 +33,7 @@ composer install
 ##### Create your '.env.php' (If using in production environment) or '.env.local.php' (In local) in root.
 
 ```sh
+<?php
 return [
 
     'FACEBOOK_ID' => '<facebook-id>',
@@ -43,8 +45,8 @@ return [
 
 ```
 ##### Configure Database.
-* Configure app/database.php - For production
-* Configure app/local/database.php - For local environment (All config for local environment goes to app/local/)
+* Configure app/config/database.php - For production
+* Configure app/config/local/database.php - For local environment (All config for local environment goes to app/local/)
 
 ##### Migrate Database
 * For production
@@ -78,3 +80,4 @@ php artisan migrate --env=local
 [jQuery]:http://jquery.com
 [Gulp]:http://gulpjs.com
 [Vagrant]:http://www.vagrantup.com/
+[Embedly]:http://embed.ly
