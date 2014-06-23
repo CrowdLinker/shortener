@@ -44,8 +44,8 @@ return [
 
 ```
 ##### Configure Database.
-* Configure app/database.php - For production
-* Configure app/local/database.php - For local environment (All config for local environment goes to app/local/)
+* Configure app/config/database.php - For production
+* Configure app/config/local/database.php - For local environment (All config for local environment goes to app/local/)
 
 ##### Migrate Database
 * For production
