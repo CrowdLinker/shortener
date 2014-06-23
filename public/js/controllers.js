@@ -9,6 +9,8 @@ angular.module('shortenerApp.controllers',[])
                 .success(function()
                 {
                     $scope.success = true;
+                    $scope.error = false;
+                    $window.location.replace(shortener.url + '/login');
                 })
                 .error(function(data)
                 {
