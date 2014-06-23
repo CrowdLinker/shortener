@@ -29,9 +29,9 @@ Route::get('/logout',function()
 
 
 //Dashboard
-Route::get('dashboard',['as' => 'dashboard','before' => 'auth','uses' => 'DashboardController@index']);
-Route::get('dashboard/settings',['as' => 'dashboardsettings','before' => 'auth','uses' => 'SettingsController@index']);
-Route::get('dashboard/{id}',['as' => 'dashboard','before' => 'auth','uses' => 'AnalyticsController@index'])->where('id','^[0-9]*$');
+Route::get('dashboard',['as' => 'dashboard','before' => 'guest','uses' => 'DashboardController@index']);
+Route::get('dashboard/settings',['as' => 'dashboardsettings','before' => 'guest','uses' => 'SettingsController@index']);
+Route::get('dashboard/{id}',['as' => 'dashboard','before' => 'guest','uses' => 'AnalyticsController@index'])->where('id','^[0-9]*$');
 Route::group(['prefix' => 'api'],function()
 {
     Route::get('links',['as' => 'api.urls','before' => 'auth.basic','uses' => 'LinksController@getlinks']);
