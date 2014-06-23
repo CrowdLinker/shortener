@@ -10,13 +10,12 @@ angular.module('shortenerApp.controllers',[])
                 {
                     $scope.success = true;
                     $scope.error = false;
-                    $window.location.replace(shortener.url + '/login');
+                    window.location.replace(shortener.url + '/login');
                 })
                 .error(function(data)
                 {
                     if(data['error']['status_code'] == 400)
                     {
-                        console.log('error');
                         $scope.error = true;
                         $scope.success = false;
                         $scope.errormessage = data['error']['message'];
