@@ -16,13 +16,14 @@ class DbUserRepository implements UserInterface
         $user = new User;
         $user->firstname = !$socialmedia ? $data['firstname'] : $data['first_name'];
         $user->lastname = !$socialmedia ? $data['lastname'] : $data['last_name'];
-        $user->email = !$socialmedia ? $data['email'] : NULL;
+        $user->email = $data['email'];
         $user->password =  !$socialmedia ? Hash::make($data['password']) : NULL;
         $user->save();
         if($socialmedia)
         {
             $this->addAccount($user,$data['id'],$token->getAccessToken(),$token->getEndOfLife());
         }
+        return $user;
     }
 
     /**
@@ -53,6 +54,16 @@ class DbUserRepository implements UserInterface
 
 
     public function setPassword($email)
+    {
+
+    }
+
+    public function setEmail($email)
+    {
+
+    }
+
+    public function checkAccountPassword($userid)
     {
 
     }
