@@ -83,7 +83,7 @@ class DbLinkRepository implements LinkRepositoryInterface
             $links[] =
             [
                 'id' => $value->id,
-                'link' => 'http://crdln.kr/'.$value['hash'],
+                'link' => $_ENV['SHORT_DOMAIN'].'/'.$value['hash'],
                 'pagetitle' => $value->pagetitle,
                 'provider' => $value->domainprovider,
                 'clicks' => $value->clicks,

@@ -49,7 +49,7 @@ Route::post('links', 'LinksController@store');
 
 
 // Process Short Link Urls
-Route::group(['domain' => 'shortlink.192.168.33.10.xip.io'],function()
+Route::group(['domain' => $_ENV['SHORT_DOMAIN']],function()
 {
     Route::get('{hash}','LinksController@processHash')->before('clicks_shorturl|track_referrer|track_location');
 });
