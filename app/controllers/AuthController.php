@@ -79,7 +79,14 @@ class AuthController extends ApiController {
         $email = Input::get('email');
         $password = Input::get('password');
         $remember = Input::get('remember');
-        $remember_me = $remember == 'yes' ? true : false;
+        if($remember == yes)
+        {
+            $remember_me = true;
+        }
+        else
+        {
+            $remember_me = false;
+        }
         if (Auth::attempt(['email' => $email, 'password' => $password],$remember_me))
         {
             return $this->setStatusCode(200)->respondWithSuccess('Successfully Authorized!');
