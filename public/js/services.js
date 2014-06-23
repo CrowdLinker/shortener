@@ -15,6 +15,22 @@ angular.module('shortenerApp.services',[])
                     url : shortener.url + '/api/user/authorize',
                     data : data
                 })
+            },
+            email: function(data)
+            {
+                return $http({
+                    method : 'PUT',
+                    url : shortener.url + '/api/user/email/update',
+                    data : data
+                })
+            },
+            check: function()
+            {
+                return $http.get(shortener.url + '/api/user/password/exists');
+            },
+            getemail: function()
+            {
+                return $http.get(shortener.url + '/api/user/email');
             }
         };
     })

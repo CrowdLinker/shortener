@@ -28,17 +28,16 @@ interface UserInterface
 
     /**
      * Set password if logged in using Social Media
-     * @param $email
+     * @param $data
      * @return mixed
      */
-    public function setPassword($email);
+    public function setPassword($data);
 
     /**
      * Check whether user already has username and password.
-     * @param $userid
      * @return mixed
      */
-    public function checkAccountPassword($userid);
+    public function checkAccountPassword();
 
     /**
      * @param $email

@@ -1,5 +1,6 @@
 <?php namespace Crowdlinker\Repositories;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use User,Account;
 class DbUserRepository implements UserInterface
@@ -53,18 +54,32 @@ class DbUserRepository implements UserInterface
     }
 
 
-    public function setPassword($email)
+    public function setPassword($data)
     {
-
+        $userid = Auth::user()->id;
+        $user = User::find($userid);
+        $user->password = Hash::make($data['password']);
+        $user->save;
     }
 
     public function setEmail($email)
     {
-
+        $userid = Auth::user()->id;
+        $user = User::find($userid);
+        $user->email = $email;
+        $user->save();
     }
 
-    public function checkAccountPassword($userid)
+    public function checkAccountPassword()
     {
+        if(Auth::user()->password == NULL)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
     }
 
@@ -85,4 +100,6 @@ class DbUserRepository implements UserInterface
         $account->save();
 
     }
+
+
 }

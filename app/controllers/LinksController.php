@@ -89,14 +89,7 @@ class LinksController extends ApiController {
      */
     public function getlinks()
     {
-        if(Auth::check())
-        {
-            $data = Shortener::getLinksbyUser(Auth::user()->id);
-            return $this->setStatusCode(200)->respond($data);
-        }
-        else
-        {
-            return $this->setStatusCode(401)->respondWithError('Unauthorized Access.');
-        }
+        $data = Shortener::getLinksbyUser(Auth::user()->id);
+        return $this->setStatusCode(200)->respond($data);
     }
 }

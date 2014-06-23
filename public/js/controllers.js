@@ -66,37 +66,85 @@ angular.module('shortenerApp.controllers',[])
         };
     })
     .controller('AnalyticsController',
-    function($scope,Link)
-    {
-        $scope.traffic = [];
-        Link.details()
-            .success(function(data)
+        function($scope,Link)
+        {
+            $scope.traffic = [];
+            Link.details()
+                .success(function(data)
+                {
+                    $scope.pagetitle = data.pagetitle;
+                    $scope.domainprovider = data.domain;
+                    $scope.traffic = data.referrers;
+                    $scope.originallink = data.original_url;
+                    $scope.totalclicks = data.totalclicks;
+                    var steps = 4;
+                    var max = Math.max.apply(Math, data.graph_data.count);
+                    $scope.options = {
+                        scaleOverride: true,
+                        scaleSteps: steps,
+                        scaleStepWidth: Math.ceil(max / steps),
+                        scaleStartValue: 0
+                    };
+                    $scope.chart = {
+                        labels : data.graph_data.source,
+                        datasets : [
+                            {
+                                fillColor : "rgba(151,187,205,0.5)",
+                                strokeColor : "rgba(151,187,205,1)",
+                                data : data.graph_data.count
+                            }
+                        ]
+                    };
+                });
+        })
+            .controller('SettingsController',
+            function($scope,User)
             {
-                $scope.pagetitle = data.pagetitle;
-                $scope.domainprovider = data.domain;
-                $scope.traffic = data.referrers;
-                $scope.originallink = data.original_url;
-                $scope.totalclicks = data.totalclicks;
-                var steps = 4;
-                var max = Math.max.apply(Math, data.graph_data.count);
-                $scope.options = {
-                    scaleOverride: true,
-                    scaleSteps: steps,
-                    scaleStepWidth: Math.ceil(max / steps),
-                    scaleStartValue: 0
+                $scope.settings =
+                {
+                    'email' : ''
                 };
-                $scope.chart = {
-                    labels : data.graph_data.source,
-                    datasets : [
+                $scope.errormessage = '';
+                $scope.success = false;
+                $scope.error = false;
+                $scope.createpassword = '';
+                $scope.changepassword = '';
+                $scope.updateEmail = function()
+                {
+                    User.email($scope.settings)
+                        .success(function(data){
+                            $scope.success = true;
+                        })
+                        .error(function(data){
+                            if(data['error']['status_code'] == 400)
+                            {
+                                $scope.error = true;
+                                $scope.success = false;
+                                $scope.errormessage = data['error']['message'];
+                            }
+                        });
+                };
+
+                User.getemail()
+                    .success(function(data)
+                    {
+                        $scope.settings.email = data['email'];
+                    });
+
+                User.check()
+                    .success(function()
+                    {
+                        $scope.changepassword = true;
+                        $scope.createpassword = false;
+                    })
+                    .error(function(data)
+                    {
+                        if(data['error']['status_code'] == 404)
                         {
-                            fillColor : "rgba(151,187,205,0.5)",
-                            strokeColor : "rgba(151,187,205,1)",
-                            data : data.graph_data.count
+                            $scope.createpassword = true;
+                            $scope.changepassword = false;
                         }
-                    ]
-                };
+                    });
             });
-    }
-);
 
 

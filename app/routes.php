@@ -10,6 +10,8 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
+//Front end
 Route::model('shortlink', 'ShortLink');
 Route::get('/',['as' => 'home','before' => 'loggedin','uses' => 'LinksController@index']);
 Route::get('/login',['as' => 'login','before' => 'loggedin','uses' => 'AuthController@index']);
@@ -24,19 +26,25 @@ Route::get('/logout',function()
     Cache::flush();
     return Redirect::to('/');
 });
+
+
+//Dashboard
 Route::get('dashboard',['as' => 'dashboard','before' => 'auth','uses' => 'DashboardController@index']);
-Route::get('dashboard/settings',['as' => 'dashboardsettings','before' => 'auth','uses' => 'DashboardController@settings']);
-Route::get('dashboard/{id}',['as' => 'dashboard','before' => 'auth','uses' => 'DashboardController@analytics']);
+Route::get('dashboard/settings',['as' => 'dashboardsettings','before' => 'auth','uses' => 'SettingsController@index']);
+Route::get('dashboard/{id}',['as' => 'dashboard','before' => 'auth','uses' => 'AnalyticsController@index'])->where('id','^[0-9]*$');
 Route::group(['prefix' => 'api'],function()
 {
-    Route::get('links',['as' => 'api.urls','uses' => 'LinksController@getlinks']);
-    Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','uses' => 'DashboardController@detail']);
+    Route::get('links',['as' => 'api.urls','before' => 'auth.basic','uses' => 'LinksController@getlinks']);
+    Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','before' => 'auth.basic','uses' => 'AnalyticsController@detail']);
     Route::post('create',['as' => 'api.create','uses' => 'LinksController@create']);
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
     Route::post('/user/authorize',['as' => 'api.authorize', 'uses' => 'AuthController@authorize']);
+    Route::put('/user/email/update',['as' => 'api.updateemail','before' => 'auth.basic','uses' => 'AuthController@setEmail']);
+    Route::get('/user/password/exists',['as' => 'api.checkpass','before' => 'auth.basic','uses' => 'SettingsController@checkpassword']);
+    Route::get('/user/email',['as' => 'api.getuseremail','before' => 'auth.basic','uses' => 'SettingsController@getemail']);
 });
-
 Route::post('links', 'LinksController@store');
+
 
 // Process Short Link Urls
 Route::group(['domain' => 'shortlink.192.168.33.10.xip.io'],function()
