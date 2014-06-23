@@ -25,16 +25,55 @@ class SettingsController extends ApiController {
         return View::make('settings',compact('title'));
     }
 
+    /**
+     * Get Logged in user's email
+     * @return mixed
+     */
     public function getemail()
     {
         return $this->setStatusCode(200)->respond(['email' => Auth::user()->email]);
     }
 
 
+    /**
+     * Check if Account has Password
+     * @return mixed
+     */
     public function checkpassword()
     {
         $check = $this->user->checkAccountPassword();
         return $check ? $this->setStatusCode(404)->respondWithError('Password for account does not exists') : $this->setStatusCode(200)->respondWithSuccess('Password for account exists');
+    }
+
+    /**
+     * Set New Password
+     * @return mixed
+     */
+    public function setPassword()
+    {
+        $rules =
+            [
+                'password' => 'required|confirmed|min:6'
+            ];
+        $messages =
+            [
+                'password.required' => 'Password is required',
+                'password.min' => 'Password should be minimum 6 characters',
+            ];
+
+        $validator = Validator::make(Input::all(),$rules,$messages);
+
+        if($validator->fails())
+        {
+            $messages = $validator->messages();
+            $error_messages = $messages->all(':message');
+            return $this->setStatusCode(400)->respondWithError($error_messages);
+        }
+        else
+        {
+            $this->user->setPassword(Input::get('password'));
+            return $this->setStatusCode(201)->respondWithSuccess('Password successfully updated');
+        }
     }
 
     /**

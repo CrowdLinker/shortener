@@ -54,18 +54,20 @@
                         <h4 class="modal-title">Create Password</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-success"></div>
+                        <div class="alert alert-danger"></div>
                         <div class="form-group">
                             <label for="password">New Password</label>
-                            <input type="password" class="form-control" placeholder="Minimum 6 characters" name="password">
+                            <input type="password" name="password" ng-model="password" class="form-control" placeholder="Minimum 6 characters" name="password">
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation">Confirm Password</label>
-                            <input type="password" class="form-control" placeholder="One more time..." name="password_confirmation">
+                            <input type="password" ng-model="password_confirmation" class="form-control" placeholder="One more time..." name="password_confirmation">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Create</button>
+                        <button type="button" ng-click="createNewPassword()" class="btn btn-primary">Create</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
