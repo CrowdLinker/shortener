@@ -18,6 +18,7 @@ Crowdlinker Shortener uses a number of open source projects to work properly:
 * [Gulp] - The streaming build system. Too minify and compile SASS/SCSS.
 * [jQuery] - duh 
 * [Vagrant] - Development Environment.
+* [Embedly] - For Extracting URL
 
 Installation
 --------------
@@ -79,3 +80,4 @@ php artisan migrate --env=local
 [jQuery]:http://jquery.com
 [Gulp]:http://gulpjs.com
 [Vagrant]:http://www.vagrantup.com/
+[Embedly]:http://embed.ly
