@@ -45,7 +45,7 @@ class DbUserRepository implements UserInterface
         {
             return 'CREATE';
         }
-        if($user == 0 && $account > 0)
+        if($user == 0 && $account > 0 || $user > 0 && $account > 0)
         {
             return 'EXISTS';
         }
@@ -61,7 +61,7 @@ class DbUserRepository implements UserInterface
     public function setProviderFacebook($email,$provider_id,$token)
     {
         $user = User::with('accounts')->where('email','=',$email)->first();
-        if($user['accounts'] == 0) $this->addAccount($user,$provider_id,$token->getAccessToken(),$token->getEndOfLife(),$email);
+        if(count($user['accounts']) == 0) $this->addAccount($user,$provider_id,$token->getAccessToken(),$token->getEndOfLife(),$email);
         return $user;
     }
 
