@@ -79,7 +79,7 @@ class AuthController extends ApiController {
         $email = Input::get('email');
         $password = Input::get('password');
         $remember = Input::get('remember');
-        if($remember == yes)
+        if($remember == "yes")
         {
             $remember_me = true;
         }
