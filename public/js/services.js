@@ -31,7 +31,24 @@ angular.module('shortenerApp.services',[])
             getemail: function()
             {
                 return $http.get(shortener.url + '/api/user/email');
+            },
+            newpassword: function(data)
+            {
+                return $http({
+                    method : 'PUT',
+                    url : shortener.url + '/api/user/password/create',
+                    data : data
+                })
+            },
+            changepassword: function(data)
+            {
+                return $http({
+                    method : 'PUT',
+                    url : shortener.url + '/api/user/password/change',
+                    data : data
+                })
             }
+
         };
     })
     .factory('Link',function($http)

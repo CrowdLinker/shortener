@@ -58,8 +58,8 @@ class DbUserRepository implements UserInterface
     {
         $userid = Auth::user()->id;
         $user = User::find($userid);
-        $user->password = Hash::make($data['password']);
-        $user->save;
+        $user->password = Hash::make($data);
+        return $user->save();
     }
 
     public function setEmail($email)

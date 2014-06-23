@@ -104,8 +104,13 @@ angular.module('shortenerApp.controllers',[])
                 {
                     'email' : ''
                 };
+                $scope.newpassword = {};
+                $scope.updatepassword = {};
                 $scope.errormessage = '';
                 $scope.success = false;
+                $scope.newpassword_success = false;
+                $scope.newpassword_error = false;
+                $scope.newpassword_errormessage = '';
                 $scope.error = false;
                 $scope.createpassword = '';
                 $scope.changepassword = '';
@@ -124,6 +129,25 @@ angular.module('shortenerApp.controllers',[])
                             }
                         });
                 };
+
+                $scope.createNewPassword = function()
+                {
+                    User.newpassword($scope.newpassword)
+                        .success(function(){
+                            $scope.newpassword_success = true;
+                            $('#createpassword').modal('hide');
+                            $scope.changepassword = true;
+                        })
+                        .error(function(data){
+                            if(data['error']['status_code'] == 400)
+                            {
+                                $scope.newpassword_success = false;
+                                $scope.newpassword_error = true;
+                                $scope.newpassword_errormessage = data['error']['message'];
+                                $scope.newpassword = {};
+                            }
+                        });
+                }
 
                 User.getemail()
                     .success(function(data)

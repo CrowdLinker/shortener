@@ -8,10 +8,6 @@
         </div>
         <div class="row">
             <br/>
-            <h3>Connected Account</h3>
-        </div>
-        <div class="row">
-            <br/>
             <h3>
                 Email
                 <br/>
@@ -54,15 +50,21 @@
                         <h4 class="modal-title">Create Password</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="alert alert-success"></div>
-                        <div class="alert alert-danger"></div>
+                        <div ng-if="newpassword_success" class="alert alert-success" ng-cloak> Password successfully created.</div>
+                        <div ng-if="newpassword_error" class="alert alert-danger" ng-cloak>
+                            <ul>
+                                <li ng-repeat="errors in newpassword_errormessage">
+                                    <% errors %>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="form-group">
                             <label for="password">New Password</label>
-                            <input type="password" name="password" ng-model="password" class="form-control" placeholder="Minimum 6 characters" name="password">
+                            <input type="password" name="password" ng-model="newpassword.password" class="form-control" placeholder="Minimum 6 characters" name="password">
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation">Confirm Password</label>
-                            <input type="password" ng-model="password_confirmation" class="form-control" placeholder="One more time..." name="password_confirmation">
+                            <input type="password" ng-model="newpassword.password_confirmation" class="form-control" placeholder="One more time..." name="password_confirmation">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -80,18 +82,21 @@
                         <h4 class="modal-title">Change Password</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-success"></div>
+                        <div class="alert alert-danger"></div>
                         <div class="form-group">
                             <label for="currentpassword">Current Password</label>
-                            <input type="password" class="form-control" name="currentpassword">
+                            <input type="password" ng-model="updatepassword.currentpassword" class="form-control" name="currentpassword">
                         </div>
                         <div class="form-group">
                             <label for="password">New Password</label>
-                            <input type="password" class="form-control" placeholder="Minimum 6 characters" name="password">
+                            <input type="password" ng-model="updatepassword.password" class="form-control" placeholder="Minimum 6 characters" name="password">
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation">Confirm Password</label>
-                            <input type="password" class="form-control" placeholder="One more time..." name="password_confirmation">
+                            <input type="password" ng-model="updatepassword.password_confirmation" class="form-control" placeholder="One more time..." name="password_confirmation">
                         </div>
+                        <a href="/password/remind" target="_blank">Forgot your password ?</a>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

@@ -77,6 +77,37 @@ class SettingsController extends ApiController {
     }
 
     /**
+     * Change Password
+     * @return mixed
+     */
+    public function changePassword()
+    {
+        $rules =
+            [
+                'password' => 'required|confirmed|min:6'
+            ];
+        $messages =
+            [
+                'password.required' => 'Password is required',
+                'password.min' => 'Password should be minimum 6 characters',
+            ];
+
+        $validator = Validator::make(Input::all(),$rules,$messages);
+
+        if($validator->fails())
+        {
+            $messages = $validator->messages();
+            $error_messages = $messages->all(':message');
+            return $this->setStatusCode(400)->respondWithError($error_messages);
+        }
+        else
+        {
+            $this->user->setPassword(Input::get('password'));
+            return $this->setStatusCode(201)->respondWithSuccess('Password successfully updated');
+        }
+    }
+
+    /**
      * Set Email Address
      * @return mixed
      */

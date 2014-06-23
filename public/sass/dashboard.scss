@@ -40,3 +40,7 @@ a.logo-static {
     font-family: 'Lato', sans-serif;
   }
 }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
