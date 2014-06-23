@@ -83,7 +83,7 @@ class DbLinkRepository implements LinkRepositoryInterface
             $links[] =
             [
                 'id' => $value->id,
-                'link' => $_ENV['SHORT_DOMAIN'].'/'.$value['hash'],
+                'link' => 'http://'.$_ENV['SHORT_DOMAIN'].'/'.$value['hash'],
                 'pagetitle' => $value->pagetitle,
                 'provider' => $value->domainprovider,
                 'clicks' => $value->clicks,
@@ -114,7 +114,7 @@ class DbLinkRepository implements LinkRepositoryInterface
     public function referrer($hash,$referrer)
     {
         $shortlink = ShortLink::where('hash','=',$hash)->first();
-        $source = !is_null($referrer) ? $this->snowplow->parse($referrer,$hash) : 'direct';
+        $source = !is_null($referrer) && $referrer !== 'direct' ? $this->snowplow->parse($referrer,$hash) : 'direct';
         $referrer = new Referrer;
         $referrer->source = $source;
         $referrer->shortlink()->associate($shortlink);

@@ -51,43 +51,25 @@ class SettingsController extends ApiController {
      */
     public function setPassword()
     {
-        $rules =
-            [
-                'password' => 'required|confirmed|min:6'
-            ];
-        $messages =
-            [
-                'password.required' => 'Password is required',
-                'password.min' => 'Password should be minimum 6 characters',
-            ];
-
-        $validator = Validator::make(Input::all(),$rules,$messages);
-
-        if($validator->fails())
+        if(Input::has('currentpassword'))
         {
-            $messages = $validator->messages();
-            $error_messages = $messages->all(':message');
-            return $this->setStatusCode(400)->respondWithError($error_messages);
+            $rules =
+                [
+                    'currentpassword' => 'passcheck',
+                    'password' => 'required|confirmed|min:6'
+                ];
         }
         else
         {
-            $this->user->setPassword(Input::get('password'));
-            return $this->setStatusCode(201)->respondWithSuccess('Password successfully updated');
+            $rules =
+                [
+                    'password' => 'required|confirmed|min:6'
+                ];
         }
-    }
 
-    /**
-     * Change Password
-     * @return mixed
-     */
-    public function changePassword()
-    {
-        $rules =
-            [
-                'password' => 'required|confirmed|min:6'
-            ];
         $messages =
             [
+                'currentpassword.passcheck' => 'Current password is invalid',
                 'password.required' => 'Password is required',
                 'password.min' => 'Password should be minimum 6 characters',
             ];

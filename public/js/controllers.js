@@ -111,6 +111,9 @@ angular.module('shortenerApp.controllers',[])
                 $scope.newpassword_success = false;
                 $scope.newpassword_error = false;
                 $scope.newpassword_errormessage = '';
+                $scope.changepassword_success = false;
+                $scope.changepassword_error = false;
+                $scope.changepassword_errormessage = '';
                 $scope.error = false;
                 $scope.createpassword = '';
                 $scope.changepassword = '';
@@ -119,6 +122,7 @@ angular.module('shortenerApp.controllers',[])
                     User.email($scope.settings)
                         .success(function(data){
                             $scope.success = true;
+                            $scope.error = false;
                         })
                         .error(function(data){
                             if(data['error']['status_code'] == 400)
@@ -135,8 +139,10 @@ angular.module('shortenerApp.controllers',[])
                     User.newpassword($scope.newpassword)
                         .success(function(){
                             $scope.newpassword_success = true;
+                            $scope.newpassword_error = false;
                             $('#createpassword').modal('hide');
                             $scope.changepassword = true;
+                            $scope.createpassword = false;
                         })
                         .error(function(data){
                             if(data['error']['status_code'] == 400)
@@ -145,6 +151,26 @@ angular.module('shortenerApp.controllers',[])
                                 $scope.newpassword_error = true;
                                 $scope.newpassword_errormessage = data['error']['message'];
                                 $scope.newpassword = {};
+                            }
+                        });
+                }
+
+                $scope.changePassword = function()
+                {
+                    User.changepassword($scope.updatepassword)
+                        .success(function()
+                        {
+                            $scope.changepassword_success = true;
+                            $scope.changepassword_error = false;
+                            $('#changepassword').modal('hide');
+                        })
+                        .error(function(data)
+                        {
+                            if(data['error']['status_code'] == 400)
+                            {
+                                $scope.changepassword_success = false;
+                                $scope.changepassword_error = true;
+                                $scope.changepassword_errormessage = data['error']['message'];
                             }
                         });
                 }

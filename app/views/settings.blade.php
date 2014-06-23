@@ -82,8 +82,14 @@
                         <h4 class="modal-title">Change Password</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="alert alert-success"></div>
-                        <div class="alert alert-danger"></div>
+                        <div ng-if="changepassword_success" class="alert alert-success" ng-cloak>Password changed successfully.</div>
+                        <div ng-if="changepassword_error" class="alert alert-danger" ng-cloak>
+                            <ul>
+                                <li ng-repeat="errors in changepassword_errormessage">
+                                    <% errors %>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="form-group">
                             <label for="currentpassword">Current Password</label>
                             <input type="password" ng-model="updatepassword.currentpassword" class="form-control" name="currentpassword">
@@ -100,7 +106,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Create</button>
+                        <button type="button" ng-click="changePassword()" class="btn btn-primary">Change</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

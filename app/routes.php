@@ -42,7 +42,7 @@ Route::group(['prefix' => 'api'],function()
     Route::put('/user/email/update',['as' => 'api.updateemail','before' => 'auth.basic','uses' => 'SettingsController@setEmail']);
     Route::get('/user/password/exists',['as' => 'api.checkpass','before' => 'auth.basic','uses' => 'SettingsController@checkpassword']);
     Route::put('/user/password/create',['as' => 'api.createpassword','before' => 'auth.basic','uses' => 'SettingsController@setPassword']);
-    Route::put('/user/password/change',['as' => 'api.changepassword','before' => 'auth.basic','uses' => 'SettingsController@changePassword']);
+    Route::put('/user/password/change',['as' => 'api.changepassword','before' => 'auth.basic','uses' => 'SettingsController@setPassword']);
     Route::get('/user/email',['as' => 'api.getuseremail','before' => 'auth.basic','uses' => 'SettingsController@getemail']);
 });
 Route::post('links', 'LinksController@store');

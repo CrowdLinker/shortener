@@ -105,8 +105,15 @@ Route::filter('clicks_shorturl',function()
 
 Route::filter('track_referrer',function()
 {
-    $referrer = Request::server('HTTP_REFERER');
-    Shortener::trackReferrer(Request::segment(1),$referrer);
+    if(URL::previous() != URL::to('/dashboard'))
+    {
+        $referrer = 'direct';
+    }
+    else
+    {
+        $referrer = Request::server('HTTP_REFERER');
+    }
+        Shortener::trackReferrer(Request::segment(1),$referrer);
 });
 
 Route::filter('track_location',function()
