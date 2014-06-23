@@ -32,6 +32,7 @@ composer install
 ##### Create your '.env.php' (If using in production environment) or '.env.local.php' (In local) in root.
 
 ```sh
+<?php
 return [
 
     'FACEBOOK_ID' => '<facebook-id>',
