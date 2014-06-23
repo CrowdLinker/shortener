@@ -134,7 +134,7 @@ class AuthController extends ApiController {
                     break;
             }
             //Get User Id and login
-            Auth::loginUsingId((int)$user->id);
+            Auth::login($user);
             $this->insertSession($result['id'],$token->getAccessToken(),'facebook');
             return Redirect::to('dashboard');
         }
