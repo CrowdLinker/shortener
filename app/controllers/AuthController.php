@@ -113,7 +113,18 @@ class AuthController extends ApiController {
             $checkemail = $this->user->checkUser($result['email']);
             //If user account's email is matching with Facebook account email and already exists
             //Add Facebook Token
-            $user = ($checkemail) ? $this->user->setProviderFacebook($result['email'],$result['id'],$token) : $this->user->create($result,true,$token);
+            switch($checkemail)
+            {
+                case 'ACCOUNT':
+                    $user = $this->user->setProviderFacebook($result['email'],$result['id'],$token);
+                    break;
+                case 'EXISTS':
+                    $user = $this->user->getUserid($result['email']);
+                    break;
+                case 'CREATE':
+                    $user = $this->user->create($result,true,$token);
+                    break;
+            }
             //Get User Id and login
             Auth::loginUsingId((int)$user->id);
             $this->insertSession($result['id'],$token->getAccessToken(),'facebook');

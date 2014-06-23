@@ -20,6 +20,7 @@ class CreateAccountsTable extends Migration {
             $table->string('secret')->nullable()->default(NULL);
             $table->integer('expiry')->nullable()->default(NULL);
             $table->string('provider');
+            $table->string('primary_email');
             $table->string('facebook_id')->nullable()->default(NULL);
             $table->string('twitter_id')->nullable()->default(NULL);
             $table->integer('user_id')->unsigned()->index();

@@ -20,12 +20,12 @@
                     <div ng-if="error" class="alert alert-danger" ng-cloak><% errormessage %></div>
                 </div>
             </div>
-            <form  ng-submit="updateEmail" class="form">
+            <form  ng-submit="updateEmail()" class="form">
                 <div class="form-group col-xs-4 col-md-4 col-sm-4 col-lg-4" style="padding-left:0">
                     <div class="input-group">
                         <input type="email" ng-model="settings.email" name="email" class="form-control">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Save</button>
+                    <button class="btn btn-default" type="submit">Save</button>
                  </span>
                     </div>
                 </div>
@@ -39,8 +39,8 @@
                 <small>Use your password to sign in to Crowdlinker Shortener app on web.</small>
             </h3>
             <br/>
-            <button ng-if="createpassword" class="btn btn-default" data-toggle="modal" data-target="#createpassword">Create New Password</button>
-            <button ng-if="changepassword" class="btn btn-default" data-toggle="modal" data-target="#changepassword">Change Password</button>
+            <button ng-if="createpassword" class="btn btn-default" data-toggle="modal" data-target="#createpassword" ng-cloak>Create New Password</button>
+            <button ng-if="changepassword" class="btn btn-default" data-toggle="modal" data-target="#changepassword" ng-cloak>Change Password</button>
         </div>
         <div class="modal fade" id="createpassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">

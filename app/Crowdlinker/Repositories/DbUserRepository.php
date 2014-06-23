@@ -22,7 +22,7 @@ class DbUserRepository implements UserInterface
         $user->save();
         if($socialmedia)
         {
-            $this->addAccount($user,$data['id'],$token->getAccessToken(),$token->getEndOfLife());
+            $this->addAccount($user,$data['id'],$token->getAccessToken(),$token->getEndOfLife(),$data['email']);
         }
         return $user;
     }
@@ -34,8 +34,21 @@ class DbUserRepository implements UserInterface
      */
     public function checkUser($email)
     {
+        $account = Account::where('primary_email','=',$email)->count();
         $user = User::where('email','=',$email)->count();
-        return $user > 0 ? true : false;
+
+        if($user > 0 && $account == 0)
+        {
+            return 'ACCOUNT';
+        }
+        if($user == 0 && $account == 0)
+        {
+            return 'CREATE';
+        }
+        if($user == 0 && $account > 0)
+        {
+            return 'EXISTS';
+        }
     }
 
     /**
@@ -47,9 +60,8 @@ class DbUserRepository implements UserInterface
      */
     public function setProviderFacebook($email,$provider_id,$token)
     {
-        $user = User::where('email','=',$email)->first();
-        $count = Account::where('user_id','=',$user->id)->count();
-        if($count == 0) $this->addAccount($user,$provider_id,$token->getAccessToken(),$token->getEndOfLife());
+        $user = User::with('accounts')->where('email','=',$email)->first();
+        if($user['accounts'] == 0) $this->addAccount($user,$provider_id,$token->getAccessToken(),$token->getEndOfLife(),$email);
         return $user;
     }
 
@@ -83,17 +95,26 @@ class DbUserRepository implements UserInterface
 
     }
 
+    public function getUserid($email)
+    {
+       $account = Account::where('primary_email','=',$email)->first();
+       $user = User::find($account['user_id']);
+       return $user;
+    }
+
     /**
      * @param $user
      * @param $id
      * @param $token
      * @param $endlife
+     * @param $email
      */
-    private function addAccount($user,$id,$token,$endlife)
+    private function addAccount($user,$id,$token,$endlife,$email)
     {
         $account = new Account;
         $account->token = $token;
         $account->expiry = Carbon::createFromTimeStamp((int)$endlife)->diffInDays();
+        $account->primary_email = $email;
         $account->provider = 'facebook';
         $account->facebook_id = $id;
         $account->user()->associate($user);

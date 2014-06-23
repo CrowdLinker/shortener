@@ -18,6 +18,13 @@ interface UserInterface
      */
     public function checkUser($email);
 
+    /**
+     * Get User Id;
+     * @param $email
+     * @return mixed
+     */
+    public function getUserid($email);
+
 
     /**
      * Set Email if one doesn't exists or user signed in with Social Media
