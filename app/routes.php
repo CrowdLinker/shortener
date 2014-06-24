@@ -30,7 +30,7 @@ Route::get('social/twitter',['as' => 'twitter','uses' => 'AuthController@twitter
 Route::get('/logout',function()
 {
     Auth::logout();
-    Session::flush();
+    Session::forget('users');
     Cache::flush();
     return Redirect::to('/');
 });
