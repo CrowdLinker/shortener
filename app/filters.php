@@ -67,7 +67,6 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-    dd(Auth::check());
 	if (!Auth::check()) return Redirect::to('/');
 });
 
