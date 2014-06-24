@@ -15,7 +15,7 @@
 Route::group(['domain' => $_ENV['SHORT_DOMAIN']],function()
 {
     Route::get('/',['as' => 'home','uses' => 'LinksController@shortdomainmain']);
-    Route::get('{hash}','LinksController@processHash')->before('clicks_shorturl|track_referrer|track_location');
+    Route::get('{hash}','LinksController@processHash')->after('clicks_shorturl|track_referrer|track_location');
 });
 
 
