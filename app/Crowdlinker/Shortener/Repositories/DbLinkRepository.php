@@ -114,9 +114,9 @@ class DbLinkRepository implements LinkRepositoryInterface
     public function referrer($hash,$referrer)
     {
         $shortlink = ShortLink::where('hash','=',$hash)->first();
-        $source = !is_null($referrer) && $referrer !== 'direct' ? $this->snowplow->parse($referrer,$hash) : 'direct';
+        $source =  $this->snowplow->parse($referrer,$hash);
         $referrer = new Referrer;
-        $referrer->source = $source;
+        $referrer->source = is_null($source) ? "direct" : $source;
         $referrer->shortlink()->associate($shortlink);
         $referrer->save();
     }
