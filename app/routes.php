@@ -35,15 +35,15 @@ Route::get('dashboard/{id}',['as' => 'dashboard','before' => 'guest','uses' => '
 Route::group(['prefix' => 'api'],function()
 {
     Route::get('links',['as' => 'api.urls','before' => 'auth.basic','uses' => 'LinksController@getlinks']);
-    Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','before' => 'auth.basic','uses' => 'AnalyticsController@detail']);
+    Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','before' => 'auth','uses' => 'AnalyticsController@detail']);
     Route::post('create',['as' => 'api.create','uses' => 'LinksController@create']);
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
     Route::post('/user/authorize',['as' => 'api.authorize', 'uses' => 'AuthController@authorize']);
-    Route::put('/user/email/update',['as' => 'api.updateemail','before' => 'auth.basic','uses' => 'SettingsController@setEmail']);
-    Route::get('/user/password/exists',['as' => 'api.checkpass','before' => 'auth.basic','uses' => 'SettingsController@checkpassword']);
-    Route::put('/user/password/create',['as' => 'api.createpassword','before' => 'auth.basic','uses' => 'SettingsController@setPassword']);
-    Route::put('/user/password/change',['as' => 'api.changepassword','before' => 'auth.basic','uses' => 'SettingsController@setPassword']);
-    Route::get('/user/email',['as' => 'api.getuseremail','before' => 'auth.basic','uses' => 'SettingsController@getemail']);
+    Route::put('/user/email/update',['as' => 'api.updateemail','before' => 'auth','uses' => 'SettingsController@setEmail']);
+    Route::get('/user/password/exists',['as' => 'api.checkpass','before' => 'auth','uses' => 'SettingsController@checkpassword']);
+    Route::put('/user/password/create',['as' => 'api.createpassword','before' => 'auth','uses' => 'SettingsController@setPassword']);
+    Route::put('/user/password/change',['as' => 'api.changepassword','before' => 'auth','uses' => 'SettingsController@setPassword']);
+    Route::get('/user/email',['as' => 'api.getuseremail','before' => 'auth','uses' => 'SettingsController@getemail']);
 });
 Route::post('links', 'LinksController@store');
 
