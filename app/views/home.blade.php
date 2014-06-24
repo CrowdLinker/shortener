@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <input name="_token" type="hidden" value="{{ csrf_token() }}">
                             <div class="input-group">
-                                <input class="form-control" id="shorten-input" placeholder="https://crowdlinker.com" name="url" type="url" required>
+                                <input class="form-control" id="shorten-input" placeholder="Paste a link" name="url" type="url" required>
                     <span class="input-group-btn">
                         <button class="btn btn-lg btn-specs btn-primary" type="submit"><i class="fa fa-link"></i> Shrink it !</button>
                      </span>

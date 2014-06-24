@@ -45,7 +45,7 @@ Route::group(['prefix' => 'api'],function()
     Route::put('/user/password/change',['as' => 'api.changepassword','before' => 'auth','uses' => 'SettingsController@setPassword']);
     Route::get('/user/email',['as' => 'api.getuseremail','before' => 'auth','uses' => 'SettingsController@getemail']);
 });
-Route::post('links', 'LinksController@store');
+Route::post('links', 'LinksController@store')->before('csrf');
 
 
 // Process Short Link Urls
