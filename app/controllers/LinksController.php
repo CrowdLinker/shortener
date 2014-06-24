@@ -28,7 +28,7 @@ class LinksController extends ApiController {
 
     public function shortdomainmain()
     {
-        return Redirect::to('http://shortener.crowdlinker.com');
+        return View::make('shortdomain');
     }
 
     /**

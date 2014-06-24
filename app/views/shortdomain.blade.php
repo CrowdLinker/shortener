@@ -1,7 +1,53 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: meetgodhani
- * Date: 2014-06-23
- * Time: 6:26 PM
- */ 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>{{ $_ENV['COMPANY_NAME'] }}</title>
+    <!-- Custom styles for this template -->
+    <style>
+        body {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            background-color: #eee;
+        }
+
+        .form-signin {
+            max-width: 650px;
+            padding: 30px;
+            margin: 0 auto;
+            background:white;
+            font-size:24px;
+            border-radius:10px
+        }
+    </style>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="container">
+    <div class="form-signin" role="form">
+       <p>{{ $_ENV['COMPANY_NAME'] }} uses <b>{{ $_ENV['SHORT_DOMAIN'] }}</b> as part of url shortener service.</p>
+        <br/>
+        <p><a href="{{ $_ENV['COMPANY_SITE'] }}" class="btn btn-primary"> Back to {{ $_ENV['COMPANY_NAME'] }}</a></p>
+    </div>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+</body>
+</html>

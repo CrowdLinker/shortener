@@ -183,6 +183,17 @@ class DbLinkRepository implements LinkRepositoryInterface
         return array_count_values($count);
     }
 
+    private function locationCount($data)
+    {
+        $count = [];
+        foreach($data[0] as $value)
+        {
+            $count[] = $value['city'];
+        }
+
+        return array_count_values($count);
+    }
+
     /**
      * Insert Location Coordinates
      * @param $slink

@@ -11,6 +11,14 @@
 |
 */
 
+// Process Short Link Urls
+Route::group(['domain' => $_ENV['SHORT_DOMAIN']],function()
+{
+    Route::get('/',['as' => 'home','uses' => 'LinksController@shortdomainmain']);
+    Route::get('{hash}','LinksController@processHash')->before('clicks_shorturl|track_referrer|track_location');
+});
+
+
 //Front end
 Route::model('shortlink', 'ShortLink');
 Route::get('/',['as' => 'home','before' => 'loggedin','uses' => 'LinksController@index']);
@@ -46,11 +54,3 @@ Route::group(['prefix' => 'api'],function()
     Route::get('/user/email',['as' => 'api.getuseremail','before' => 'auth','uses' => 'SettingsController@getemail']);
 });
 Route::post('links', 'LinksController@store')->before('csrf');
-
-
-// Process Short Link Urls
-Route::group(['domain' => $_ENV['SHORT_DOMAIN']],function()
-{
-    //Route::get('/',['as' => 'home','uses' => 'LinksController@shortdomainmain']);
-    Route::get('{hash}','LinksController@processHash')->before('clicks_shorturl|track_referrer|track_location');
-});
