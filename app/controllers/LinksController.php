@@ -26,6 +26,11 @@ class LinksController extends ApiController {
         return View::make('home');
     }
 
+    public function shortdomainmain()
+    {
+        return Redirect::to('http://shortener.crowdlinker.com');
+    }
+
     /**
      * Store a newly created resource in storage.
      * @return mixed

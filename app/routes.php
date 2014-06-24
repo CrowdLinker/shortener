@@ -51,5 +51,6 @@ Route::post('links', 'LinksController@store');
 // Process Short Link Urls
 Route::group(['domain' => $_ENV['SHORT_DOMAIN']],function()
 {
+    Route::get('/',['as' => 'home','uses' => 'LinksController@shortdomainmain']);
     Route::get('{hash}','LinksController@processHash')->before('clicks_shorturl|track_referrer|track_location');
 });

@@ -67,6 +67,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
+    dd(Auth::check());
 	if (!Auth::check()) return Redirect::to('/');
 });
 
@@ -105,7 +106,7 @@ Route::filter('clicks_shorturl',function()
 
 Route::filter('track_referrer',function()
 {
-    if(URL::previous() != URL::to('/dashboard'))
+    if(URL::previous() == URL::to('/dashboard'))
     {
         $referrer = 'direct';
     }
