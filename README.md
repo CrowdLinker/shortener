@@ -2,7 +2,7 @@
 Version
 ----
 
-1.0
+1.1
 
 Tech
 -----------
@@ -40,7 +40,9 @@ return [
     'FACEBOOK_SECRET' => '<facebook-secret>',
     'MANDRILL_KEY' => '<mandrill-key>',
     'EMBEDLY_KEY' => '<embedly-key>',
-    'SHORT_DOMAIN' => '<your desired shortlink i.e samply.com (Without http)'
+    'SHORT_DOMAIN' => '<your desired shortlink i.e samply.com (Without http)',
+    'COMPANY_NAME' => '<your company name>',
+    'COMPANY_SITE' => '<your company site>'
 ];
 
 ```
