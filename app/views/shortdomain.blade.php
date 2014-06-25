@@ -5,8 +5,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="{{ $_ENV['COMPANY_NAME'] }} uses {{ $_ENV['SHORT_DOMAIN'] }} as part of its URL shortener service.It's a service that will be 100% free forever. You can try register/signup for it with Facebook or email.">
+    <meta name="author" content="@crowdlinker">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@crowdlinker">
+    <meta name="twitter:title" content="crdln.kr / Crowdlinker">
+    <meta property="og:site_name" content="Crowdlinker"/>
+    <meta property="og:title" content="crdln.kr / Crowdlinker" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://crdln.kr" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
