@@ -104,6 +104,27 @@ class ShortenerService
     }
 
     /**
+     * Check if session id already exists.
+     * @param $sess_id
+     * @return mixed
+     */
+    public function checkSessionExists($sess_id)
+    {
+        $check = $this->linkRepo->checkSession($sess_id);
+        return $check;
+    }
+
+    /**
+     * Log Unique Views.
+     * @param $link_id
+     * @param $sess_id
+     */
+    public function logUniqueView($link_id,$sess_id)
+    {
+        $this->linkRepo->addViewed($link_id,$sess_id);
+    }
+
+    /**
      * @param $data
      * @return mixed
      */

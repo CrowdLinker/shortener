@@ -3,7 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\URL;
-use ShortLink,Referrer,Location,LocationCity;
+use ShortLink,Referrer,Location,LinkView;
 use Crowdlinker\GeoIP\geoipApi as GeoApi;
 use Crowdlinker\SnowPlow\snowplowApi as SnowPlow;
 class DbLinkRepository implements LinkRepositoryInterface
@@ -75,7 +75,7 @@ class DbLinkRepository implements LinkRepositoryInterface
      */
     public function byUser($id)
     {
-        $data = ShortLink::where('user_id','=',$id)->remember(10)->get();
+        $data = ShortLink::where('user_id','=',$id)->orderBy('created_at', 'DESC')->remember(10)->get();
         $links = [];
         foreach($data as $value)
         {
@@ -87,6 +87,7 @@ class DbLinkRepository implements LinkRepositoryInterface
                 'pagetitle' => $value->pagetitle,
                 'provider' => $value->domainprovider,
                 'clicks' => $value->clicks,
+                'unique_clicks' => $value->unique_clicks,
                 'created_at' => $created_at->toFormattedDateString()
             ];
         }
@@ -138,18 +139,15 @@ class DbLinkRepository implements LinkRepositoryInterface
         $lon = $data['longitude'];
         $lat = $data['latitude'];
         $city = $data['city'];
-        $check = $this->checkLocationExists($lon,$lat);
-        if(!$check)
-        {
-            $this->insertLocation($shortlink,$city,$lat,$lon);
-        }
-        else
-        {
-            $location = Location::where('latitude','=',$lat)->where('longitude','=',$lon)->first();
-            $this->addLocationCity($location->id,$city);
-        }
+        $country = $data['country_name'];
+        $this->insertLocation($ip,$shortlink,$city,$country,$lat,$lon);
     }
 
+    /**
+     * Link Analytics
+     * @param $data
+     * @return array|mixed
+     */
     public function linkDetails($data)
     {
         $details = $data->toArray();
@@ -162,6 +160,7 @@ class DbLinkRepository implements LinkRepositoryInterface
             'domain' => $details[0]['domainprovider'],
             'hash' => $details[0]['hash'],
             'totalclicks' => $details[0]['clicks'],
+            'uniqueclicks' => $details[0]['unique_clicks'],
             'referrers' => $sources,
             'graph_data' =>
             [
@@ -196,48 +195,48 @@ class DbLinkRepository implements LinkRepositoryInterface
 
     /**
      * Insert Location Coordinates
+     * @param $ip
      * @param $slink
      * @param $city
      * @param $lat
+     * @param $country
      * @param $lon
      */
-    private function insertLocation($slink,$city,$lat,$lon)
+    private function insertLocation($ip,$slink,$city,$country,$lat,$lon)
     {
         $location = new Location;
         $location->latitude = $lat;
         $location->longitude = $lon;
+        $location->city = $city;
+        $location->country = $country;
+        $location->ip = $ip;
         $location->shortlink()->associate($slink);
         $location->save();
-
-        $location_city = new LocationCity;
-        $location_city->city = $city;
-        $location_city->location()->associate($location);
-        $location_city->save();
-
     }
 
     /**
-     * Add Location City name
-     * @param $lid
-     * @param $city
+     * Check if session cookie already exists.
+     * @param $id
+     * @return bool|mixed
      */
-    private function addLocationCity($lid,$city)
+    public function checkSession($id)
     {
-        $location = new LocationCity;
-        $location->city = $city;
-        $location->location_id = $lid;
-        $location->save();
+       $count = LinkView::where('session_id','=',$id)->count();
+       return $count > 0 ? true : false;
     }
 
     /**
-     * Check if Location already exists
-     * @param $lon
-     * @param $lat
-     * @return bool
+     * Create entry to mark that link is clicked/viewed.
+     * @param $id
+     * @param $sess_id
+     * @return mixed|void
      */
-    private function checkLocationExists($lon,$lat)
+    public function addViewed($id,$sess_id)
     {
-        $location = Location::where('latitude','=',$lat)->where('longitude','=',$lon)->count();
-        return $location > 0 ? true : false;
+        $shortlink = ShortLink::where('hash','=',$id)->first();
+        $linkview = new LinkView;
+        $linkview->shortlink_id = $shortlink->id;
+        $linkview->session_id = $sess_id;
+        $linkview->save();
     }
 }

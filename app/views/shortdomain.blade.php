@@ -39,9 +39,10 @@
 
 <div class="container">
     <div class="form-signin" role="form">
-       <p>{{ $_ENV['COMPANY_NAME'] }} uses <b>{{ $_ENV['SHORT_DOMAIN'] }}</b> as part of url shortener service.</p>
+       <p>{{ $_ENV['COMPANY_NAME'] }} uses <b>{{ $_ENV['SHORT_DOMAIN'] }}</b> as part of its URL shortener service.</p>
+        <p>It's a service that will be 100% free forever. You can try register/signup for it with Facebook or email.</p>
         <br/>
-        <p><a href="{{ $_ENV['COMPANY_SITE'] }}" class="btn btn-primary"> Back to {{ $_ENV['COMPANY_NAME'] }}</a></p>
+        <p><a href="{{ $_ENV['COMPANY_SITE'] }}" class="btn btn-primary"> Go to Shortener</a></p>
     </div>
 </div> <!-- /container -->
 

@@ -70,4 +70,19 @@ interface LinkRepositoryInterface
      * @return mixed
      */
     public function linkDetails($data);
+
+    /**
+     * Check if Session exists in database.
+     * @param $id
+     * @return mixed
+     */
+    public function checkSession($id);
+
+    /**
+     * Add viewed if session does not exist.
+     * @param $id
+     * @param $sess_id
+     * @return mixed
+     */
+    public function addViewed($id,$sess_id);
 }

@@ -27,6 +27,7 @@
                         <th>Date</th>
                         <th>Page</th>
                         <th>Clicks</th>
+                        <th>Unique Clicks</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,7 @@
                         <td><% value.created_at %></td>
                         <td><h5><% value.pagetitle %><br/><small><% value.provider %></small></h5></td>
                         <td><% value.clicks %></td>
+                        <td><% value.unique_clicks %></td>
                         <td><a href="/dashboard/<% value.id %>">View Stats</a></td>
                     </tr>
                     <tr ng-if="shortlinks.length === 0">

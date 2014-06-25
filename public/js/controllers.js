@@ -73,11 +73,13 @@ angular.module('shortenerApp.controllers',[])
             Link.details()
                 .success(function(data)
                 {
+                    console.log(data);
                     $scope.pagetitle = data.pagetitle;
                     $scope.domainprovider = data.domain;
                     $scope.traffic = data.referrers;
                     $scope.originallink = data.original_url;
                     $scope.totalclicks = data.totalclicks;
+                    $scope.uniqueclicks = data.uniqueclicks;
                     var steps = 4;
                     var max = Math.max.apply(Math, data.graph_data.count);
                     $scope.options = {

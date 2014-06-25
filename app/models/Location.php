@@ -12,13 +12,4 @@ class Location extends \Eloquent {
     {
         return $this->belongsTo('shortlink');
     }
-
-    /**
-     * Has many cities
-     * @return mixed
-     */
-    public function cities()
-    {
-        return $this->hasMany('LocationCity');
-    }
 }

@@ -20,12 +20,14 @@
                     <tr>
                         <th>Action</th>
                         <th>Clicks</th>
+                        <th>Unique Clicks</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-if="totalclicks > 0">
                         <td>clicks</td>
                         <td><% totalclicks %></td>
+                        <td><% uniqueclicks %></td>
                     </tr>
                     <tr ng-if="totalclicks == 0">
                         <td colspan="2">No clicks yet</td>
