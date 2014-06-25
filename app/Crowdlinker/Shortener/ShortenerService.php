@@ -106,11 +106,12 @@ class ShortenerService
     /**
      * Check if session id already exists.
      * @param $sess_id
+     * @param $slinkid
      * @return mixed
      */
-    public function checkSessionExists($sess_id)
+    public function checkSessionExists($sess_id,$slinkid)
     {
-        $check = $this->linkRepo->checkSession($sess_id);
+        $check = $this->linkRepo->checkSession($sess_id,$slinkid);
         return $check;
     }
 

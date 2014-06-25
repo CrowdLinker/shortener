@@ -219,9 +219,10 @@ class DbLinkRepository implements LinkRepositoryInterface
      * @param $id
      * @return bool|mixed
      */
-    public function checkSession($id)
+    public function checkSession($id,$sid)
     {
-       $count = LinkView::where('session_id','=',$id)->count();
+       $shortlink = ShortLink::where('hash','=',$sid)->first();
+       $count = LinkView::where('session_id','=',$id)->where('shortlink_id','=',$shortlink->id)->count();
        return $count > 0 ? true : false;
     }
 

@@ -101,7 +101,7 @@ Route::filter('csrf', function()
 Route::filter('clicks_shorturl',function()
 {
     $sess_id = Session::getId();
-    $check = Shortener::checkSessionExists($sess_id);
+    $check = Shortener::checkSessionExists($sess_id,Request::segment(1));
     \Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
     if(!$check)
     {
