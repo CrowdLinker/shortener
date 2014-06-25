@@ -14,13 +14,15 @@ class CreateLocationTable extends Migration {
 	{
 		Schema::create('location', function(Blueprint $table)
 		{
-            $table->engine = 'InnoDB';
 			$table->increments('id');
             $table->string('latitude');
             $table->string('longitude');
+            $table->string('city');
+            $table->string('country');
+            $table->string('ip');
             $table->integer('shortlink_id')->unsigned()->index();
-			$table->timestamps();
             $table->foreign('shortlink_id')->references('id')->on('shortlink')->onDelete('cascade');
+			$table->timestamps();
 		});
 	}
 
@@ -34,5 +36,4 @@ class CreateLocationTable extends Migration {
 	{
 		Schema::drop('location');
 	}
-
 }
