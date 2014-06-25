@@ -74,9 +74,10 @@ interface LinkRepositoryInterface
     /**
      * Check if Session exists in database.
      * @param $id
+     * @param $sid
      * @return mixed
      */
-    public function checkSession($id);
+    public function checkSession($id,$sid);
 
     /**
      * Add viewed if session does not exist.
