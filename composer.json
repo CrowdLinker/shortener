@@ -13,7 +13,8 @@
         "guzzlehttp/guzzle": "~4.0",
         "laracasts/utilities": "dev-master",
         "snowplow/referer-parser": "dev-master",
-        "symfony/yaml": "2.5.*@dev"
+        "symfony/yaml": "2.5.*@dev",
+        "fideloper/proxy": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

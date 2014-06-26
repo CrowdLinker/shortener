@@ -80,7 +80,7 @@ class LinksController extends ApiController {
         try
         {
             $url = Shortener::getUrlByHash($hash);
-            return Redirect::to($url);
+            return Redirect::to($url,301);
         }
         catch(NonExistentHashException $e)
         {
