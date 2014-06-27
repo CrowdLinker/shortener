@@ -270,8 +270,18 @@ class DbLinkRepository implements LinkRepositoryInterface
         list($cityname,$citycount) = array_divide(array_count_values($city));
         $top5_country = $this->top5country($countryname,$countrycount);
         $top5_cities = $this->top5cities($cityname,$citycount);
-        krsort($top5_country);
-        dd($top5_country);
+        foreach($top5_cities as $key=>$value)
+        {
+            $city[$key] = $value['country'];
+            $count[$key] = $value['count'];
+        }
+        array_multisort($count, SORT_DESC, $city, SORT_ASC, $top5_cities);
+        foreach($top5_country as $key=>$value)
+        {
+            $country[$key] = $value['country'];
+            $count[$key] = $value['count'];
+        }
+        array_multisort($count, SORT_DESC, $country, SORT_ASC, $top5_country);
         return $output = ['top5cities' => $top5_cities,'top5countries' => $top5_country];
     }
 
@@ -286,7 +296,6 @@ class DbLinkRepository implements LinkRepositoryInterface
                     'count' => $ccount[$key]
                 ];
         }
-        arsort($output);
         return array_slice($output,0,5,true);
     }
 
@@ -301,7 +310,6 @@ class DbLinkRepository implements LinkRepositoryInterface
                     'count' => $ccount[$key]
                 ];
         }
-        arsort($output);
         return array_slice($output,0,5,true);
     }
 }
