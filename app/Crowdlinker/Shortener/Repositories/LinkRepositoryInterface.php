@@ -86,4 +86,6 @@ interface LinkRepositoryInterface
      * @return mixed
      */
     public function addViewed($id,$sess_id);
+
+    public function getLocation($data);
 }

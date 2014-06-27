@@ -182,17 +182,6 @@ class DbLinkRepository implements LinkRepositoryInterface
         return array_count_values($count);
     }
 
-    private function locationCount($data)
-    {
-        $count = [];
-        foreach($data[0] as $value)
-        {
-            $count[] = $value['city'];
-        }
-
-        return array_count_values($count);
-    }
-
     /**
      * Insert Location Coordinates
      * @param $ip
@@ -240,5 +229,13 @@ class DbLinkRepository implements LinkRepositoryInterface
         $linkview->shortlink_id = $shortlink->id;
         $linkview->session_id = $sess_id;
         $linkview->save();
+    }
+
+    public function getLocation($data)
+    {
+        $details = $data->toArray();
+        $city = array_fetch($details[0]['locations'],'city');
+        $country = array_fetch($details[0]['locations'],'country');
+        dd(array_count_values($country));
     }
 }

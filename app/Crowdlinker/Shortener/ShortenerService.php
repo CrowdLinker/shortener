@@ -133,4 +133,22 @@ class ShortenerService
     {
         return $this->linkRepo->linkDetails($data);
     }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function locationDetails($data)
+    {
+        return $this->linkRepo->getLocation($data);
+    }
+
+    /**
+     * Get Location Data.
+     * @param $data
+     */
+    public function getLocation($data)
+    {
+        $details = $data->toArray();
+    }
 }
