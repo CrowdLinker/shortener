@@ -274,6 +274,11 @@ class DbLinkRepository implements LinkRepositoryInterface
         return $output = ['top5cities' => $top5_cities,'top5countries' => $top5_country];
     }
 
+    /**
+     * @param $cname
+     * @param $ccount
+     * @return array
+     */
     private function top5cities($cname,$ccount)
     {
         $output = [];
@@ -289,6 +294,11 @@ class DbLinkRepository implements LinkRepositoryInterface
         return array_slice($output,0,5,true);
     }
 
+    /**
+     * @param $cname
+     * @param $ccount
+     * @return array
+     */
     private function top5country($cname,$ccount)
     {
         $output = [];
@@ -302,5 +312,39 @@ class DbLinkRepository implements LinkRepositoryInterface
                 ];
         }
         return array_slice($output,0,5,true);
+    }
+
+    /**
+     * @param $data
+     * @return array|mixed
+     */
+    public function getMapData($data)
+    {
+        $details = $data->toArray();
+        $city = array_fetch($details,'city');
+        $lat = array_fetch($details,'latitude');
+        $long = array_fetch($details,'longitude');
+        $output = $this->generateMapArray($city,$lat,$long);
+        return $output;
+    }
+
+    /**
+     * @param $city
+     * @param $lat
+     * @param $long
+     * @return array
+     */
+    private function generateMapArray($city,$lat,$long)
+    {
+        $output = [];
+        foreach($city as $key=>$value)
+        {
+            $output[] =
+                [
+                    'latLng' => [$lat[$key],$long[$key]],
+                    'name' => ($value == "")  ? "Unknown" : $value
+                ];
+        }
+        return $output;
     }
 }

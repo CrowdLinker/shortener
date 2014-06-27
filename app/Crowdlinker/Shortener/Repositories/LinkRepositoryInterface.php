@@ -87,5 +87,15 @@ interface LinkRepositoryInterface
      */
     public function addViewed($id,$sess_id);
 
+    /**
+     * @param $data
+     * @return mixed
+     */
     public function getLocation($data);
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function getMapData($data);
 }

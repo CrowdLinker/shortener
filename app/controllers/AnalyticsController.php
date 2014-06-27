@@ -51,12 +51,13 @@ class AnalyticsController extends ApiController {
     }
 
     /**
-     * Get data for map
      * @param $shortlink
+     * @return mixed
      */
     public function map($shortlink)
     {
         $details = Location::where('shortlink_id','=',$shortlink->id)->remember(10)->get();
         $data = Shortener::topLocations($details);
+        return $this->setStatusCode(200)->respond($data);
     }
 }
