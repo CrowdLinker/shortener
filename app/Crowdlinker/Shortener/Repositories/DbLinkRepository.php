@@ -300,7 +300,7 @@ class DbLinkRepository implements LinkRepositoryInterface
         {
             $output[] =
                 [
-                    'rank' => $key,
+                    'rank' => $key+1,
                     'country' => $value,
                     'count' => $ccount[$key]
                 ];
