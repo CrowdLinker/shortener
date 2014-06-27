@@ -290,7 +290,7 @@ class DbLinkRepository implements LinkRepositoryInterface
         {
             arsort($output);
         }
-        return array_slice($output,0,5,true);
+        return $output;
     }
 
     private function top5country($cname,$ccount)
@@ -310,6 +310,6 @@ class DbLinkRepository implements LinkRepositoryInterface
         {
             arsort($output);
         }
-        return array_slice($output,0,5,true);
+        return $output;
     }
 }
