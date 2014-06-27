@@ -81,15 +81,15 @@ class DbLinkRepository implements LinkRepositoryInterface
         {
             $created_at = Carbon::createFromTimeStamp(strtotime($value->created_at));
             $links[] =
-            [
-                'id' => $value->id,
-                'link' => 'http://'.$_ENV['SHORT_DOMAIN'].'/'.$value['hash'],
-                'pagetitle' => $value->pagetitle,
-                'provider' => $value->domainprovider,
-                'clicks' => $value->clicks,
-                'unique_clicks' => $value->unique_clicks,
-                'created_at' => $created_at->toFormattedDateString()
-            ];
+                [
+                    'id' => $value->id,
+                    'link' => 'http://'.$_ENV['SHORT_DOMAIN'].'/'.$value['hash'],
+                    'pagetitle' => $value->pagetitle,
+                    'provider' => $value->domainprovider,
+                    'clicks' => $value->clicks,
+                    'unique_clicks' => $value->unique_clicks,
+                    'created_at' => $created_at->toFormattedDateString()
+                ];
         }
         return $links;
     }
@@ -155,20 +155,20 @@ class DbLinkRepository implements LinkRepositoryInterface
         $graphdata = $this->graphData(array_fetch($details,'referrers'));
         list($source,$count) = array_divide($graphdata);
         $output =
-        [
-            'pagetitle' => $details[0]['pagetitle'],
-            'original_url' => $details[0]['url'],
-            'domain' => $details[0]['domainprovider'],
-            'hash' => $details[0]['hash'],
-            'totalclicks' => $details[0]['clicks'],
-            'uniqueclicks' => $details[0]['unique_clicks'],
-            'referrers' => $sources,
-            'graph_data' =>
             [
-                'source' => $source,
-                'count' => $count
-            ]
-        ];
+                'pagetitle' => $details[0]['pagetitle'],
+                'original_url' => $details[0]['url'],
+                'domain' => $details[0]['domainprovider'],
+                'hash' => $details[0]['hash'],
+                'totalclicks' => $details[0]['clicks'],
+                'uniqueclicks' => $details[0]['unique_clicks'],
+                'referrers' => $sources,
+                'graph_data' =>
+                    [
+                        'source' => $source,
+                        'count' => $count
+                    ]
+            ];
         return $output;
     }
 
@@ -237,9 +237,9 @@ class DbLinkRepository implements LinkRepositoryInterface
      */
     public function checkSession($id,$sid)
     {
-       $shortlink = ShortLink::where('hash','=',$sid)->first();
-       $count = LinkView::where('session_id','=',$id)->where('shortlink_id','=',$shortlink->id)->count();
-       return $count > 0 ? true : false;
+        $shortlink = ShortLink::where('hash','=',$sid)->first();
+        $count = LinkView::where('session_id','=',$id)->where('shortlink_id','=',$shortlink->id)->count();
+        return $count > 0 ? true : false;
     }
 
     /**
@@ -257,14 +257,59 @@ class DbLinkRepository implements LinkRepositoryInterface
         $linkview->save();
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function getLocation($data)
     {
         $details = $data->toArray();
-        $city = array_fetch($details[0]['locations'],'city');
-        $country = array_fetch($details[0]['locations'],'country');
-        $lat = array_fetch($details[0]['locations'],'latitude');
-        $long = array_fetch($details[0]['locations'],'longitude');
+        $city = array_fetch($details,'city');
+        $country = array_fetch($details,'country');
         list($countryname,$countrycount) = array_divide(array_count_values($country));
         list($cityname,$citycount) = array_divide(array_count_values($city));
+        $top5_country = $this->top5country($countryname,$countrycount);
+        $top5_cities = $this->top5cities($cityname,$citycount);
+        return $output = ['top5cities' => $top5_cities,'top5countries' => $top5_country];
+    }
+
+    private function top5cities($cname,$ccount)
+    {
+        $output = [];
+        foreach($cname as $key=>$value)
+        {
+            $output[] =
+                [
+                    'rank' => $key+1,
+                    'city' => $value,
+                    'count' => $ccount[$key]
+                ];
+        }
+
+        if(!is_null($output))
+        {
+            arsort($output);
+        }
+        return array_slice($output,0,5,true);
+    }
+
+    private function top5country($cname,$ccount)
+    {
+        $output = [];
+        foreach($cname as $key=>$value)
+        {
+            $output[] =
+                [
+                    'rank' => $key+1,
+                    'country' => $value,
+                    'count' => $ccount[$key]
+                ];
+        }
+
+        if(!is_null($output))
+        {
+            arsort($output);
+        }
+        return array_slice($output,0,5,true);
     }
 }

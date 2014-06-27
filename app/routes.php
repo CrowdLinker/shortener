@@ -20,7 +20,6 @@ Route::group(['domain' => $_ENV['SHORT_DOMAIN']],function()
 
 
 //Front end
-Route::model('shortlink', 'ShortLink');
 Route::get('/',['as' => 'home','before' => 'loggedin','uses' => 'LinksController@index']);
 Route::get('/login',['as' => 'login','before' => 'loggedin','uses' => 'AuthController@index']);
 Route::get('/register',['as' => 'register', 'uses' => 'AuthController@register']);
@@ -44,6 +43,7 @@ Route::group(['prefix' => 'api'],function()
 {
     Route::get('links',['as' => 'api.urls','before' => 'auth.basic','uses' => 'LinksController@getlinks']);
     Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','before' => 'auth','uses' => 'AnalyticsController@detail']);
+    Route::get('/links/map/{shortlink}',['as' => 'api.url.map','before' => 'auth','uses' => 'AnalyticsController@map']);
     Route::get('/links/location/{shortlink}',['as' => 'api.url.location','before' => 'auth','uses' => 'AnalyticsController@location']);
     Route::post('create',['as' => 'api.create','uses' => 'LinksController@create']);
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);

@@ -69,6 +69,10 @@ angular.module('shortenerApp.services',[])
             details : function()
             {
                 return $http.get(shortener.url + '/api/links/detail/' + shortener.id);
+            },
+            locations : function()
+            {
+                return $http.get(shortener.url + '/api/links/location/' + shortener.id);
             }
         }
     });

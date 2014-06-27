@@ -77,6 +77,8 @@ angular.module('shortenerApp.controllers',[])
         function($scope,Link)
         {
             $scope.traffic = [];
+            $scope.topcities = [];
+            $scope.topcountries = [];
             Link.details()
                 .success(function(data)
                 {
@@ -104,6 +106,12 @@ angular.module('shortenerApp.controllers',[])
                             }
                         ]
                     };
+                });
+            Link.locations()
+                .success(function(data)
+                {
+                    $scope.topcities = data.top5cities;
+                    $scope.topcountries = data.top5countries;
                 });
         })
             .controller('SettingsController',
