@@ -267,10 +267,11 @@ class DbLinkRepository implements LinkRepositoryInterface
         $city = array_fetch($details,'city');
         $country = array_fetch($details,'country');
         $country_value = array_count_values($country);
+        $city_value = array_count_values($city);
         arsort($country_value);
-        dd($country_value);
-        list($countryname,$countrycount) = array_divide(array_count_values($country));
-        list($cityname,$citycount) = array_divide(array_count_values($city));
+        arsort($city_value);
+        list($countryname,$countrycount) = array_divide($country_value);
+        list($cityname,$citycount) = array_divide($city_value);
         $top5_country = $this->top5country($countryname,$countrycount);
         $top5_cities = $this->top5cities($cityname,$citycount);
         return $output = ['top5cities' => $top5_cities,'top5countries' => $top5_country];
@@ -283,6 +284,7 @@ class DbLinkRepository implements LinkRepositoryInterface
         {
             $output[] =
                 [
+                    'rank' => $key+1,
                     'city' => ($value == "") ? "Unknown" : $value,
                     'count' => $ccount[$key]
                 ];
@@ -297,6 +299,7 @@ class DbLinkRepository implements LinkRepositoryInterface
         {
             $output[] =
                 [
+                    'rank' => $key+1,
                     'country' => $value,
                     'count' => $ccount[$key]
                 ];
