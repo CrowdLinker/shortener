@@ -272,7 +272,7 @@ class DbLinkRepository implements LinkRepositoryInterface
         $top5_cities = $this->top5cities($cityname,$citycount);
         foreach($top5_cities as $key=>$value)
         {
-            $city[$key] = $value['country'];
+            $city[$key] = $value['city'];
             $count[$key] = $value['count'];
         }
         array_multisort($count, SORT_DESC, $city, SORT_ASC, $top5_cities);
