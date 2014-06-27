@@ -95,7 +95,7 @@
                             <tbody>
                             <tr ng-repeat="value in topcountries">
                                 <td><% value.rank %></td>
-                                <td><% value.city %></td>
+                                <td><% value.country %></td>
                                 <td><% value.count %></td>
                             </tr>
                             </tbody>
