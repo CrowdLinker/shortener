@@ -324,10 +324,8 @@ class DbLinkRepository implements LinkRepositoryInterface
         $city = array_fetch($details,'city');
         $lat = array_fetch($details,'latitude');
         $long = array_fetch($details,'longitude');
-        list($cityname,$citycount) = array_divide($city);
-        list($latitude,$latcount) = array_divide($lat);
-        list($longitude,$longcount) = array_divide($long);
-        dd($latitude);
+        $longitude = array_divide($long);
+        dd($longitude);
         $output = $this->generateMapArray($cityname,$latitude,$longitude,$citycount);
         return $output;
     }
