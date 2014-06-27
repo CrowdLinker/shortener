@@ -280,7 +280,7 @@ class DbLinkRepository implements LinkRepositoryInterface
         {
             $output[] =
                 [
-                    'city' => $value,
+                    'city' => ($value == "") ? "Unknown" : $value,
                     'count' => $ccount[$key]
                 ];
         }
