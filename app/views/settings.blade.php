@@ -3,7 +3,7 @@
 <div class="container" ng-controller="SettingsController">
     <div class="col-md-12">
         <div class="row">
-            <h1 class="text-center">Settings</h1>
+            <h1 class="text-center"><i class="fa fa-cog"></i>  Settings</h1>
             <hr/>
         </div>
         <div class="row">
@@ -41,6 +41,17 @@
             <br/>
             <button ng-if="createpassword" class="btn btn-default" data-toggle="modal" data-target="#createpassword" ng-cloak>Create New Password</button>
             <button ng-if="changepassword" class="btn btn-default" data-toggle="modal" data-target="#changepassword" ng-cloak>Change Password</button>
+        </div>
+        <div class="row">
+            <br/>
+            <h3>
+                Deactivate Account
+                <br/>
+                <small>Note: On deactivating account all links would be deleted.</small>
+                <br/>
+                <br/>
+                <button class="btn btn-danger">Deactivate</button>
+            </h3>
         </div>
         <div class="modal fade" id="createpassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">

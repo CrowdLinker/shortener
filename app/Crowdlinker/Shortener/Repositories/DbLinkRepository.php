@@ -55,7 +55,7 @@ class DbLinkRepository implements LinkRepositoryInterface
      */
     public function byHash($hash)
     {
-        return ShortLink::whereHash($hash)->first();
+        return ShortLink::whereHash($hash)->remember(10)->first();
     }
 
     /**
@@ -65,7 +65,7 @@ class DbLinkRepository implements LinkRepositoryInterface
      */
     public function byUrl($url)
     {
-        return ShortLink::whereUrl($url)->first();
+        return ShortLink::whereUrl($url)->remember(10)->first();
     }
 
     /**
@@ -217,6 +217,7 @@ class DbLinkRepository implements LinkRepositoryInterface
     /**
      * Check if session cookie already exists.
      * @param $id
+     * @param $sid
      * @return bool|mixed
      */
     public function checkSession($id,$sid)

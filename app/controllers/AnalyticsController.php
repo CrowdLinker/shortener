@@ -9,9 +9,18 @@ class AnalyticsController extends ApiController {
      */
     public function index($id)
     {
-        JavaScript::put(['url' => URL::to('/'),'id' => $id ]);
-        $title = 'Analytics';
-        return View::make('detail',compact('title'));
+        $getuserid = ShortLink::where('id','=',$id)->remember(10)->get();
+        if(count($getuserid) > 0 && $getuserid[0]['user_id'] == Auth::user()->id)
+        {
+            JavaScript::put(['url' => URL::to('/'),'id' => $id ]);
+            $title = 'Analytics';
+            return View::make('detail',compact('title'));
+        }
+        else
+        {
+            App::abort(404);
+        }
+
     }
 
     /**

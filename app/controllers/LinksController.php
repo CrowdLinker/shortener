@@ -15,8 +15,6 @@ class LinksController extends ApiController {
         $this->user = $user;
     }
 
-
-
     /**
      * Home Page
      * @return mixed
