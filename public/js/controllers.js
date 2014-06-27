@@ -48,10 +48,7 @@ angular.module('shortenerApp.controllers',[])
     function($scope,Link,$filter)
     {
         $scope.currentPage = 1,
-        $scope.numPerPage = 3,
-        $scope.itemsSize = 3;
-        $scope.maxSize = 3;
-        $scope.pageSize = 10;
+        $scope.maxSize = 10;
         Link.get()
             .success(function(data)
             {

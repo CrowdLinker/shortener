@@ -44,5 +44,12 @@ a.logo-static {
   display: none !important;
 }
 
+.jvectormap-container
+{
+  svg
+  {
+    height: 400px;
+  }
+}
 
 @import "pages/media";

@@ -34,6 +34,10 @@ a.logo-static {
   display: none !important;
 }
 
+.jvectormap-container svg {
+  height: 400px;
+}
+
 /*==================================================
 =            Bootstrap 3 Media Queries             =
 ==================================================*/
