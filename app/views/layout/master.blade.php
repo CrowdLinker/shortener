@@ -23,14 +23,24 @@
 @include('layout.partials.header')
 <div class="main">
     @yield('content')
+    <footer>
+       <div class="container">
+           <hr/>
+           <p class="pull-left">© Crowdlinker Inc. 2014</p>
+           <br/>
+           <br/>
+           <br/>
+       </div>
+    </footer>
 </div>
 @include('layout.partials.footer')
 @include('layout.partials.javascript')
-<!-- Please don't use massive JS files for minor functionality. This is okay for the demo, though. -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+<script src="/js/ui-bootstrap-custom-0.10.0.min.js"></script>
+<script src="/js/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
 <script src="/js/angles.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/services.js"></script>

@@ -200,7 +200,6 @@ class DbLinkRepository implements LinkRepositoryInterface
                 'count' => $count[$key]
             ];
         }
-
         arsort($finaloutput);
         return $finaloutput;
     }

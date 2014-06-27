@@ -47,6 +47,10 @@ angular.module('shortenerApp.controllers',[])
     .controller('LinkDataController',
     function($scope,Link)
     {
+        $scope.currentPage = 1,
+        $scope.numPerPage = 3,
+        $scope.itemsSize = 3;
+        $scope.maxSize = 3;
         Link.get()
             .success(function(data)
             {

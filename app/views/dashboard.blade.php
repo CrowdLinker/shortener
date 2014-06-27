@@ -31,7 +31,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="value in shortlinks" ng-if="shortlinks.length > 0">
+                    <tr ng-repeat="value in shortlinks.slice(((currentPage-1)*maxSize), ((currentPage)*maxSize)) track by $index" ng-if="shortlinks.length > 0">
                         <td><a href="<% value.link %>" target="_blank"><% value.link %></a></td>
                         <td><% value.created_at %></td>
                         <td><h5><% value.pagetitle %><br/><small><% value.provider %></small></h5></td>
@@ -44,7 +44,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <div data-pagination="" data-num-pages="numPages()"  data-current-page="currentPage" data-boundary-links="true"></div>
+                <pagination total-items="shortlinks.length" page="currentPage" items-per-page="maxSize" max-size="5" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
             </div>
         </div>
     </div>
