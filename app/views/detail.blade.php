@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <h3>Total Clicks</h3>
                 <hr/>
-                <table class="table">
+                <table class="table table-condensed table-responsive">
                     <thead>
                     <tr>
                         <th>Action</th>
@@ -32,14 +32,14 @@
                         <td><% uniqueclicks %></td>
                     </tr>
                     <tr ng-if="totalclicks == 0">
-                        <td colspan="2">No clicks yet</td>
+                        <td colspan="3">No clicks yet</td>
                     </tr>
                     </tbody>
                 </table>
                 <br/>
                 <h3>Traffic Source</h3>
                 <hr/>
-                <table class="table">
+                <table class="table table-condensed table-responsive">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -54,7 +54,7 @@
                         <td><% value.count %></td>
                     </tr>
                     <tr>
-                        <td ng-if="totalclicks == 0" colspan="2">No traffic yet</td>
+                        <td ng-if="totalclicks == 0" colspan="3">No traffic yet</td>
                     </tr>
                     </tbody>
                 </table>
@@ -65,6 +65,29 @@
                 <hr/>
                 <br/>
                 <div id="world-map" style="height:400px"></div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Top 5 Cities</h3>
+                        <table class="table table-condensed table-responsive">
+                            <thead>
+                                <th>#</th>
+                                <th>City</th>
+                                <th>Clicks</th>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Top 5 Countries</h3>
+                        <table class="table table-condensed table-responsive">
+                            <thead>
+                            <th>#</th>
+                            <th>Country</th>
+                            <th>Clicks</th>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
