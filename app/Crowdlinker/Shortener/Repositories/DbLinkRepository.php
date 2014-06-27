@@ -152,7 +152,8 @@ class DbLinkRepository implements LinkRepositoryInterface
     {
         $details = $data->toArray();
         $sources = $this->referrerCount(array_fetch($details,'referrers'));
-        list($source,$count) = array_divide($sources);
+        $graphdata = $this->graphData(array_fetch($details,'referrers'));
+        list($source,$count) = array_divide($graphdata);
         $output =
         [
             'pagetitle' => $details[0]['pagetitle'],
@@ -165,10 +166,21 @@ class DbLinkRepository implements LinkRepositoryInterface
             'graph_data' =>
             [
                 'source' => $source,
-                'count' => $count,
+                'count' => $count
             ]
         ];
         return $output;
+    }
+
+    private function graphData($data)
+    {
+        $count = [];
+        foreach($data[0] as $value)
+        {
+            $count[] = $value['source'];
+        }
+        $countvalues = array_count_values($count);
+        return $countvalues;
     }
 
     private function referrerCount($data)
@@ -178,8 +190,19 @@ class DbLinkRepository implements LinkRepositoryInterface
         {
             $count[] = $value['source'];
         }
+        $countvalues = array_count_values($count);
+        list($source,$count) = array_divide($countvalues);
+        foreach($source as $key=>$value)
+        {
+            $finaloutput[] = [
+                'rank' => $key+1,
+                'source' => $value,
+                'count' => $count[$key]
+            ];
+        }
 
-        return array_count_values($count);
+        arsort($finaloutput);
+        return $finaloutput;
     }
 
     /**
@@ -234,9 +257,11 @@ class DbLinkRepository implements LinkRepositoryInterface
     public function getLocation($data)
     {
         $details = $data->toArray();
-        dd(array_pluck($details[0]['locations'],'city'));
         $city = array_fetch($details[0]['locations'],'city');
         $country = array_fetch($details[0]['locations'],'country');
         $lat = array_fetch($details[0]['locations'],'latitude');
+        $long = array_fetch($details[0]['locations'],'longitude');
+        list($countryname,$countrycount) = array_divide(array_count_values($country));
+        list($cityname,$citycount) = array_divide(array_count_values($city));
     }
 }

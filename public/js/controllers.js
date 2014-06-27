@@ -73,7 +73,6 @@ angular.module('shortenerApp.controllers',[])
             Link.details()
                 .success(function(data)
                 {
-                    console.log(data);
                     $scope.pagetitle = data.pagetitle;
                     $scope.domainprovider = data.domain;
                     $scope.traffic = data.referrers;

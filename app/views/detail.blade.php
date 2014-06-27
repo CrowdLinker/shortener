@@ -38,14 +38,16 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Source</th>
                             <th>Clicks</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="(key,value) in traffic" ng-if="totalclicks > 0">
-                                <td><% key %></td>
-                                <td><% value %></td>
+                        <tr ng-repeat="value in traffic" ng-if="totalclicks > 0">
+                                <td><% value.rank %></td>
+                                <td><% value.source %></td>
+                                <td><% value.count %></td>
                         </tr>
                         <tr>
                             <td ng-if="totalclicks == 0" colspan="2">No traffic yet</td>
