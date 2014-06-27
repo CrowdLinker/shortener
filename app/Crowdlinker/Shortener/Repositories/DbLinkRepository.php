@@ -266,7 +266,9 @@ class DbLinkRepository implements LinkRepositoryInterface
         $details = $data->toArray();
         $city = array_fetch($details,'city');
         $country = array_fetch($details,'country');
-        dd(arsort(array_count_values($country)));
+        $country_value = array_count_values($country);
+        arsort($country_value);
+        dd($country_value);
         list($countryname,$countrycount) = array_divide(array_count_values($country));
         list($cityname,$citycount) = array_divide(array_count_values($city));
         $top5_country = $this->top5country($countryname,$countrycount);
