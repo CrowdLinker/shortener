@@ -125,7 +125,7 @@ Route::filter('track_location',function()
 
 Route::filter('checkuser',function()
 {
-    $id = Request::segment(2);
+    $id = Request::segment(4);
     $count = ShortLink::where('id','=',$id)->where('user_id','=',Auth::user()->id)->count();
     if($count == 0)
     {
