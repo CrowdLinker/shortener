@@ -21,7 +21,7 @@
                 </div>
             </div>
             <form  ng-submit="updateEmail()" class="form">
-                <div class="form-group col-xs-4 col-md-4 col-sm-4 col-lg-4" style="padding-left:0">
+                <div class="form-group col-md-4" style="padding-left:0">
                     <div class="input-group">
                         <input type="email" ng-model="settings.email" name="email" class="form-control">
                 <span class="input-group-btn">
