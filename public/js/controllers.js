@@ -45,16 +45,22 @@ angular.module('shortenerApp.controllers',[])
         }
     })
     .controller('LinkDataController',
-    function($scope,Link)
+    function($scope,Link,$filter)
     {
         $scope.currentPage = 1,
         $scope.numPerPage = 3,
         $scope.itemsSize = 3;
         $scope.maxSize = 3;
+        $scope.pageSize = 10;
         Link.get()
             .success(function(data)
             {
                 $scope.shortlinks = data;
+                $scope.$watch('searchLinks', function (newLinkTitle) {
+                    $scope.currentPage = 1;
+                    $scope.filteredLinks = $filter('filter')($scope.shortlinks, $scope.searchLinks);
+                    $scope.noOfPages = $scope.filteredLinks.length / 10;
+                });
             });
 
         $scope.submitLink = function()
