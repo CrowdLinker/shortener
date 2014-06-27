@@ -76,10 +76,13 @@
                             <th>Clicks</th>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="value in topcities">
+                            <tr ng-repeat="value in topcities" ng-if="topcities.length > 0">
                                 <td><% value.rank %></td>
                                 <td><% value.city %></td>
                                 <td><% value.count %></td>
+                            </tr>
+                            <tr ng-if="topcities.length == 0">
+                                <td colspan="3">No Data</td>
                             </tr>
                             </tbody>
                         </table>
@@ -93,10 +96,13 @@
                             <th>Clicks</th>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="value in topcountries">
+                            <tr ng-repeat="value in topcountries" ng-if="topcountries.length > 0">
                                 <td><% value.rank %></td>
                                 <td><% value.country %></td>
                                 <td><% value.count %></td>
+                            </tr>
+                            <tr ng-if="topcountries.length == 0">
+                                <td colspan="3">No Data</td>
                             </tr>
                             </tbody>
                         </table>
