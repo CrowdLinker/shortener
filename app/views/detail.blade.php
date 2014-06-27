@@ -56,6 +56,12 @@
                 </table>
             </div>
         </div>
+        <div class="row">
+            <br/>
+            <br/>
+            <br/
+            <h3>Geo Demographics</h3>
+        </div>
     </div>
 </div>
 @stop

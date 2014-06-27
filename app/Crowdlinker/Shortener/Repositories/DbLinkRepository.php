@@ -191,6 +191,7 @@ class DbLinkRepository implements LinkRepositoryInterface
             $count[] = $value['source'];
         }
         $countvalues = array_count_values($count);
+        $finaloutput = [];
         list($source,$count) = array_divide($countvalues);
         foreach($source as $key=>$value)
         {
@@ -200,7 +201,10 @@ class DbLinkRepository implements LinkRepositoryInterface
                 'count' => $count[$key]
             ];
         }
-        arsort($finaloutput);
+        if(!is_null($finaloutput))
+        {
+            arsort($finaloutput);
+        }
         return $finaloutput;
     }
 
