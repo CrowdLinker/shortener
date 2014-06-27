@@ -234,9 +234,9 @@ class DbLinkRepository implements LinkRepositoryInterface
     public function getLocation($data)
     {
         $details = $data->toArray();
+        dd(array_pluck($details[0]['locations'],'city'));
         $city = array_fetch($details[0]['locations'],'city');
         $country = array_fetch($details[0]['locations'],'country');
         $lat = array_fetch($details[0]['locations'],'latitude');
-        dd(array_count_values($country));
     }
 }
