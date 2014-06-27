@@ -144,11 +144,11 @@ class ShortenerService
     }
 
     /**
-     * Get Location Data.
      * @param $data
+     * @return mixed
      */
-    public function getLocation($data)
+    public function mapLocation($data)
     {
-        $details = $data->toArray();
+        return $this->linkRepo->getMapData($data);
     }
 }
