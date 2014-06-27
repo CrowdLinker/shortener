@@ -284,12 +284,8 @@ class DbLinkRepository implements LinkRepositoryInterface
                     'count' => $ccount[$key]
                 ];
         }
-
-        if(!is_null($output))
-        {
-            arsort($output);
-        }
-        return $output;
+        sort($output);
+        return array_slice($output,0,5,true);
     }
 
     private function top5country($cname,$ccount)
@@ -303,11 +299,7 @@ class DbLinkRepository implements LinkRepositoryInterface
                     'count' => $ccount[$key]
                 ];
         }
-
-        if(!is_null($output))
-        {
-            arsort($output);
-        }
-        return $output;
+        arsort($output);
+        return array_slice($output,0,5,true);
     }
 }
