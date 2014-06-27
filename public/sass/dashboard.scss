@@ -1,6 +1,5 @@
 .container
 {
-  width:1170px;
   max-width: none !important;
 }
 
@@ -44,3 +43,6 @@ a.logo-static {
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
 }
+
+
+@import "pages/media";

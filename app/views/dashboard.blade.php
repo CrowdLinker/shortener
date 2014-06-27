@@ -20,30 +20,33 @@
             <div class="row">
                 <h2 class="text-left">Created links</h2>
                 <br/>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Link</th>
-                        <th>Date</th>
-                        <th>Page</th>
-                        <th>Clicks</th>
-                        <th>Unique Clicks</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="value in shortlinks.slice(((currentPage-1)*maxSize), ((currentPage)*maxSize)) track by $index|filter:searchLinks" ng-if="shortlinks.length > 0">
-                        <td><a href="<% value.link %>" target="_blank"><% value.link %></a></td>
-                        <td><% value.created_at %></td>
-                        <td><h5><% value.pagetitle %><br/><small><% value.provider %></small></h5></td>
-                        <td><% value.clicks %></td>
-                        <td><% value.unique_clicks %></td>
-                        <td><a href="/dashboard/<% value.id %>">View Stats</a></td>
-                    </tr>
-                    <tr ng-if="shortlinks.length === 0">
-                        <td class="text-center" colspan=4"><h4>No short links created yet</h4></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-condensed table-responsive">
+                        <thead>
+                        <tr>
+                            <th>Link</th>
+                            <th>Date</th>
+                            <th>Page</th>
+                            <th>Clicks</th>
+                            <th>Unique Clicks</th>
+                            <th>Stats</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="value in shortlinks.slice(((currentPage-1)*maxSize), ((currentPage)*maxSize)) track by $index" ng-if="shortlinks.length > 0">
+                            <td><a href="<% value.link %>" target="_blank"><% value.link %></a></td>
+                            <td><% value.created_at %></td>
+                            <td><h5><% value.pagetitle %><br/><small><% value.provider %></small></h5></td>
+                            <td><% value.clicks %></td>
+                            <td><% value.unique_clicks %></td>
+                            <td><a href="/dashboard/<% value.id %>"><i class="fa fa-bar-chart-o"></i> Details</a></td>
+                        </tr>
+                        <tr ng-if="shortlinks.length === 0">
+                            <td class="text-center" colspan=4"><h4>No short links created yet</h4></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <pagination total-items="shortlinks.length" page="currentPage" items-per-page="maxSize" max-size="5" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
             </div>
         </div>
