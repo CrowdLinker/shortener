@@ -299,7 +299,7 @@ class DbLinkRepository implements LinkRepositoryInterface
                     'count' => $ccount[$key]
                 ];
         }
-        arsort($output);
+        krsort($output);
         return array_slice($output,0,5,true);
     }
 }
