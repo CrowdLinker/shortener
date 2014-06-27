@@ -236,6 +236,7 @@ class DbLinkRepository implements LinkRepositoryInterface
         $details = $data->toArray();
         $city = array_fetch($details[0]['locations'],'city');
         $country = array_fetch($details[0]['locations'],'country');
-        dd(array_count_values($country));
+        $lat = array_fetch($details[0]['locations'],'latitude');
+        dd(array_count_values($lat));
     }
 }
