@@ -122,3 +122,13 @@ Route::filter('track_location',function()
     $ip = $request->getClientIp();
     Shortener::trackLocation(Request::segment(1),$ip);
 });
+
+Route::filter('checkuser',function()
+{
+    $id = Request::segment(2);
+    $count = ShortLink::where('id','=',$id)->where('user_id','=',Auth::user()->id)->count();
+    if($count == 0)
+    {
+        return App::abort(404);
+    }
+});

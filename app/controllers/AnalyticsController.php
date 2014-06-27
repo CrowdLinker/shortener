@@ -33,7 +33,6 @@ class AnalyticsController extends ApiController {
 
         $details = ShortLink::with('referrers')->where('id','=',$shortlink)->remember(10)->get();
         $data = Shortener::linkDetails($details);
-        return $data;
         return $this->setStatusCode(200)->respond($data);
 
     }
@@ -45,6 +44,7 @@ class AnalyticsController extends ApiController {
      */
     public function location($shortlink)
     {
+
         $details = Location::where('shortlink_id','=',$shortlink)->remember(10)->get();
         $data = Shortener::locationDetails($details);
         return $this->setStatusCode(200)->respond($data);
