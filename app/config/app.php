@@ -128,6 +128,7 @@ return array(
         'Crowdlinker\Shortener\Repositories\BackendServiceProvider',
         'Crowdlinker\Shortener\ShortenerServiceProvider',
         'Crowdlinker\Shortener\Utilities\UtilitiesServiceProvider',
+        'Jenssegers\Agent\AgentServiceProvider',
 	),
 
 	/*
@@ -196,7 +197,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
         'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
         'Shortener'       => 'Crowdlinker\Shortener\Facades\Shortener',
-
+        'Agent'            => 'Jenssegers\Agent\Facades\Agent',
 	),
 
 );
