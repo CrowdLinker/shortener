@@ -35,9 +35,10 @@ class DbLinkRepository implements LinkRepositoryInterface
      * @param $pagetitle
      * @param $provider
      * @param $uid
+     * @param $favicon
      * @return mixed|void
      */
-    public function createApi($url,$hash,$pagetitle,$provider,$uid)
+    public function createApi($url,$hash,$pagetitle,$provider,$uid,$favicon)
     {
         $shortlink = new ShortLink;
         $shortlink->url = $url;
@@ -45,6 +46,7 @@ class DbLinkRepository implements LinkRepositoryInterface
         $shortlink->pagetitle = $pagetitle;
         $shortlink->domainprovider = $provider;
         $shortlink->user_id = $uid;
+        $shortlink->favicon = $favicon;
         $shortlink->save();
     }
 

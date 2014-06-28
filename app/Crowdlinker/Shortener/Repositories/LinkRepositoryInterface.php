@@ -16,9 +16,10 @@ interface LinkRepositoryInterface
      * @param $pagetitle
      * @param $provider
      * @param $uid
+     * @param $favicon
      * @return mixed
      */
-    public function createApi($url,$hash,$pagetitle,$provider,$uid);
+    public function createApi($url,$hash,$pagetitle,$provider,$uid,$favicon);
 
     /**
      * Fetch link by hash

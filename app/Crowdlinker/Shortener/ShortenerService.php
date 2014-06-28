@@ -70,8 +70,9 @@ class ShortenerService
         });
         $domainprovider = $page_data['provider_display'];
         $pagetitle = $page_data['title'];
+        $favicon = $page_data['favicon_url'];
         $user_id = (Auth::check()) ? Auth::user()->id : NULL;
-        $this->linkRepo->createApi($url,$hash,$pagetitle,$domainprovider,$user_id);
+        $this->linkRepo->createApi($url,$hash,$pagetitle,$domainprovider,$user_id,$favicon);
         return $hash;
     }
     /**
