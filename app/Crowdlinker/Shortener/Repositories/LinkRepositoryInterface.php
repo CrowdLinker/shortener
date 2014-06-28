@@ -95,7 +95,8 @@ interface LinkRepositoryInterface
 
     /**
      * @param $data
+     * @param $shorlink
      * @return mixed
      */
-    public function getMapData($data);
+    public function getMapData($data,$shorlink);
 }

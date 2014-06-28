@@ -57,7 +57,7 @@ class AnalyticsController extends ApiController {
     public function map($shortlink)
     {
         $details = Location::where('shortlink_id','=',$shortlink)->remember(10)->get(['latitude','longitude']);
-        $data = Shortener::mapLocation($details);
+        $data = Shortener::mapLocation($details,$shortlink);
         return $this->setStatusCode(200)->respond($data);
     }
 }

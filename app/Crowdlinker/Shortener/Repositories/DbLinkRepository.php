@@ -318,14 +318,14 @@ class DbLinkRepository implements LinkRepositoryInterface
      * @param $data
      * @return array|mixed
      */
-    public function getMapData($data)
+    public function getMapData($data,$shortlink)
     {
         $details = $data->toArray();
         $lat = array_fetch($details,'latitude');
         $long = array_fetch($details,'longitude');
         list($latitude,$latcount) = array_divide(array_count_values($lat));
         list($longitude,$longcount) = array_divide(array_count_values($long));
-        $output = $this->generateMapArray($latitude,$longitude,$latcount);
+        $output = $this->generateMapArray($latitude,$longitude,$latcount,$shortlink);
         return $output;
     }
 
@@ -335,13 +335,13 @@ class DbLinkRepository implements LinkRepositoryInterface
      * @param $count
      * @return array
      */
-    private function generateMapArray($lat,$long,$count)
+    private function generateMapArray($lat,$long,$count,$shortlink)
     {
         $output = [];
 
         foreach($lat as $key=>$value)
         {
-            $data = Location::where('latitude','=',$value)->where('longitude','=',$long[$key])->remember(10)->first();
+            $data = Location::where('latitude','=',$value)->where('longitude','=',$long[$key])->where('shortlink_id','=',$shortlink)->remember(10)->first();
             $output[] =
                 [
                     'latLng' => [$lat[$key],$long[$key]],

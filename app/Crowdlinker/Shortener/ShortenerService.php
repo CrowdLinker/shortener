@@ -145,10 +145,11 @@ class ShortenerService
 
     /**
      * @param $data
+     * @param $shortlink
      * @return mixed
      */
-    public function mapLocation($data)
+    public function mapLocation($data,$shortlink)
     {
-        return $this->linkRepo->getMapData($data);
+        return $this->linkRepo->getMapData($data,$shortlink);
     }
 }
