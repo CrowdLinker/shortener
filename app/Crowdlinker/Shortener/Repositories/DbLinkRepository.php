@@ -341,7 +341,7 @@ class DbLinkRepository implements LinkRepositoryInterface
 
         foreach($lat as $key=>$value)
         {
-            $data = ShortLink::where('latitude','=',$value)->where('longitude','=',$long[$key])->remember(10)->first();
+            $data = Location::where('latitude','=',$value)->where('longitude','=',$long[$key])->remember(10)->first();
             $output[] =
                 [
                     'latLng' => [$lat[$key],$long[$key]],
