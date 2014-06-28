@@ -345,7 +345,7 @@ class DbLinkRepository implements LinkRepositoryInterface
             $output[] =
                 [
                     'latLng' => [$lat[$key],$long[$key]],
-                    'name' => $data['city'],
+                    'name' => ($data['city'] == "") ? "Unknown" : $data['city'],
                     'count' => $count[$key]
                 ];
         }
