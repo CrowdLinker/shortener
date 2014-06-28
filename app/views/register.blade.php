@@ -40,8 +40,8 @@
             <div class="login-form-content" ng-controller="RegisterController">
                 <p class="text-center"><a href="/"><img src="/image/scrolllogo.svg" width="166"></a></p>
                 <h3 class="login">Register</h3>
-                <div ng-if="success" class="alert alert-success">Registered successfully !. Please sign in</div>
-                <div ng-if="error" class="alert alert-danger">
+                <div ng-if="success" class="alert alert-success" ng-cloak>Registered successfully !. Please sign in</div>
+                <div ng-if="error" class="alert alert-danger" ng-cloak>
                     <ul>
                         <li ng-repeat="error in errormessage">
                             <% error %>
