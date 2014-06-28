@@ -47,8 +47,10 @@ angular.module('shortenerApp.controllers',[])
     .controller('LinkDataController',
     function($scope,Link)
     {
-        $scope.currentPage = 2;
+        $scope.currentPage = 1;
         $scope.maxSize = 10;
+        var begin = (($scope.currentPage - 1) * $scope.maxSize)
+            , end = begin + $scope.maxSize;
         Link.get()
             .success(function(data)
             {
@@ -71,6 +73,7 @@ angular.module('shortenerApp.controllers',[])
                         .success(function(data)
                         {
                             $scope.shortlinks = data;
+                            $scope.filteredLinks = $scope.shortlinks.slice(begin, end);
                         });
                 });
         };
