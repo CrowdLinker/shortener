@@ -84,9 +84,11 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+<script src="/js/ui-bootstrap-custom-0.10.0.min.js"></script>
+<script src="/js/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
 <script src="/js/angles.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/services.js"></script>
-<Script src="/js/controllers.js"></Script>
+<script src="/js/controllers.js"></Script>
 </body>
 </html>

@@ -321,24 +321,21 @@ class DbLinkRepository implements LinkRepositoryInterface
     public function getMapData($data)
     {
         $details = $data->toArray();
-        $city = array_fetch($details,'city');
         $lat = array_fetch($details,'latitude');
         $long = array_fetch($details,'longitude');
-        list($cityname,$citycount) = array_divide(array_count_values($city));
         list($latitude,$latcount) = array_divide(array_count_values($lat));
         list($longitude,$longcount) = array_divide(array_count_values($long));
-        $output = $this->generateMapArray($cityname,$latitude,$longitude,$citycount);
+        $output = $this->generateMapArray($latitude,$longitude,$latcount);
         return $output;
     }
 
     /**
-     * @param $city
      * @param $lat
      * @param $long
      * @param $count
      * @return array
      */
-    private function generateMapArray($city,$lat,$long,$count)
+    private function generateMapArray($lat,$long,$count)
     {
         $output = [];
         foreach($city as $key=>$value)
