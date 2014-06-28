@@ -36,7 +36,7 @@
                         <tr ng-repeat="value in shortlinks.slice(((currentPage-1)*maxSize), ((currentPage)*maxSize)) track by $index" ng-if="shortlinks.length > 0">
                             <td><a href="<% value.link %>" target="_blank"><% value.link %></a></td>
                             <td><% value.created_at %></td>
-                            <td><h5><img ng-src="<% value.favicon %>"/><% value.pagetitle %><br/><small><% value.provider %></small></h5></td>
+                            <td><h5><img style="float:left;margin-right:10px" ng-src="<% value.favicon %>"/> <% value.pagetitle %><br/><small><% value.provider %></small></h5></td>
                             <td><% value.clicks %></td>
                             <td><% value.unique_clicks %></td>
                             <td><a href="/dashboard/<% value.id %>"><i class="fa fa-bar-chart-o"></i> Details</a></td>

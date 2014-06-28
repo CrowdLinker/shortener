@@ -87,6 +87,7 @@ class DbLinkRepository implements LinkRepositoryInterface
                     'id' => $value->id,
                     'link' => 'http://'.$_ENV['SHORT_DOMAIN'].'/'.$value['hash'],
                     'pagetitle' => $value->pagetitle,
+                    'favicon' => $value->favicon,
                     'provider' => $value->domainprovider,
                     'clicks' => $value->clicks,
                     'unique_clicks' => $value->unique_clicks,
