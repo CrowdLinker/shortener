@@ -42,8 +42,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
 <script src="/js/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="/js/jquery-jvectormap-world-mill-en.js"></script>
-<script src="/js/ui-bootstrap-custom-0.10.0.min.js"></script>
-<script src="/js/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
+<script src="/js/ui-bootstrap-tpls-0.11.0.min.js"></script>
 <script src="/js/angles.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/services.js"></script>
