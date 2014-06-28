@@ -338,12 +338,14 @@ class DbLinkRepository implements LinkRepositoryInterface
     private function generateMapArray($lat,$long,$count)
     {
         $output = [];
-        foreach($city as $key=>$value)
+
+        foreach($lat as $key=>$value)
         {
+            $data = ShortLink::where('latitude','=',$value)->where('longitude','=',$long[$key])->remember(10)->first();
             $output[] =
                 [
                     'latLng' => [$lat[$key],$long[$key]],
-                    'name' => ($value == "")  ? "Unknown" : $value,
+                    'name' => ($data['city'] == "")  ? "Unknown" : $data['city'],
                     'count' => $count[$key]
                 ];
         }
