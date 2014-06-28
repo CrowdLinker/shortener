@@ -53,5 +53,6 @@ Route::group(['prefix' => 'api'],function()
     Route::put('/user/password/create',['as' => 'api.createpassword','before' => 'auth','uses' => 'SettingsController@setPassword']);
     Route::put('/user/password/change',['as' => 'api.changepassword','before' => 'auth','uses' => 'SettingsController@setPassword']);
     Route::get('/user/email',['as' => 'api.getuseremail','before' => 'auth','uses' => 'SettingsController@getemail']);
+    Route::delete('/user/deactivate',['as' => 'api.deleteaccount','before' => 'auth','uses' => 'SettingsController@deleteaccount']);
 });
 Route::post('links', 'LinksController@store')->before('csrf');

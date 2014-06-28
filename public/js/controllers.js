@@ -197,6 +197,15 @@ angular.module('shortenerApp.controllers',[])
                         });
                 }
 
+                $scope.deactivateAccount = function()
+                {
+                    User.delete()
+                        .success(function()
+                        {
+                            window.location.replace(shortener.url + '/logout');
+                        });
+                };
+
                 User.getemail()
                     .success(function(data)
                     {

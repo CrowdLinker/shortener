@@ -34,6 +34,11 @@ class SettingsController extends ApiController {
         return $this->setStatusCode(200)->respond(['email' => Auth::user()->email]);
     }
 
+    public function deleteaccount()
+    {
+        $this->user->delete();
+        return $this->setStatusCode(200)->respondWithSuccess('Successfully Deactivated');
+    }
 
     /**
      * Check if Account has Password

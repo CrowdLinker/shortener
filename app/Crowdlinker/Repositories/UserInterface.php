@@ -54,4 +54,10 @@ interface UserInterface
      */
     public function setProviderFacebook($email,$provider_id,$token);
 
+    /**
+     * Soft Delete Account
+     * @return mixed
+     */
+    public function delete();
+
 }

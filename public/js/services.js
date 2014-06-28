@@ -32,6 +32,10 @@ angular.module('shortenerApp.services',[])
             {
                 return $http.get(shortener.url + '/api/user/email');
             },
+            delete: function()
+            {
+                return $http.delete(shortener.url + '/api/user/deactivate');
+            },
             newpassword: function(data)
             {
                 return $http({

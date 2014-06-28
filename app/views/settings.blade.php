@@ -50,9 +50,22 @@
                 <small>Note: On deactivating account all links would be deleted.</small>
                 <br/>
                 <br/>
-                <button class="btn btn-danger">Deactivate</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#confirmation">Deactivate</button>
             </h3>
         </div>
+        <div class="modal fade" id="confirmation" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h3>Are you sure ?<br/><br/><small>Your account would be deleted <b>permanently</b></small>.</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" ng-click="deactivateAccount()" class="btn btn-success">Delete</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
         <div class="modal fade" id="createpassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">

@@ -122,5 +122,15 @@ class DbUserRepository implements UserInterface
 
     }
 
+    /**
+     * soft delete account / deactivate
+     * @return mixed|void
+     */
+    public function delete()
+    {
+        $user = User::find(Auth::user()->id);
+        $user->delete();
+    }
+
 
 }
