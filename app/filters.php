@@ -102,16 +102,14 @@ Route::filter('clicks_shorturl',function()
 {
     $sess_id = Session::getId();
     $check = Shortener::checkSessionExists($sess_id,Request::segment(1));
-    $bots = ['MetaURI API/2.0 +metauri.com','Mozilla/5.0 () [] []','Google-HTTP-Java-Client/1.17.0-rc (gzip) [] []','help@dataminr.com','Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0) [] []'];
-    if(BrowserDetect::isBot())
+    if(Agent::isRobot() || Agent::match('+metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client/1.17.0-rc (gzip) [] []') || Agent::match('Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0) [] []') || Agent::match('Mozilla/5.0 () [] []'))
     {
         Log::info(Request::server('HTTP_USER_AGENT'));
     }
     else
     {
-        Log::error(Request::server('HTTP_USER_AGENT'));
+        \Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
     }
-    //\Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
     if(!$check)
     {
         Shortener::logUniqueView(Request::segment(1),$sess_id);
