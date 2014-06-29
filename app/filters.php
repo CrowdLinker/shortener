@@ -102,9 +102,12 @@ Route::filter('clicks_shorturl',function()
 {
     $sess_id = Session::getId();
     $check = Shortener::checkSessionExists($sess_id,Request::segment(1));
+    Log::error(Request::server('HTTP_USER_AGENT'));
     if(!Agent::isRobot() || !Agent::match('facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)') || !Agent::match('Mozilla/5.0 (compatible; TweetmemeBot/3.0; +http://tweetmeme.com/)'))
     {
+        Log::info(Request::server('HTTP_USER_AGENT'));
         \Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
+
     }
     if(!$check)
     {
