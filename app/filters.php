@@ -102,10 +102,7 @@ Route::filter('clicks_shorturl',function()
 {
     $sess_id = Session::getId();
     $check = Shortener::checkSessionExists($sess_id,Request::segment(1));
-    if(Agent::isRobot())
-    {
-        Log::info(Request::server('HTTP_USER_AGENT'));
-    }
+    Log::info(Request::server('HTTP_USER_AGENT'));
     //\Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
     if(!$check)
     {
