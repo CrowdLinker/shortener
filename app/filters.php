@@ -104,10 +104,11 @@ Route::filter('clicks_shorturl',function()
     $check = Shortener::checkSessionExists($sess_id,Request::segment(1));
     if(Agent::isRobot() || Agent::match('Google') || Agent::match('Linkedin') || Agent::match('Bot|bot') || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php') || Agent::platform() == "")
     {
-        Log::info(Request::server('HTTP_USER_AGENT'));
+        Log::error(Request::server('HTTP_USER_AGENT'));
     }
     else
     {
+        Log::info(Request::server('HTTP_USER_AGENT'));
         \Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
         if(!$check)
         {
