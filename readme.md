@@ -2,7 +2,7 @@
 Version
 ----
 
-1.1
+1.2
 
 Tech
 -----------
@@ -19,6 +19,19 @@ Crowdlinker Shortener uses a number of open source projects to work properly:
 * [jQuery] - duh 
 * [Vagrant] - Development Environment.
 * [Embedly] - For Extracting URL
+* [jVectorMap] - For Analytics geo visualizaton.
+* [freegeoip] - REST Api for searching geolocation by ipaddress.
+
+
+Features
+-----------
+
+* Generate Shortlink. Ability to use any custom domain of your choice.
+* Single Sign On - Currently supports Facebook and username/password.
+* Track clicks (Including unique clicks)
+* Track Location - Countries and City
+* SafeBrowsing
+
 
 Installation
 --------------
@@ -66,13 +79,19 @@ php artisan migrate
 php artisan migrate --env=local
 
 ```
+##### Setup cronjob
+* Setup cronjob to run at midnight for following command (used for to analyze unique clicks):
+
+```sh
+0 0 * * * 1,2,3,4,5 /usr/bin/php /public_html/shortener/artisan crowdlinker:updatecount
+
+```
 
 
 
 
 
-
-**Free Software, Hell Yeah!**
+**Free Software, Hell Yeah! Feel free to contribute or suggest any issues or new features.**
 [Laravel 4]:http://laravel.com
 [Grunt]:http://gruntjs.com/
 [AngularJS]:https://angularjs.org/
@@ -83,3 +102,5 @@ php artisan migrate --env=local
 [Gulp]:http://gulpjs.com
 [Vagrant]:http://www.vagrantup.com/
 [Embedly]:http://embed.ly
+[jVectorMap]:http://jvectormap.com/
+[freegeoip]:http://freegeoip.net
