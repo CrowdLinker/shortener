@@ -107,6 +107,10 @@ Route::filter('clicks_shorturl',function()
     {
         Log::info(Request::server('HTTP_USER_AGENT'));
     }
+    else
+    {
+        Log::error(Request::server('HTTP_USER_AGENT'));
+    }
     //\Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
     if(!$check)
     {
