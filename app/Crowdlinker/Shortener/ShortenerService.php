@@ -65,7 +65,7 @@ class ShortenerService
             return $this->embedly->fetchdata($url);
         });
         $domainprovider = $page_data['provider_display'];
-        $pagetitle = $page_data['title'];
+        $pagetitle = is_null($page_data['title']) ? $url : $page_data['title'];
         $safe = $page_data['safe'];
         $favicon = $page_data['favicon_url'];
         $user_id = (Auth::check()) ? Auth::user()->id : NULL;
