@@ -103,13 +103,9 @@ Route::filter('clicks_shorturl',function()
     $sess_id = Session::getId();
     $check = Shortener::checkSessionExists($sess_id,Request::segment(1));
     Log::error(Request::server('HTTP_USER_AGENT'));
-    if(Agent::match('+http://tweetmeme.com'))
+    if(Agent::isRobot())
     {
         Log::info(Request::server('HTTP_USER_AGENT'));
-    }
-    else
-    {
-        Log::error(Request::server('HTTP_USER_AGENT'));
     }
     //\Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
     if(!$check)
