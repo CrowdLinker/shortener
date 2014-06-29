@@ -4,6 +4,7 @@ use Crowdlinker\Shortener\Repositories\LinkRepositoryInterface as LinkRepo;
 use Crowdlinker\Shortener\Utilities\UrlHasher;
 use Crowdlinker\Shortener\Exceptions\NonExistentHashException;
 use Crowdlinker\Embedly\EmbedlyApi as Embedly;
+use Guzzle\Service\Exception\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -23,11 +24,6 @@ class ShortenerService
     public function make($url)
     {
         return $this->makeHash($url);
-    }
-
-    public function makeDashboard($data)
-    {
-        return $this->makeHashFromApp($data['url'],$data['provider'],$data['title']);
     }
 
     /**
@@ -70,10 +66,18 @@ class ShortenerService
         });
         $domainprovider = $page_data['provider_display'];
         $pagetitle = $page_data['title'];
+        $safe = $page_data['safe'];
         $favicon = $page_data['favicon_url'];
         $user_id = (Auth::check()) ? Auth::user()->id : NULL;
-        $this->linkRepo->createApi($url,$hash,$pagetitle,$domainprovider,$user_id,$favicon);
-        return $hash;
+        if($safe)
+        {
+            $this->linkRepo->createApi($url,$hash,$pagetitle,$domainprovider,$user_id,$favicon);
+            return $hash;
+        }
+        else
+        {
+            throw new ValidationException($page_data['safe_message']);
+        }
     }
     /**
      * Increment Click

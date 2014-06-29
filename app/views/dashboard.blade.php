@@ -42,7 +42,7 @@
                             <td><a href="/dashboard/<% value.id %>"><i class="fa fa-bar-chart-o"></i> Details</a></td>
                         </tr>
                         <tr ng-if="shortlinks.length === 0">
-                            <td class="text-center" colspan=4"><h4>No short links created yet</h4></td>
+                            <td class="text-center" colspan=6"><h4>No short links created yet</h4></td>
                         </tr>
                         </tbody>
                     </table>

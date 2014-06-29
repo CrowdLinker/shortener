@@ -64,7 +64,7 @@ class LinksController extends ApiController {
         }
         catch (ValidationException $e)
         {
-            return $this->setStatusCode(400)->respondWithError('Oops! there was some problem');
+            return $this->setStatusCode(400)->respondWithError($e);
         }
     }
 
