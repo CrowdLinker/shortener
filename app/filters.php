@@ -102,7 +102,7 @@ Route::filter('clicks_shorturl',function()
 {
     $sess_id = Session::getId();
     $check = Shortener::checkSessionExists($sess_id,Request::segment(1));
-    if(Agent::isRobot() || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('Mozilla/5.0'))
+    if(Agent::isRobot() || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php'))
     {
         Log::info(Request::server('HTTP_USER_AGENT'));
     }
@@ -118,7 +118,7 @@ Route::filter('clicks_shorturl',function()
 
 Route::filter('track_referrer',function()
 {
-    if(Agent::isRobot() || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('Mozilla/5.0'))
+    if(Agent::isRobot() || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php'))
     {
         Log::info(Request::server('HTTP_USER_AGENT'));
     }
@@ -131,7 +131,7 @@ Route::filter('track_referrer',function()
 
 Route::filter('track_location',function()
 {
-    if(Agent::isRobot() || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('Mozilla/5.0'))
+    if(Agent::isRobot() || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php'))
     {
         Log::info(Request::server('HTTP_USER_AGENT'));
     }
