@@ -129,6 +129,7 @@ return array(
         'Crowdlinker\Shortener\ShortenerServiceProvider',
         'Crowdlinker\Shortener\Utilities\UtilitiesServiceProvider',
         'Jenssegers\Agent\AgentServiceProvider',
+        'hisorange\BrowserDetect\Provider\BrowserDetectService',
 	),
 
 	/*
@@ -198,6 +199,7 @@ return array(
         'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
         'Shortener'       => 'Crowdlinker\Shortener\Facades\Shortener',
         'Agent'            => 'Jenssegers\Agent\Facades\Agent',
+        'BrowserDetect' => 'hisorange\BrowserDetect\Facade\Parser',
 	),
 
 );

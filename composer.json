@@ -15,7 +15,8 @@
         "snowplow/referer-parser": "dev-master",
         "symfony/yaml": "2.5.*@dev",
         "fideloper/proxy": "dev-master",
-        "jenssegers/agent": "*"
+        "jenssegers/agent": "*",
+        "hisorange/browser-detect": "1.*"
 	},
 	"autoload": {
 		"classmap": [

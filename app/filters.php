@@ -102,7 +102,11 @@ Route::filter('clicks_shorturl',function()
 {
     $sess_id = Session::getId();
     $check = Shortener::checkSessionExists($sess_id,Request::segment(1));
-    Log::info(Request::server('HTTP_USER_AGENT'));
+    $bots = ['MetaURI API/2.0 +metauri.com','Mozilla/5.0 () [] []','Google-HTTP-Java-Client/1.17.0-rc (gzip) [] []','help@dataminr.com','Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0) [] []'];
+    if(BrowserDetect::isBot())
+    {
+        Log::info(Request::server('HTTP_USER_AGENT'));
+    }
     //\Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
     if(!$check)
     {
