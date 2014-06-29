@@ -91,7 +91,7 @@ php artisan migrate --env=local
 
 
 
-**Free Software, Hell Yeah!**
+**Free Software, Hell Yeah! Feel free to contribute or suggest any issues or new features.**
 [Laravel 4]:http://laravel.com
 [Grunt]:http://gruntjs.com/
 [AngularJS]:https://angularjs.org/
