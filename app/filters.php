@@ -109,25 +109,39 @@ Route::filter('clicks_shorturl',function()
     else
     {
         \Crowdlinker\Shortener\Facades\Shortener::incrementClick(Request::segment(1));
-    }
-    if(!$check)
-    {
-        Shortener::logUniqueView(Request::segment(1),$sess_id);
+        if(!$check)
+        {
+            Shortener::logUniqueView(Request::segment(1),$sess_id);
+        }
     }
 });
 
 Route::filter('track_referrer',function()
 {
-    $referrer = Request::server('HTTP_REFERER');
-    Shortener::trackReferrer(Request::segment(1),$referrer);
+    if(Agent::isRobot() || Agent::match('+metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client/1.17.0-rc (gzip) [] []') || Agent::match('Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0) [] []') || Agent::match('Mozilla/5.0 () [] []'))
+    {
+        Log::info(Request::server('HTTP_USER_AGENT'));
+    }
+    else
+    {
+        $referrer = Request::server('HTTP_REFERER');
+        Shortener::trackReferrer(Request::segment(1),$referrer);
+    }
 });
 
 Route::filter('track_location',function()
 {
-    $request = Request::instance();
-    $request->setTrustedProxies(array('127.0.0.1'));
-    $ip = $request->getClientIp();
-    Shortener::trackLocation(Request::segment(1),$ip);
+    if(Agent::isRobot() || Agent::match('+metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client/1.17.0-rc (gzip) [] []') || Agent::match('Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0) [] []') || Agent::match('Mozilla/5.0 () [] []'))
+    {
+        Log::info(Request::server('HTTP_USER_AGENT'));
+    }
+    else
+    {
+        $request = Request::instance();
+        $request->setTrustedProxies(array('127.0.0.1'));
+        $ip = $request->getClientIp();
+        Shortener::trackLocation(Request::segment(1),$ip);
+    }
 });
 
 Route::filter('checkuser',function()
