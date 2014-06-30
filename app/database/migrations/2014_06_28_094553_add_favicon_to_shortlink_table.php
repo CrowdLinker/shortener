@@ -14,7 +14,7 @@ class AddFaviconToShortlinkTable extends Migration {
 	{
 		Schema::table('shortlink', function(Blueprint $table)
 		{
-			$table->string('favicon')->nullable();
+			$table->string('favicon')->nullable()->default(NULL);
 		});
 	}
 
