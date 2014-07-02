@@ -58,7 +58,7 @@ class DbLinkRepository implements LinkRepositoryInterface
      */
     public function byHash($hash)
     {
-        $shortlink = ShortLink::whereHash($hash)->whereNULL('user_id')->remember(10)->first();
+        $shortlink = ShortLink::whereHash($hash)->remember(10)->first();
         return $shortlink;
     }
 
