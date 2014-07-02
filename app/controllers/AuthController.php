@@ -140,7 +140,7 @@ class AuthController extends ApiController {
             //Get User Id and login
             Auth::login($user);
             $this->insertSession($result['id'],$token->getAccessToken(),'facebook');
-            return Redirect::intended('dashboard');
+            return Redirect::to(URL::previous());
         }
         // if not ask for permission first
         else {
