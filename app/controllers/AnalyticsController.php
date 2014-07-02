@@ -25,6 +25,7 @@ class AnalyticsController extends ApiController {
 
    public function globalanalytics($slug)
    {
+        Session::put('analytics.page',$slug);
         $getId = ShortLink::where('hash','=',$slug)->remember(10)->get();
         JavaScript::put(['url' => URL::to('/'),'id' => $getId[0]['id']]);
         $title = 'Analytics';
