@@ -43,8 +43,8 @@ Route::group(['prefix' => 'api'],function()
 {
     Route::get('links',['as' => 'api.urls','before' => 'auth.basic','uses' => 'LinksController@getlinks']);
     Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','uses' => 'AnalyticsController@detail']);
-    Route::get('/links/map/{shortlink}',['as' => 'api.url.map','before' => 'auth|checkuser','uses' => 'AnalyticsController@map']);
-    Route::get('/links/location/{shortlink}',['as' => 'api.url.location','before' => 'auth|checkuser','uses' => 'AnalyticsController@location']);
+    Route::get('/links/map/{shortlink}',['as' => 'api.url.map','uses' => 'AnalyticsController@map']);
+    Route::get('/links/location/{shortlink}',['as' => 'api.url.location','uses' => 'AnalyticsController@location']);
     Route::post('create',['as' => 'api.create','uses' => 'LinksController@create']);
     Route::post('/home/create',['as' => 'api.home.create','uses' => 'LinksController@store']);
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
