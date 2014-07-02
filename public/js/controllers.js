@@ -79,7 +79,7 @@ angular.module('shortenerApp.controllers',[])
                     Link.get()
                         .success(function(data)
                         {
-                            $scope.shortlinks = data;
+                            $scope.shortlinks = data.data;
                             $scope.filteredLinks = $scope.shortlinks.slice(begin, end);
                         });
                 });
