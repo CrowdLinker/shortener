@@ -9,7 +9,8 @@ class RemindersController extends Controller {
 	 */
 	public function getRemind()
 	{
-		return View::make('password.remind');
+        $title = 'URL Shortener - Forgot Password';
+		return View::make('password.remind',compact('title'));
 	}
 
 	/**
@@ -38,8 +39,8 @@ class RemindersController extends Controller {
 	public function getReset($token = null)
 	{
 		if (is_null($token)) App::abort(404);
-
-		return View::make('password.reset')->with('token', $token);
+        $title = 'URL Shortener - Forgot Password';
+		return View::make('password.reset',compact('title'))->with('token', $token);
 	}
 
 	/**

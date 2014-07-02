@@ -39,7 +39,7 @@
                             <td><h5><img style="float:left;margin-right:10px" width="16" ng-src="<% value.favicon %>"/> <% value.pagetitle %><br/><small><% value.provider %></small></h5></td>
                             <td><% value.clicks %></td>
                             <td><% value.unique_clicks %></td>
-                            <td><a href="/dashboard/<% value.id %>"><i class="fa fa-bar-chart-o"></i> Details</a></td>
+                            <td><a href="/dashboard/<% value.hash %>"><i class="fa fa-bar-chart-o"></i> Details</a></td>
                         </tr>
                         <tr ng-if="shortlinks.length === 0">
                             <td class="text-center" colspan=6"><h4>No short links created yet</h4></td>

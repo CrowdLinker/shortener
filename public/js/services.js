@@ -66,6 +66,14 @@ angular.module('shortenerApp.services',[])
                     data: data
                 });
             },
+            createhome : function(data)
+            {
+                return $http({
+                    method :'POST',
+                    url : shortener.url + '/api/home/create',
+                    data : data
+                });
+            },
             get : function()
             {
                 return $http.get(shortener.url + '/api/links');

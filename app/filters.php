@@ -154,3 +154,12 @@ Route::filter('checkuser',function()
         return App::abort(404);
     }
 });
+
+Route::filter('serviceCSRF',function(){
+    $aHeaders = getallheaders();
+    if (Session::token() != $aHeaders['csrf_token']) {
+        return Response::json([
+            'message' => 'I’m a teapot !!! you stupid hacker :D '
+        ], 418);
+    }
+});

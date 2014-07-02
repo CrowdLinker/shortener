@@ -20,7 +20,7 @@ class SettingsController extends ApiController {
      */
     public function index()
     {
-        JavaScript::put(['url' => URL::to('/')]);
+        JavaScript::put(['url' => URL::to('/'),'csrf' => csrf_token()]);
         $title = 'Settings';
         return View::make('settings',compact('title'));
     }

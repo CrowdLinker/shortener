@@ -4,15 +4,15 @@ class AnalyticsController extends ApiController {
 
     /**
      * Analytics detail page
-     * @param $id
+     * @param $slug
      * @return mixed
      */
-    public function index($id)
+    public function index($slug)
     {
-        $getuserid = ShortLink::where('id','=',$id)->remember(10)->get();
+        $getuserid = ShortLink::where('hash','=',$slug)->remember(10)->get();
         if(count($getuserid) > 0 && $getuserid[0]['user_id'] == Auth::user()->id)
         {
-            JavaScript::put(['url' => URL::to('/'),'id' => $id ]);
+            JavaScript::put(['url' => URL::to('/'),'id' => $getuserid[0]['id'], 'csrf' => csrf_token() ]);
             $title = 'Analytics';
             return View::make('detail',compact('title'));
         }
@@ -22,6 +22,19 @@ class AnalyticsController extends ApiController {
         }
 
     }
+
+   public function globalanalytics($slug)
+   {
+        $getId = ShortLink::where('hash','=',$slug)->remember(10)->get();
+        JavaScript::put(['url' => URL::to('/'),'id' => $getId[0]['id']]);
+        $title = 'Analytics';
+        if(Auth::check())
+        {
+            return View::make('detail',compact('title'));
+        }
+        return View::make('publicanalytics',compact('title'));
+   }
+
 
     /**
      * Get Link Details

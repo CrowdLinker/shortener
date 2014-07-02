@@ -14,8 +14,8 @@
         "laracasts/utilities": "dev-master",
         "snowplow/referer-parser": "dev-master",
         "symfony/yaml": "2.5.*@dev",
-        "fideloper/proxy": "dev-master",
-        "jenssegers/agent": "*"
+        "jenssegers/agent": "*",
+        "league/fractal": "0.8.*"
 	},
 	"autoload": {
 		"classmap": [

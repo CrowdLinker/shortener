@@ -17,8 +17,11 @@ class AuthController extends ApiController {
      */
     public function index()
     {
-        JavaScript::put(['url' => URL::to('/')]);
-        return View::make('login');
+        $intended_url = Session::get('url.intended', URL::previous());
+        Session::forget('url.intended');
+        JavaScript::put(['url' => URL::to('/'),'csrf' => csrf_token(),'redirect_intend' => $intended_url]);
+        $title = 'URL Shortener - Login';
+        return View::make('login',compact('title'));
     }
 
     /**
@@ -28,7 +31,8 @@ class AuthController extends ApiController {
     public function register()
     {
         JavaScript::put(['url' => URL::to('/')]);
-        return View::make('register');
+        $title = 'URL Shortener - Register';
+        return View::make('register',compact('title'));
     }
 
     /**
@@ -136,7 +140,7 @@ class AuthController extends ApiController {
             //Get User Id and login
             Auth::login($user);
             $this->insertSession($result['id'],$token->getAccessToken(),'facebook');
-            return Redirect::to('dashboard');
+            return Redirect::intended('dashboard');
         }
         // if not ask for permission first
         else {

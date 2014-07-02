@@ -28,6 +28,8 @@ interface LinkRepositoryInterface
      */
     public function byHash($hash);
 
+    public function createHash($hash);
+
     /**
      * Fetch link by url
      * @param $url

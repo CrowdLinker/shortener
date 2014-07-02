@@ -43,7 +43,8 @@ class UpdateUniqueCount extends Command {
         foreach($final as $key=>$value)
         {
             $shortlink = ShortLink::where('id','=',$key)->first();
-            $shortlink->unique_clicks = $value;
+            $unique_clicks = $shortlink->unique_clicks + $value;
+            $shortlink->unique_clicks = $unique_clicks;
             $shortlink->save();
         }
         LinkView::truncate();

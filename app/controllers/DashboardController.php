@@ -10,7 +10,7 @@ class DashboardController extends ApiController {
 	 */
 	public function index()
 	{
-        JavaScript::put(['url' => URL::to('/')]);
+        JavaScript::put(['url' => URL::to('/'),'csrf' => csrf_token()]);
         $title = 'Dashboard';
 		return View::make('dashboard',compact('title'));
 	}

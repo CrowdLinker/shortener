@@ -31,7 +31,14 @@ angular.module('shortenerApp.controllers',[])
             User.authorize($scope.account)
                 .success(function(data)
                 {
-                    $window.location.replace(shortener.url + '/dashboard');
+                    if(shortener.redirect_intend== "")
+                    {
+                        $window.location.replace(shortener.url + '/dashboard');
+                    }
+                    else
+                    {
+                        $window.location.replace(shortener.redirect_intend);
+                    }
                 })
                 .error(function(data)
                 {
@@ -54,7 +61,7 @@ angular.module('shortenerApp.controllers',[])
         Link.get()
             .success(function(data)
             {
-                $scope.shortlinks = data;
+                $scope.shortlinks = data.data;
                 $scope.$watch('currentPage + maxSize', function() {
                     var begin = (($scope.currentPage - 1) * $scope.maxSize)
                         , end = begin + $scope.maxSize;
@@ -226,6 +233,25 @@ angular.module('shortenerApp.controllers',[])
                             $scope.changepassword = false;
                         }
                     });
-            });
+            })
+    .controller('HomeController',
+    function($scope,Link)
+    {
+        $scope.created = false;
+        $scope.generateLink = function()
+        {
+            Link.createhome($scope.generate)
+                .success(function(data)
+                {
+                    $scope.created = true;
+                    $scope.favicon = data.data.favicon;
+                    $scope.pagetitle = data.data.pagetitle;
+                    $scope.domainprovider = data.data.domainprovider;
+                    $scope.url = data.data.url;
+                    $scope.clicks = data.data.totalclicks;
+                    $scope.hash = data.data.hash;
+                });
+        };
+    });
 
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\URL;
 use ShortLink,Referrer,Location,LinkView;
 use Crowdlinker\GeoIP\geoipApi as GeoApi;
 use Crowdlinker\SnowPlow\snowplowApi as SnowPlow;
+use League\Fractal;
 class DbLinkRepository implements LinkRepositoryInterface
 {
     /**
@@ -57,8 +58,33 @@ class DbLinkRepository implements LinkRepositoryInterface
      */
     public function byHash($hash)
     {
-        return ShortLink::whereHash($hash)->remember(10)->first();
+        $shortlink = ShortLink::whereHash($hash)->whereNULL('user_id')->remember(10)->first();
+        return $shortlink;
     }
+
+    /**
+     * Get Link by Hash
+     * @param $hash
+     * @return mixed
+     */
+    public function createHash($hash)
+    {
+        $fractal = new Fractal\Manager();
+        $shortlink = ShortLink::whereHash($hash)->whereNULL('user_id')->remember(10)->first();
+        $resource = new Fractal\Resource\Item($shortlink, function(ShortLink $value) {
+            return [
+                'id'      => (int) $value->id,
+                'pagetitle'   => $value->pagetitle,
+                'favicon'    => $value->favicon,
+                'domainprovider'   => $value->domainprovider,
+                'totalclicks' => $value->clicks,
+                'hash' => $value->hash,
+                'url' => 'http://'.$_ENV['SHORT_DOMAIN'].'/'.$value->hash
+            ];
+        });
+        return $fractal->createData($resource)->toArray();
+    }
+
 
     /**
      * Get Links by Url
@@ -67,7 +93,27 @@ class DbLinkRepository implements LinkRepositoryInterface
      */
     public function byUrl($url)
     {
-        return ShortLink::whereUrl($url)->remember(10)->first();
+        $fractal = new Fractal\Manager();
+        $shortlink = ShortLink::whereUrl($url)->whereNull('user_id')->remember(10)->first();
+        if($shortlink)
+        {
+            $resource = new Fractal\Resource\Item($shortlink, function(ShortLink $value) {
+                return [
+                    'id'      => (int) $value->id,
+                    'pagetitle'   => $value->pagetitle,
+                    'favicon'    => $value->favicon,
+                    'domainprovider'   => $value->domainprovider,
+                    'totalclicks' => $value->clicks,
+                    'hash' => $value->hash,
+                    'url' => 'http://'.$_ENV['SHORT_DOMAIN'].'/'.$value->hash
+                ];
+            });
+            return $fractal->createData($resource)->toArray();
+        }
+        else
+        {
+            return $shortlink;
+        }
     }
 
     /**
@@ -77,24 +123,23 @@ class DbLinkRepository implements LinkRepositoryInterface
      */
     public function byUser($id)
     {
+        $fractal = new Fractal\Manager();
         $data = ShortLink::where('user_id','=',$id)->orderBy('created_at', 'DESC')->remember(10)->get();
-        $links = [];
-        foreach($data as $value)
+        $resource = new Fractal\Resource\Collection($data,function(ShortLink $value)
         {
-            $created_at = Carbon::createFromTimeStamp(strtotime($value->created_at));
-            $links[] =
-                [
-                    'id' => $value->id,
-                    'link' => 'http://'.$_ENV['SHORT_DOMAIN'].'/'.$value['hash'],
-                    'pagetitle' => $value->pagetitle,
-                    'favicon' => $value->favicon,
-                    'provider' => $value->domainprovider,
-                    'clicks' => $value->clicks,
-                    'unique_clicks' => $value->unique_clicks,
-                    'created_at' => $created_at->toFormattedDateString()
-                ];
-        }
-        return $links;
+            return [
+                'id' => $value->id,
+                'link' => 'http://'.$_ENV['SHORT_DOMAIN'].'/'.$value->hash,
+                'pagetitle' => $value->pagetitle,
+                'favicon' => $value->favicon,
+                'hash' => $value->hash,
+                'provider' => $value->domainprovider,
+                'clicks' => $value->clicks,
+                'unique_clicks' => $value->unique_clicks,
+                'created_at' => Carbon::createFromTimeStamp(strtotime($value->created_at))->toFormattedDateString()
+            ];
+        });
+       return $fractal->createData($resource)->toArray();
     }
 
     /**

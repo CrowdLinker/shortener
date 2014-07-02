@@ -26,6 +26,20 @@ class ShortenerService
         return $this->makeHash($url);
     }
 
+    public function makeHome($url)
+    {
+        $link = $this->linkRepo->byUrl($url);
+        if($link)
+        {
+            return $link;
+        }
+        else
+        {
+            $hash = $this->makeHash($url);
+            return $this->linkRepo->createHash($hash);
+        }
+    }
+
     /**
      * @param $hash
      * @return mixed
@@ -34,9 +48,7 @@ class ShortenerService
     public function getUrlByHash($hash)
     {
         $link = $this->linkRepo->byHash($hash);
-
         if ( ! $link) throw new NonExistentHashException;
-
         return $link->url;
     }
 
@@ -51,10 +63,10 @@ class ShortenerService
     }
 
     /**
-     * Prepare and save new url + hash
-     *
+     * Prepare Hash
      * @param $url
-     * @returns string
+     * @return string
+     * @throws \Guzzle\Service\Exception\ValidationException
      */
     private function makeHash($url)
     {

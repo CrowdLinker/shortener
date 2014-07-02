@@ -21,7 +21,9 @@ class LinksController extends ApiController {
      */
     public function index()
     {
-        return View::make('home');
+        JavaScript::put(['url' => URL::to('/'),'csrf' => csrf_token() ]);
+        $title = 'URL Shortener';
+        return View::make('home',compact('title'));
     }
 
     public function shortdomainmain()
@@ -37,17 +39,13 @@ class LinksController extends ApiController {
     {
         try
         {
-            $hash = Shortener::make(Input::get('url'));
+            $hash = Shortener::makeHome(Input::get('url'));
+            return $this->setStatusCode(201)->respond($hash);
         }
         catch (ValidationException $e)
         {
-            return Redirect::home()->withErrors($e->getErrors())->withInput();
+            return $this->setStatusCode(400)->respondWithError($e);
         }
-        return Redirect::home()->with([
-            'flash_message' => 'Here you go! ' . link_to($hash),
-            'hashed'        => $hash
-        ]);
-
     }
 
 
