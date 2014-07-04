@@ -2,7 +2,7 @@
 Version
 ----
 
-1.2
+1.3
 
 Tech
 -----------
@@ -21,13 +21,14 @@ Crowdlinker Shortener uses a number of open source projects to work properly:
 * [Embedly] - For Extracting URL
 * [jVectorMap] - For Analytics geo visualizaton.
 * [freegeoip] - REST Api for searching geolocation by ipaddress.
+* [Mandrill] - SMTP server.
 
 
 Features
 -----------
 
 * Generate Shortlink. Ability to use any custom domain of your choice.
-* Single Sign On - Currently supports Facebook and username/password.
+* Single Sign On - Currently supports Facebook,Twitter and username/password.
 * Track clicks (Including unique clicks)
 * Track Location - Countries and City
 * SafeBrowsing
@@ -48,14 +49,17 @@ composer install
 ```sh
 <?php
 return [
-
-    'FACEBOOK_ID' => '<facebook-id>',
+    'FACEBOOK_ID' => '<facebook-key>',
     'FACEBOOK_SECRET' => '<facebook-secret>',
+    'TWITTER_KEY' => '<twitter-key>',
+    'TWITTER_SECRET' => '<twitter-secret>',
+    'TWITTER_CALLBACK_URI' => '<your-domain>/auth/twitter/callback',
+    'MANDRILL_USERNAME' => '<mandrill-username>',
     'MANDRILL_KEY' => '<mandrill-key>',
     'EMBEDLY_KEY' => '<embedly-key>',
-    'SHORT_DOMAIN' => '<your desired shortlink i.e samply.com (Without http)',
-    'COMPANY_NAME' => '<your company name>',
-    'COMPANY_SITE' => '<your company site>'
+    'SHORT_DOMAIN' => '<your-short-domain e.g sample.com>',
+    'COMPANY_NAME' => '<company-name>',
+    'COMPANY_SITE' => '<company-site>',
 ];
 
 ```
@@ -104,3 +108,4 @@ php artisan migrate --env=local
 [Embedly]:http://embed.ly
 [jVectorMap]:http://jvectormap.com/
 [freegeoip]:http://freegeoip.net
+[Mandrill]:http://mandrillapp.com
