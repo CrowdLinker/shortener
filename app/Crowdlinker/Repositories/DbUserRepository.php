@@ -49,7 +49,7 @@ class DbUserRepository implements UserInterface
             $user->email = $data['email'];
             $user->save();
         }
-        $this->addAccount($user,$data['providerid'],$data['token'],$data['secret'],'NONE','twitter','NONE');
+        $this->addAccount($user,$data['providerid'],$data['token'],$data['secret'],'NONE','twitter','NONE',$data['profileimage']);
         Auth::login($user);
     }
 
@@ -98,7 +98,7 @@ class DbUserRepository implements UserInterface
     public function setProviderFacebook($email,$provider_id,$token)
     {
         $user = User::with('accounts')->where('email','=',$email)->first();
-        if(count($user['accounts']) == 0) $this->addAccount($user,$provider_id,$token->getAccessToken(),$token->getEndOfLife(),$email,'facebook');
+        if(count($user['accounts']) == 0) $this->addAccount($user,$provider_id,$token->getAccessToken(),$token->getEndOfLife(),'facebook',$email,'https://graph.facebook.com/'.$provider_id.'/picture?width=140&height=140');
         return $user;
     }
 

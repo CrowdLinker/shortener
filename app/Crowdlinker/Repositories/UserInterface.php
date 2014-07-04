@@ -50,6 +50,7 @@ interface UserInterface
      * @param $email
      * @param $provider_id
      * @param $token
+     * @param $image
      * @return mixed
      */
     public function setProviderFacebook($email,$provider_id,$token);

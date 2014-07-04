@@ -118,6 +118,7 @@ class AuthController extends ApiController {
                    'token' => Session::get('oauth_token'),
                    'secret' => Session::get('oauth_token_secret'),
                    'provider' => 'twitter',
+                   'profileimage' => Session::get('twitter_image'),
                    'providerid' => Session::get('uid')
                 ];
             $this->user->createTwitter($data);
@@ -248,6 +249,7 @@ class AuthController extends ApiController {
             Session::put('uid',$user->uid);
             Session::put('oauth_token', $token->getIdentifier());
             Session::put('oauth_token_secret', $token->getSecret());
+            Session::put('twitter_image',$user->imageUrl);
             Session::save();
             $check = $this->user->checkTwitterExists($user->uid);
             if($check)
