@@ -207,7 +207,7 @@ class DbUserRepository implements UserInterface
         {
             return [
                 'provider' => $value->provider,
-                'profileimage' => $value->profileimage
+                'profileimage' => is_null($value->profileimage) ? URL::to('/image/avatar.png') : $value->profileimage
             ];
         });
         return $fractal->createData($resource)->toArray();
@@ -242,7 +242,7 @@ class DbUserRepository implements UserInterface
         $account = Account::where('user_id','=',$id)->where('token','=',$token)->first();
         $account->token = $token;
         $account->secret = $secret;
-        $account->profileimage = is_null($image) ? URL::to('image/avatar.png') : $image;
+        $account->profileimage = $image;
         $account->save();
     }
 
