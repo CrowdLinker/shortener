@@ -60,4 +60,18 @@ interface UserInterface
      */
     public function delete();
 
+    /**
+     * Check if twitter exists
+     * @param $name
+     * @return mixed
+     */
+    public function checkTwitterExists($name);
+
+    /**
+     * Create new Twitter Account
+     * @param $data
+     * @return mixed
+     */
+    public function createTwitter($data);
+
 }

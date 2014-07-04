@@ -1,12 +1,15 @@
 <?php
 
 use Crowdlinker\Repositories\UserInterface as User;
+use Crowdlinker\Twitter\Manager;
 
 class AuthController extends ApiController {
 
-    public function __construct(User $user)
+    protected $manager;
+    public function __construct(User $user,Manager $manager)
     {
         $this->user = $user;
+        $this->manager = $manager;
     }
 
     /**
@@ -29,9 +32,16 @@ class AuthController extends ApiController {
      */
     public function register()
     {
-        JavaScript::put(['url' => URL::to('/')]);
+        JavaScript::put(['url' => URL::to('/'),'csrf' => csrf_token()]);
         $title = 'URL Shortener - Register';
         return View::make('register',compact('title'));
+    }
+
+    public function start()
+    {
+        JavaScript::put(['url' => URL::to('/'),'csrf' => csrf_token()]);
+        $title = "Let's Get Started";
+        return View::make('twitteremail',compact('title'));
     }
 
     /**
@@ -70,6 +80,45 @@ class AuthController extends ApiController {
             $this->user->create(Input::all());
             return $this->setStatusCode(201)->respondWithSuccess('Successfully created account');
         }
+    }
+
+
+    public function storeTwitter()
+    {
+        $rules =
+            [
+                'email' => 'required|unique:user,email',
+            ];
+        $messages =
+            [
+                'email.required' => 'Email is required',
+                'email.unique' => 'Email already exists.',
+            ];
+
+        $validator = Validator::make(Input::all(),$rules,$messages);
+        if($validator->fails())
+        {
+            $messages = $validator->messages();
+            $error_messages = $messages->all(':message');
+            return $this->setStatusCode(400)->respondWithError($error_messages);
+        }
+        else
+        {
+            list($firstname,$lastname) = explode(" ",Session::get('name'));
+            $data =
+                [
+                   'email' => Input::get('email'),
+                   'firstname' => $firstname,
+                   'lastname' => $lastname,
+                   'token' => Session::get('oauth_token'),
+                   'secret' => Session::get('oauth_token_secret'),
+                   'provider' => 'twitter',
+                   'providerid' => Session::get('uid')
+                ];
+            $this->user->createTwitter($data);
+            return $this->setStatusCode(201)->respondWithSuccess('Successfully created account');
+        }
+
     }
 
 
@@ -149,6 +198,57 @@ class AuthController extends ApiController {
 
             // return to facebook login url
             return Redirect::to( (string)$url );
+        }
+    }
+
+    public function twitter()
+    {
+        try
+        {
+            $provider = $this->manager->get('twitter');
+            $credentials = $provider->getTemporaryCredentials();
+            Session::put('credentials',$credentials);
+            Session::save();
+            return $provider->authorize($credentials);
+        }
+        catch(Exception $e)
+        {
+            return App::abort(404);
+        }
+    }
+
+    public function callback($provider)
+    {
+        try
+        {
+            $provider = $this->manager->get($provider);
+            $token = $provider->getTokenCredentials(
+                Session::get('credentials'),
+                Input::get('oauth_token'),
+                Input::get('oauth_verifier')
+            );
+            $user = $provider->getUserDetails($token);
+            Session::put('username', $user->nickname);
+            Session::put('name',$user->name);
+            Session::put('uid',$user->uid);
+            Session::put('oauth_token', $token->getIdentifier());
+            Session::put('oauth_token_secret', $token->getSecret());
+            Session::save();
+            $check = $this->user->checkTwitterExists($user->uid);
+            if($check)
+            {
+                   Auth::loginUsingId($check);
+                   return Session::has('analytics.page') ? Redirect::to(Session::get('analytics.page'))->with('analytics.page','') : Redirect::to('dashboard');
+            }
+            else
+            {
+                return Redirect::to('start');
+            }
+        }
+        catch(Exception $e)
+        {
+            dd($e);
+            return App::abort(404);
         }
     }
 

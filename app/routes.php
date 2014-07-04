@@ -10,6 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+//CSRF PROTECTION
 Route::when('*', 'serviceCSRF', array('post','put'));
 // Process Short Link Urls
 Route::group(['domain' => $_ENV['SHORT_DOMAIN']],function()
@@ -26,6 +27,10 @@ Route::get('/register',['as' => 'register', 'uses' => 'AuthController@register']
 Route::controller('password', 'RemindersController');
 Route::get('social/facebook',['as' => 'facebook','uses' => 'AuthController@facebook']);
 Route::get('social/twitter',['as' => 'twitter','uses' => 'AuthController@twitter']);
+Route::get('auth/{provider}/callback', [
+    'uses' => 'AuthController@callback',
+    'as' => 'authenticate.callback'
+]);
 Route::get('/logout',function()
 {
     Auth::logout();
@@ -33,7 +38,7 @@ Route::get('/logout',function()
     Cache::flush();
     return Redirect::to('/');
 });
-
+Route::get('/start',['as' => 'twitter_email','uses' => 'AuthController@start']);
 
 //Dashboard
 Route::get('dashboard',['as' => 'dashboard','before' => 'guest','uses' => 'DashboardController@index']);
@@ -46,6 +51,7 @@ Route::group(['prefix' => 'api'],function()
     Route::get('/links/map/{shortlink}',['as' => 'api.url.map','uses' => 'AnalyticsController@map']);
     Route::get('/links/location/{shortlink}',['as' => 'api.url.location','uses' => 'AnalyticsController@location']);
     Route::post('create',['as' => 'api.create','uses' => 'LinksController@create']);
+    Route::post('/twitter/create',['as' => 'api.create.twitter','uses' => 'AuthController@storeTwitter']);
     Route::post('/home/create',['as' => 'api.home.create','uses' => 'LinksController@store']);
     Route::post('/user/create',['as' => 'api.createaccount', 'uses' => 'AuthController@store']);
     Route::post('/user/authorize',['as' => 'api.authorize', 'uses' => 'AuthController@authorize']);
@@ -55,5 +61,6 @@ Route::group(['prefix' => 'api'],function()
     Route::put('/user/password/change',['as' => 'api.changepassword','before' => 'auth','uses' => 'SettingsController@setPassword']);
     Route::get('/user/email',['as' => 'api.getuseremail','before' => 'auth','uses' => 'SettingsController@getemail']);
     Route::delete('/user/deactivate',['as' => 'api.deleteaccount','before' => 'auth','uses' => 'SettingsController@deleteaccount']);
+
 });
 Route::get('{slug}',['as' => 'globalanalytics','uses' => 'AnalyticsController@globalanalytics']);

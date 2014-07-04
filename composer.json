@@ -15,7 +15,9 @@
         "snowplow/referer-parser": "dev-master",
         "symfony/yaml": "2.5.*@dev",
         "jenssegers/agent": "*",
-        "league/fractal": "0.8.*"
+        "league/fractal": "0.8.*",
+        "league/oauth1-client": "~1.0",
+        "doctrine/dbal": "2.5.*@dev"
 	},
 	"autoload": {
 		"classmap": [

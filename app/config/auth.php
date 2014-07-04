@@ -68,4 +68,17 @@ return array(
 
 	),
 
+
+    /*
+     * Providers - Social Login
+     */
+
+    'providers' => array(
+        'twitter' => array(
+            'identifier'    => $_ENV['TWITTER_KEY'],
+            'secret'        => $_ENV['TWITTER_SECRET'],
+            'callback_uri'  => $_ENV['TWITTER_CALLBACK_URI']
+        )
+    )
+
 );

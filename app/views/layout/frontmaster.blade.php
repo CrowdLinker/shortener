@@ -26,6 +26,7 @@
     <![endif]-->
 </head>
 <body ng-app="shortenerApp" ng-csp>
+@if(Request::segment(1) != 'start')
 <div class="row">
     <div class="container">
         <br/>
@@ -36,6 +37,11 @@
         </ul>
     </div>
 </div>
+@else
+<br/>
+<br/>
+<br/>
+@endif
 @yield('content')
 @include('layout.partials.javascript')
 <!-- Please don't use massive JS files for minor functionality. This is okay for the demo, though. -->

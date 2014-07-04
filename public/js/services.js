@@ -51,8 +51,15 @@ angular.module('shortenerApp.services',[])
                     url : shortener.url + '/api/user/password/change',
                     data : data
                 })
+            },
+            twitter: function(data)
+            {
+                return $http({
+                    method: 'POST',
+                    url: shortener.url + '/api/twitter/create',
+                    data : data
+                });
             }
-
         };
     })
     .factory('Link',function($http)

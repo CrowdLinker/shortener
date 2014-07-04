@@ -252,6 +252,24 @@ angular.module('shortenerApp.controllers',[])
                     $scope.hash = data.data.hash;
                 });
         };
+    })
+    .controller('TwitterController',
+    function($scope,User)
+    {
+        $scope.account = {};
+        $scope.error = false;
+        $scope.setEmail = function()
+        {
+            User.twitter($scope.account)
+                .success(function(data)
+                {
+                    window.location.replace(shortener.url + '/dashboard');
+                })
+                .error(function(data)
+                {
+                    $scope.error = true;
+                });
+        }
     });
 
 

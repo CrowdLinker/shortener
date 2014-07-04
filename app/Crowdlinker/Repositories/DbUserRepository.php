@@ -27,6 +27,17 @@ class DbUserRepository implements UserInterface
         return $user;
     }
 
+    public function createTwitter($data)
+    {
+        $user = new User;
+        $user->firstname = $data['firstname'];
+        $user->lastname = $data['lastname'];
+        $user->email = $data['email'];
+        $user->save();
+        $this->addAccount($user,$data['providerid'],$data['token'],$data['secret'],'NONE','NONE');
+        Auth::login($user);
+    }
+
     /**
      * Check for existing user email
      * @param $email
@@ -106,17 +117,19 @@ class DbUserRepository implements UserInterface
      * @param $user
      * @param $id
      * @param $token
+     * @param $secret
      * @param $endlife
      * @param $email
      */
-    private function addAccount($user,$id,$token,$endlife,$email)
+    private function addAccount($user,$id,$token,$secret=null,$endlife,$email)
     {
         $account = new Account;
         $account->token = $token;
+        $account->secret = !is_null($secret) ? $secret : null;
         $account->expiry = Carbon::createFromTimeStamp((int)$endlife)->diffInDays();
         $account->primary_email = $email;
         $account->provider = 'facebook';
-        $account->facebook_id = $id;
+        $account->providerid = $id;
         $account->user()->associate($user);
         $account->save();
 
@@ -132,5 +145,10 @@ class DbUserRepository implements UserInterface
         $user->delete();
     }
 
+    public function checkTwitterExists($twitterid)
+    {
+        $count = Account::with('user')->where('providerid','=',$twitterid)->whereNotNull('user_id')->first();
+        return count($count) > 0 ? $count['user']['id'] : false;
+    }
 
 }

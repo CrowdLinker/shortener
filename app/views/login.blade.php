@@ -6,8 +6,15 @@
                 <p class="text-center"><a href="/"><img src="/image/scrolllogo.svg" width="166"></a></p>
                 <h3 class="login">Please Log In, or <a href="/register">Sign Up</a></h3>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <p class="text-center"><a href="/social/facebook" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Facebook</a></p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                              <p class="text-center"> <a href="/social/facebook" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Facebook</a></p>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                               <p class="text-center"><a href="/social/twitter" class="btn btn-social btn-twitter"><i class="fa fa-twitter"></i> Twitter</a></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="login-or">

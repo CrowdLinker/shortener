@@ -129,6 +129,7 @@ return array(
         'Crowdlinker\Shortener\ShortenerServiceProvider',
         'Crowdlinker\Shortener\Utilities\UtilitiesServiceProvider',
         'Jenssegers\Agent\AgentServiceProvider',
+        'Crowdlinker\Twitter\AuthenticatorsServiceProvider',
 	),
 
 	/*
