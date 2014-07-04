@@ -242,7 +242,7 @@ class DbUserRepository implements UserInterface
         $account = Account::where('user_id','=',$id)->where('token','=',$token)->first();
         $account->token = $token;
         $account->secret = $secret;
-        $account->profileimage = $image;
+        $account->profileimage = is_null($image) ? URL::to('images/avatar.png') : $image;
         $account->save();
     }
 
