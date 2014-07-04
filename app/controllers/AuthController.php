@@ -87,12 +87,11 @@ class AuthController extends ApiController {
     {
         $rules =
             [
-                'email' => 'required|unique:user,email',
+                'email' => 'required|email',
             ];
         $messages =
             [
-                'email.required' => 'Email is required',
-                'email.unique' => 'Email already exists.',
+                'email.required' => 'Email is required'
             ];
 
         $validator = Validator::make(Input::all(),$rules,$messages);
