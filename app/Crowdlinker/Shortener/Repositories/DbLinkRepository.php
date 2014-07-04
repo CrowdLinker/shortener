@@ -130,7 +130,7 @@ class DbLinkRepository implements LinkRepositoryInterface
             return [
                 'id' => $value->id,
                 'link' => 'http://'.$_ENV['SHORT_DOMAIN'].'/'.$value->hash,
-                'pagetitle' => $value->pagetitle,
+                'pagetitle' => \Illuminate\Support\Str::words($value->pagetitle,7),
                 'favicon' => $value->favicon,
                 'hash' => $value->hash,
                 'provider' => $value->domainprovider,
