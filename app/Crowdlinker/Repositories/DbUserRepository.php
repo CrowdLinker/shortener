@@ -23,7 +23,7 @@ class DbUserRepository implements UserInterface
         $user->save();
         if($socialmedia)
         {
-            $this->addAccount($user,$data['id'],$token->getAccessToken(),$token->getEndOfLife(),'facebook',$data['email']);
+            $this->addAccount($user,$data['id'],$token->getAccessToken(),$token->getEndOfLife(),'facebook',$data['email'],'https://graph.facebook.com/'.$data['id'].'/picture?width=140&height=140');
         }
         return $user;
     }
@@ -158,8 +158,9 @@ class DbUserRepository implements UserInterface
      * @param $endlife
      * @param $provider
      * @param $email
+     * @param $profileimage
      */
-    private function addAccount($user,$id,$token,$secret=null,$endlife,$provider,$email)
+    private function addAccount($user,$id,$token,$secret=null,$endlife,$provider,$email,$profileimage)
     {
         $account = new Account;
         $account->token = $token;
@@ -168,6 +169,7 @@ class DbUserRepository implements UserInterface
         $account->primary_email = $email;
         $account->provider = $provider;
         $account->providerid = $id;
+        $account->profileimage = $profileimage;
         $account->user()->associate($user);
         $account->save();
 
@@ -226,7 +228,7 @@ class DbUserRepository implements UserInterface
         $account = Account::where('user_id','=',$id)->where('provider','=','facebook')->first();
         $account->token = $token->getAccessToken();
         $account->expiry = Carbon::createFromTimeStamp((int)$endlife)->diffInDays();
-        $account->profileimage ='https://graph.facebook.com/'.$result['id'].'/picture?width=140&height=140';
+        $account->profileimage = 'https://graph.facebook.com/'.$result['id'].'/picture?width=140&height=140';
         $account->save();
     }
 
