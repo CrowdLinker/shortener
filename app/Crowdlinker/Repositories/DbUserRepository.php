@@ -29,11 +29,19 @@ class DbUserRepository implements UserInterface
 
     public function createTwitter($data)
     {
-        $user = new User;
-        $user->firstname = $data['firstname'];
-        $user->lastname = $data['lastname'];
-        $user->email = $data['email'];
-        $user->save();
+        $check = $this->checkUser($data['email']);
+        if($check == "EXISTS")
+        {
+            $user = User::where('email','=',$data['email'])->first();
+        }
+        else
+        {
+            $user = new User;
+            $user->firstname = $data['firstname'];
+            $user->lastname = $data['lastname'];
+            $user->email = $data['email'];
+            $user->save();
+        }
         $this->addAccount($user,$data['providerid'],$data['token'],$data['secret'],'NONE','NONE');
         Auth::login($user);
     }
