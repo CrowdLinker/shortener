@@ -82,7 +82,10 @@ class AuthController extends ApiController {
         }
     }
 
-
+    /**
+     * Store Twitter Account
+     * @return mixed
+     */
     public function storeTwitter()
     {
         $rules =
@@ -200,6 +203,10 @@ class AuthController extends ApiController {
         }
     }
 
+    /**
+     * Twitter Oauth
+     * @return mixed
+     */
     public function twitter()
     {
         try
@@ -216,6 +223,11 @@ class AuthController extends ApiController {
         }
     }
 
+    /**
+     * Oauth Twitter Callback
+     * @param $provider
+     * @return mixed
+     */
     public function callback($provider)
     {
         try

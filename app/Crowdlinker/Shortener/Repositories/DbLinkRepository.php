@@ -220,6 +220,11 @@ class DbLinkRepository implements LinkRepositoryInterface
         return $output;
     }
 
+    /**
+     * Get Graph Data
+     * @param $data
+     * @return array
+     */
     private function graphData($data)
     {
         $count = [];
@@ -231,6 +236,11 @@ class DbLinkRepository implements LinkRepositoryInterface
         return $countvalues;
     }
 
+    /**
+     * Get Referrer Count
+     * @param $data
+     * @return array
+     */
     private function referrerCount($data)
     {
         $count = [];
@@ -364,6 +374,7 @@ class DbLinkRepository implements LinkRepositoryInterface
 
     /**
      * @param $data
+     * @param $shortlink
      * @return array|mixed
      */
     public function getMapData($data,$shortlink)
@@ -381,6 +392,7 @@ class DbLinkRepository implements LinkRepositoryInterface
      * @param $lat
      * @param $long
      * @param $count
+     * @param $shortlink
      * @return array
      */
     private function generateMapArray($lat,$long,$count,$shortlink)

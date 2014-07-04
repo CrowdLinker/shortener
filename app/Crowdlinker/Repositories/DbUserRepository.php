@@ -27,6 +27,12 @@ class DbUserRepository implements UserInterface
         return $user;
     }
 
+    /**
+     * Check if email exists. If exists link it to that account or
+     * Create new account
+     * @param $data
+     * @return mixed|void
+     */
     public function createTwitter($data)
     {
         $check = $this->checkUserTwitter($data['email']);
@@ -70,18 +76,15 @@ class DbUserRepository implements UserInterface
         }
     }
 
+    /**
+     * Check account for twitter
+     * @param $email
+     * @return string
+     */
     private function checkUserTwitter($email)
     {
         $user = User::where('email','=',$email)->count();
-
-         if($user > 0)
-         {
-             return 'EXISTS';
-         }
-        else
-        {
-            return 'CREATE';
-        }
+        return ($user > 0) ? 'EXISTS' : 'CREATE';
     }
 
     /**
@@ -99,6 +102,11 @@ class DbUserRepository implements UserInterface
     }
 
 
+    /**
+     * Set Account Password
+     * @param $data
+     * @return mixed
+     */
     public function setPassword($data)
     {
         $userid = Auth::user()->id;
@@ -107,6 +115,11 @@ class DbUserRepository implements UserInterface
         return $user->save();
     }
 
+    /**
+     * Set Email
+     * @param $email
+     * @return mixed|void
+     */
     public function setEmail($email)
     {
         $userid = Auth::user()->id;
@@ -115,19 +128,20 @@ class DbUserRepository implements UserInterface
         $user->save();
     }
 
+    /**
+     * Check Account Password
+     * @return bool|mixed
+     */
     public function checkAccountPassword()
     {
-        if(Auth::user()->password == NULL)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        return (Auth::user()->password ==  NULL) ? true : false;
     }
 
+    /**
+     * Get User Id
+     * @param $email
+     * @return mixed
+     */
     public function getUserid($email)
     {
        $account = Account::where('primary_email','=',$email)->first();
@@ -141,6 +155,7 @@ class DbUserRepository implements UserInterface
      * @param $token
      * @param $secret
      * @param $endlife
+     * @param $provider
      * @param $email
      */
     private function addAccount($user,$id,$token,$secret=null,$endlife,$provider,$email)
@@ -167,6 +182,11 @@ class DbUserRepository implements UserInterface
         $user->delete();
     }
 
+    /**
+     * Check if TwitterExists already
+     * @param $twitterid
+     * @return bool|mixed
+     */
     public function checkTwitterExists($twitterid)
     {
         $count = Account::with('user')->where('providerid','=',$twitterid)->whereNotNull('user_id')->first();
