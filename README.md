@@ -2,7 +2,7 @@
 Version
 ----
 
-1.2
+1.3
 
 Tech
 -----------
@@ -27,7 +27,7 @@ Features
 -----------
 
 * Generate Shortlink. Ability to use any custom domain of your choice.
-* Single Sign On - Currently supports Facebook and username/password.
+* Single Sign On - Currently supports Facebook,Twitter and username/password.
 * Track clicks (Including unique clicks)
 * Track Location - Countries and City
 * SafeBrowsing
@@ -53,6 +53,10 @@ return [
     'FACEBOOK_SECRET' => '<facebook-secret>',
     'MANDRILL_KEY' => '<mandrill-key>',
     'EMBEDLY_KEY' => '<embedly-key>',
+    'TWITTER_KEY' => '<twitter-key',
+    'TWITTER_SECRET' => '<twitter-secret>',
+    'TWITTER_CALLBACK_URI' => '<your-domain>/auth/twitter/callback',
+    'MANDRILL_USERNAME' => 'dev@crowdlinker.com',
     'SHORT_DOMAIN' => '<your desired shortlink i.e samply.com (Without http)',
     'COMPANY_NAME' => '<your company name>',
     'COMPANY_SITE' => '<your company site>'
