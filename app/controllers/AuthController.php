@@ -246,7 +246,6 @@ class AuthController extends ApiController {
         }
         catch(Exception $e)
         {
-            dd($e);
             return App::abort(404);
         }
     }
