@@ -9,6 +9,16 @@
         <div class="row">
             <br/>
             <h3>
+                Connected Social Media Accounts
+                <br/>
+                <small>List of connected accounts</small>
+            </h3>
+            <br/>
+
+        </div>
+        <div class="row">
+            <br/>
+            <h3>
                 Email
                 <br/>
                 <small>Your email can be used to sign in to Crowdlinker Shortener app on web.</small>

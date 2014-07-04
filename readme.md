@@ -1,7 +1,8 @@
 
-Version
-----
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CrowdLinker/shortener/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CrowdLinker/shortener/?branch=master)
 
+Version
+---- 
 1.3
 
 Tech

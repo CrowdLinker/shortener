@@ -3,6 +3,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use User,Account;
+use League\Fractal;
 class DbUserRepository implements UserInterface
 {
     /**
@@ -191,6 +192,58 @@ class DbUserRepository implements UserInterface
     {
         $count = Account::with('user')->where('providerid','=',$twitterid)->whereNotNull('user_id')->first();
         return count($count) > 0 ? $count['user']['id'] : false;
+    }
+
+    /**
+     * Get List of social accounts
+     * @param $id
+     * @return mixed|void
+     */
+    public function getSocialAccounts($id)
+    {
+        $fractal = new Fractal\Manager();
+        $accounts = Account::where('user_id','=',$id)->first();
+        $resource = new Fractal\Resource\Collection($accounts,function(Account $value)
+        {
+            return [
+                'provider' => $value->provider,
+                'profileimage' => $value->profileimage
+            ];
+        });
+        return $fractal->createData($resource)->toArray();
+    }
+
+    /**
+     * Update facebook account token and info on login
+     * @param $id
+     * @param $token
+     * @param $result
+     * @return mixed|void
+     */
+    public function updateFBAccount($id,$token,$result)
+    {
+        $endlife = $token->getEndOfLife();
+        $account = Account::where('user_id','=',$id)->where('provider','=','facebook')->first();
+        $account->token = $token->getAccessToken();
+        $account->expiry = Carbon::createFromTimeStamp((int)$endlife)->diffInDays();
+        $account->profileimage ='https://graph.facebook.com/'.$result['id'].'/picture?width=140&height=140';
+        $account->save();
+    }
+
+    /**
+     * Update Twitter account on login.
+     * @param $id
+     * @param $token
+     * @param $secret
+     * @param $image
+     */
+    public function updateTwitterAccount($id,$token,$secret,$image)
+    {
+        $account = Account::where('user_id','=',$id)->where('token','=',$token)->first();
+        $account->token = $token;
+        $account->secret = $secret;
+        $account->profileimage = $image;
+        $account->save();
     }
 
 }

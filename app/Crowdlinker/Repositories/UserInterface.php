@@ -74,4 +74,22 @@ interface UserInterface
      */
     public function createTwitter($data);
 
+    /**
+     * Get All connected social accounts
+     * @param $id
+     * @return mixed
+     */
+    public function getSocialAccounts($id);
+
+    /**
+     * Update FB Account
+     * @param $id
+     * @param $token
+     * @param $result
+     * @return mixed
+     */
+    public function updateFBAccount($id,$token,$result);
+
+    public function updateTwitterAccount($id,$token,$secret,$image);
+
 }

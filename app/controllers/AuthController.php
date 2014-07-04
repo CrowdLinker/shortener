@@ -15,7 +15,6 @@ class AuthController extends ApiController {
     /**
      * Display a listing of the resource.
      * GET /auth
-     *
      * @return Response
      */
     public function index()
@@ -37,6 +36,10 @@ class AuthController extends ApiController {
         return View::make('register',compact('title'));
     }
 
+    /**
+     * Get Started page. Enter existing email or new email.
+     * @return mixed
+     */
     public function start()
     {
         JavaScript::put(['url' => URL::to('/'),'csrf' => csrf_token()]);
@@ -183,6 +186,7 @@ class AuthController extends ApiController {
                     break;
                 case 'EXISTS':
                     $user = $this->user->getUserid($result['email']);
+                    $this->user->updateFBAccount($user->id,$token,$result);
                     break;
                 case 'CREATE':
                     $user = $this->user->create($result,true,$token);
@@ -249,6 +253,7 @@ class AuthController extends ApiController {
             if($check)
             {
                    Auth::loginUsingId($check);
+                   $this->user->updateTwitterAccount(Auth::user()->id,$token->getIdentifier(),$token->getSecret(),$user->imageUrl);
                    return Session::has('analytics.page') ? Redirect::to(Session::get('analytics.page'))->with('analytics.page','') : Redirect::to('dashboard');
             }
             else
@@ -258,6 +263,7 @@ class AuthController extends ApiController {
         }
         catch(Exception $e)
         {
+            dd($e);
             return App::abort(404);
         }
     }
