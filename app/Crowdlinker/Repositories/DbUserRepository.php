@@ -29,7 +29,7 @@ class DbUserRepository implements UserInterface
 
     public function createTwitter($data)
     {
-        $check = $this->checkUser($data['email']);
+        $check = $this->checkUserTwitter($data['email']);
         if($check == "EXISTS")
         {
             $user = User::where('email','=',$data['email'])->first();
@@ -42,7 +42,7 @@ class DbUserRepository implements UserInterface
             $user->email = $data['email'];
             $user->save();
         }
-        $this->addAccount($user,$data['providerid'],$data['token'],$data['secret'],'NONE','NONE','twitter');
+        $this->addAccount($user,$data['providerid'],$data['token'],$data['secret'],'NONE','twitter','NONE');
         Auth::login($user);
     }
 
@@ -64,9 +64,23 @@ class DbUserRepository implements UserInterface
         {
             return 'CREATE';
         }
-        if($user == 0 && $account > 0 || $user > 0 && $account > 0)
+        if($user == 0 && $account > 0 || $user > 0 && $account > 0 )
         {
             return 'EXISTS';
+        }
+    }
+
+    private function checkUserTwitter($email)
+    {
+        $user = User::where('email','=',$email)->count();
+
+         if($user > 0)
+         {
+             return 'EXISTS';
+         }
+        else
+        {
+            return 'CREATE';
         }
     }
 
