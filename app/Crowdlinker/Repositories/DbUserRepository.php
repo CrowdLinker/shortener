@@ -42,7 +42,7 @@ class DbUserRepository implements UserInterface
             $user->email = $data['email'];
             $user->save();
         }
-        $this->addAccount($user,$data['providerid'],$data['token'],$data['secret'],'NONE','NONE');
+        $this->addAccount($user,$data['providerid'],$data['token'],$data['secret'],'NONE','NONE','twitter');
         Auth::login($user);
     }
 
@@ -80,7 +80,7 @@ class DbUserRepository implements UserInterface
     public function setProviderFacebook($email,$provider_id,$token)
     {
         $user = User::with('accounts')->where('email','=',$email)->first();
-        if(count($user['accounts']) == 0) $this->addAccount($user,$provider_id,$token->getAccessToken(),$token->getEndOfLife(),$email);
+        if(count($user['accounts']) == 0) $this->addAccount($user,$provider_id,$token->getAccessToken(),$token->getEndOfLife(),$email,'facebook');
         return $user;
     }
 
@@ -129,14 +129,14 @@ class DbUserRepository implements UserInterface
      * @param $endlife
      * @param $email
      */
-    private function addAccount($user,$id,$token,$secret=null,$endlife,$email)
+    private function addAccount($user,$id,$token,$secret=null,$endlife,$provider,$email)
     {
         $account = new Account;
         $account->token = $token;
         $account->secret = !is_null($secret) ? $secret : null;
         $account->expiry = Carbon::createFromTimeStamp((int)$endlife)->diffInDays();
         $account->primary_email = $email;
-        $account->provider = 'facebook';
+        $account->provider = $provider;
         $account->providerid = $id;
         $account->user()->associate($user);
         $account->save();
