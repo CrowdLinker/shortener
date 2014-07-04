@@ -124,4 +124,10 @@ class SettingsController extends ApiController {
             return $this->setStatusCode(201)->respondWithSuccess('Successfully created account');
         }
     }
+
+
+    public function getaccounts()
+    {
+        return $this->setStatusCode(200)->respond($this->user->getSocialAccounts(Auth::user()->id));
+    }
 }

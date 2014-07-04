@@ -202,7 +202,7 @@ class DbUserRepository implements UserInterface
     public function getSocialAccounts($id)
     {
         $fractal = new Fractal\Manager();
-        $accounts = Account::where('user_id','=',$id)->first();
+        $accounts = Account::where('user_id','=',$id)->get();
         $resource = new Fractal\Resource\Collection($accounts,function(Account $value)
         {
             return [

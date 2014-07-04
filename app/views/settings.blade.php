@@ -12,9 +12,15 @@
                 Connected Social Media Accounts
                 <br/>
                 <small>List of connected accounts</small>
+
             </h3>
             <br/>
-
+            <div class="row">
+                <div ng-repeat="value in socialaccounts" class="profile avatar <% value.provider %>">
+                        <img ng-src="<% value.profileimage %>" alt="...">
+                        <span></span>
+                </div>
+            </div>
         </div>
         <div class="row">
             <br/>

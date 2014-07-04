@@ -61,6 +61,7 @@ Route::group(['prefix' => 'api'],function()
     Route::put('/user/password/change',['as' => 'api.changepassword','before' => 'auth','uses' => 'SettingsController@setPassword']);
     Route::get('/user/email',['as' => 'api.getuseremail','before' => 'auth','uses' => 'SettingsController@getemail']);
     Route::delete('/user/deactivate',['as' => 'api.deleteaccount','before' => 'auth','uses' => 'SettingsController@deleteaccount']);
+    Route::get('/user/accounts',['as' => 'api.useraccounts','before' => 'auth','uses' => 'SettingsController@getaccounts']);
 
 });
 Route::get('{slug}',['as' => 'globalanalytics','uses' => 'AnalyticsController@globalanalytics']);

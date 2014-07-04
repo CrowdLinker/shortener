@@ -59,6 +59,10 @@ angular.module('shortenerApp.services',[])
                     url: shortener.url + '/api/twitter/create',
                     data : data
                 });
+            },
+            accounts: function()
+            {
+                return $http.get(shortener.url + '/api/user/accounts');
             }
         };
     })

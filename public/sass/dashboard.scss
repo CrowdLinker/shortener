@@ -52,4 +52,34 @@ a.logo-static {
   }
 }
 
+.profile
+{
+  width: 48px;
+  height: 48px;
+  float: left;
+  position: relative;
+  margin-right: 6px;
+  border-radius: 4px;
+}
+
+.profile.avatar span {
+  position: absolute;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-image: url('../image/network-icons.png');
+  background-repeat: no-repeat;
+  right: 0;
+  top: 32px;
+}
+
+.profile.avatar.twitter span {
+  background-position: 0px 0px !important;
+}
+
+.profile.avatar.facebook span
+{
+  background-position: 0 -18px !important;
+}
+
 @import "pages/media";

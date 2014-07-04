@@ -233,6 +233,12 @@ angular.module('shortenerApp.controllers',[])
                             $scope.changepassword = false;
                         }
                     });
+
+                User.accounts()
+                    .success(function(data)
+                    {
+                        $scope.socialaccounts = data.data;
+                    })
             })
     .controller('HomeController',
     function($scope,Link)
