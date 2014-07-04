@@ -17,7 +17,7 @@
             <br/>
             <div class="row">
                 <div ng-repeat="value in socialaccounts" class="profile avatar <% value.provider %>">
-                        <img ng-src="<% value.profileimage %>" alt="...">
+                        <img ng-src="<% value.profileimage %>" width="48">
                         <span></span>
                 </div>
             </div>
