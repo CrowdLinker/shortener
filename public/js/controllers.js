@@ -309,7 +309,8 @@ angular.module('shortenerApp.controllers',[])
         {
             $scope.data = {
                 'message': $scope.sharedata.message,
-                'socialaccounts': $scope.selectedsocial
+                'socialaccounts': $scope.selectedsocial,
+                'link': shortener.link
             };
 
             User.share($scope.data)

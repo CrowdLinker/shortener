@@ -425,11 +425,12 @@ class DbLinkRepository implements LinkRepositoryInterface
     public function share($data)
     {
         $message = $data['message'];
+        $link = $data['link'];
         foreach($data['socialaccounts'] as $value)
         {
             if($value['provider'] == 'facebook')
             {
-                $this->facebook->post($value['token'],$message);
+                $this->facebook->post($value['token'],$message,$link);
             }
             else
             {
