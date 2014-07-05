@@ -102,7 +102,7 @@ Route::filter('clicks_shorturl',function()
 {
     $sess_id = Session::getId();
     $check = Shortener::checkSessionExists($sess_id,Request::segment(1));
-    if(Agent::isRobot() || Agent::match('Flipboard|flipboard') || Agent::match('Google') || Agent::match('Linkedin') || Agent::match('Bot|bot') || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php') || Agent::platform() == "")
+    if(Agent::isRobot() || Agent::match('Flipboard|flipboard|Rackspace|Amazon|amazon|Proxy') || Agent::match('Google|Google Inc.') || Agent::match('Linkedin') || Agent::match('Bot|bot') || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php') || Agent::platform() == "")
     {
         Log::error(Request::server('HTTP_USER_AGENT'));
     }
@@ -119,7 +119,7 @@ Route::filter('clicks_shorturl',function()
 
 Route::filter('track_referrer',function()
 {
-    if(Agent::isRobot() || Agent::match('Flipboard|flipboard') || Agent::match('Google') || Agent::match('Linkedin') || Agent::match('Bot|bot') || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php') || Agent::platform() == "")
+    if(Agent::isRobot() || Agent::match('Flipboard|flipboard|Rackspace|Amazon|amazon|Proxy') || Agent::match('Google|Google Inc.') || Agent::match('Linkedin') || Agent::match('Bot|bot') || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php') || Agent::platform() == "")
     {
         Log::info(Request::server('HTTP_USER_AGENT'));
     }
@@ -132,7 +132,7 @@ Route::filter('track_referrer',function()
 
 Route::filter('track_location',function()
 {
-    if(Agent::isRobot() || Agent::match('Flipboard|flipboard') || Agent::match('Google') || Agent::match('Linkedin') || Agent::match('Bot|bot') || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php') || Agent::platform() == "")
+    if(Agent::isRobot() || Agent::match('Flipboard|flipboard|Rackspace|Amazon|amazon|Proxy') || Agent::match('Google|Google Inc.') || Agent::match('Linkedin') || Agent::match('Bot|bot') || Agent::match('metauri.com') || Agent::match('help@dataminr.com') || Agent::match('Google-HTTP-Java-Client') || Agent::match('Trident') || Agent::match('http://www.facebook.com/externalhit_uatext.php') || Agent::platform() == "")
     {
         Log::info(Request::server('HTTP_USER_AGENT'));
     }
