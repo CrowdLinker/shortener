@@ -52,6 +52,7 @@ class ShareController extends ApiController {
         }
         catch(Exception $e)
         {
+            Log::error($e);
             return $this->setStatusCode(400)->respondWithError('Oops Something is wrong');
         }
     }
