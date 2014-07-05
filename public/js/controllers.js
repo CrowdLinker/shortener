@@ -284,6 +284,8 @@ angular.module('shortenerApp.controllers',[])
         $scope.sharedata = {};
         $scope.success = false;
         $scope.error = false;
+        $scope.successmessage = '';
+        $scope.errormessage = '';
         $scope.sharedata.message = shortener.message;
         User.accounts()
             .success(function(data)
@@ -313,16 +315,15 @@ angular.module('shortenerApp.controllers',[])
             User.share($scope.data)
                 .success(function(data)
                 {
-                    console.log(data);
                     $scope.success = true;
                     $scope.error = false;
-                    $scope.successmessage = data.message;
+                    $scope.successmessage = data.success.message;
                 })
                 .error(function(data)
                 {
                     $scope.success = false;
                     $scope.error  = true;
-                    $scope.errormessage = data.message;
+                    $scope.errormessage = data.error.message;
                 });
         }
     });
