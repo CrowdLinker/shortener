@@ -1,15 +1,15 @@
 @extends('layout.master')
 @section('content')
 <div class="container">
-    <div class="col-md-12 sharebar">
+    <div class="col-md-12 sharebar" ng-controller="ShareController">
         <h2>Share</h2>
         <hr/>
         <div ng-if="success" class="alert alert-success" ng-cloak><% successmessage %></div>
         <div ng-if="error" class="alert alert-danger" ng-cloak><% errormessage %></div>
-        <section class="composer clearfix" ng-controller="ShareController">
+        <section class="composer clearfix">
             <div class="col-md-12">
                 <div class="row">
-                    <div ng-repeat="value in socialaccounts" ng-class="(selected) ? 'selected' : ''"  ng-init="selected=false" ng-click="selected = !selected;selectAccount($index,value,selected)" class="profile share avatar <% value.provider %> clearfix">
+                    <div ng-repeat="value in socialaccounts" ng-class="(selected) ? 'selected' : ''"  ng-init="selected=false;tooltip='select'" ng-click="selected = !selected;selectAccount($index,value,selected)" class="profile share avatar <% value.provider %> clearfix">
                         <img width="48" ng-src="<% value.profileimage %>">
                         <span></span>
                     </div>

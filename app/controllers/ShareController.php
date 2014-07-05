@@ -41,6 +41,10 @@ class ShareController extends ApiController {
     public function share()
     {
         $data = Input::all();
+        if(count($data['socialaccounts']) == 0)
+        {
+            return $this->setStatusCode(400)->respondWithError('Please select social account');
+        }
         try
         {
             Shortener::share($data);
