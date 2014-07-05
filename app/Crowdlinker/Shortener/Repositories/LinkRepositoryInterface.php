@@ -91,15 +91,24 @@ interface LinkRepositoryInterface
     public function addViewed($id,$sess_id);
 
     /**
+     * Get Location Data
      * @param $data
      * @return mixed
      */
     public function getLocation($data);
 
     /**
+     * Get Map Data
      * @param $data
      * @param $shorlink
      * @return mixed
      */
     public function getMapData($data,$shorlink);
+
+    /**
+     * Share on social media account feed/timeline
+     * @param $data
+     * @return mixed
+     */
+    public function share($data);
 }

@@ -8,18 +8,21 @@ use Crowdlinker\GeoIP\geoipApi as GeoApi;
 use Crowdlinker\SnowPlow\snowplowApi as SnowPlow;
 use League\Fractal;
 use Crowdlinker\Twitter\Service as Twitter;
+use Crowdlinker\Facebook\Service as Facebook;
 class DbLinkRepository implements LinkRepositoryInterface
 {
     /**
      * @param GeoApi $geoapi
      * @param SnowPlow $snowplow
      * @param Twitter $twitter
+     * @param Facebook $facebook
      */
-    public function __construct(GeoApi $geoapi,SnowPlow $snowplow,Twitter $twitter)
+    public function __construct(GeoApi $geoapi,SnowPlow $snowplow,Twitter $twitter,Facebook $facebook)
     {
         $this->geoip = $geoapi;
         $this->snowplow = $snowplow;
         $this->twitter = $twitter;
+        $this->facebook = $facebook;
     }
 
     /**
@@ -412,5 +415,26 @@ class DbLinkRepository implements LinkRepositoryInterface
                 ];
         }
         return $output;
+    }
+
+    /**
+     * Share on twitter feed or facebook wall
+     * @param $data
+     * @return mixed|void
+     */
+    public function share($data)
+    {
+        $message = $data['message'];
+        foreach($data['socialaccounts'] as $value)
+        {
+            if($value['provider'] == 'facebook')
+            {
+                $this->facebook->post($value['token'],$message);
+            }
+            else
+            {
+                $this->twitter->tweet($message,$value['token'],$value['secret']);
+            }
+        }
     }
 }

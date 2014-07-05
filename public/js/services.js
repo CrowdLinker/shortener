@@ -63,6 +63,14 @@ angular.module('shortenerApp.services',[])
             accounts: function()
             {
                 return $http.get(shortener.url + '/api/user/accounts');
+            },
+            share: function(data)
+            {
+                return $http({
+                    method: 'POST',
+                    url: shortener.url + '/api/share',
+                    data: data
+                });
             }
         };
     })

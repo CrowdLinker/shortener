@@ -47,6 +47,7 @@ Route::get('dashboard/{id}',['as' => 'dashboard','before' => 'guest','uses' => '
 Route::get('share/{hashtag}',['as' => 'share','before' => 'guest','uses' => 'ShareController@show']);
 Route::group(['prefix' => 'api'],function()
 {
+    Route::post('share',['as' => 'api.share','before' => 'auth','uses' => 'ShareController@share']);
     Route::get('links',['as' => 'api.urls','before' => 'auth.basic','uses' => 'LinksController@getlinks']);
     Route::get('/links/detail/{shortlink}',['as' => 'api.url.detail','uses' => 'AnalyticsController@detail']);
     Route::get('/links/map/{shortlink}',['as' => 'api.url.map','uses' => 'AnalyticsController@map']);
