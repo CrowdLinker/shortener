@@ -280,13 +280,23 @@ angular.module('shortenerApp.controllers',[])
     .controller('ShareController',
     function($scope,User)
     {
+        $scope.selected = false;
+        $scope.selectedsocial = [];
         User.accounts()
             .success(function(data)
             {
                 $scope.socialaccounts = data.data;
-                $scope.socialaccounts[0].selected = true;
-                console.log($scope.socialaccounts);
             })
+
+        $scope.selectAccount = function(data)
+        {
+            $scope.selected = !$scope.selected;
+            if($scope.selected)
+            {
+                $scope.selectedsocial.push(data);
+            }
+            console.log($scope.selectedsocial);
+        };
     });
 
 
