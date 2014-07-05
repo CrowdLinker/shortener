@@ -23,7 +23,7 @@ class DbUserRepository implements UserInterface
         $user->save();
         if($socialmedia)
         {
-            $this->addAccount($user,$data['id'],$token->getAccessToken(),$token->getEndOfLife(),'facebook',$data['email'],'https://graph.facebook.com/'.$data['id'].'/picture?width=140&height=140');
+            $this->addAccount($user,$data['id'],$token->getAccessToken(),NULL,$token->getEndOfLife(),'facebook',$data['email'],'https://graph.facebook.com/'.$data['id'].'/picture?width=140&height=140');
         }
         return $user;
     }
