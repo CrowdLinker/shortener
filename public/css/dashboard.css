@@ -66,6 +66,44 @@ a.logo-static {
   background-position: 0 -18px !important;
 }
 
+.sharebar h2 {
+  font-family: 'Lato', sans-serif;
+}
+
+.composer {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #eeeeee;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.composer .profile {
+  opacity: 0.5;
+  margin-bottom: 20px;
+}
+.composer .share {
+  cursor: pointer;
+}
+.composer textarea {
+  resize: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+.composer .profile.selected {
+  opacity: 1;
+}
+.composer .profile.selected img {
+  border-bottom: 4px solid #5ba525;
+  margin-bottom: 6px;
+}
+
+.characterlimit {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: #5b5b5b;
+}
+
 /*==================================================
 =            Bootstrap 3 Media Queries             =
 ==================================================*/

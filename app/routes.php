@@ -39,11 +39,12 @@ Route::get('/logout',function()
     return Redirect::to('/');
 });
 Route::get('/start',['as' => 'twitter_email','uses' => 'AuthController@start']);
-
+Route::model('hashtag','ShortLink');
 //Dashboard
 Route::get('dashboard',['as' => 'dashboard','before' => 'guest','uses' => 'DashboardController@index']);
 Route::get('dashboard/settings',['as' => 'dashboardsettings','before' => 'guest','uses' => 'SettingsController@index']);
 Route::get('dashboard/{id}',['as' => 'dashboard','before' => 'guest','uses' => 'AnalyticsController@index']);
+Route::get('share/{hashtag}',['as' => 'share','before' => 'guest','uses' => 'ShareController@show']);
 Route::group(['prefix' => 'api'],function()
 {
     Route::get('links',['as' => 'api.urls','before' => 'auth.basic','uses' => 'LinksController@getlinks']);
