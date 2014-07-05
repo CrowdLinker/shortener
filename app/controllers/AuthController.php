@@ -109,7 +109,7 @@ class AuthController extends ApiController {
         }
         else
         {
-            if(strpos($string, " ") !== false)
+            if(strpos(Session::get('name'), " ") !== false)
             {
                 list($firstname,$lastname) = explode(" ",Session::get('name'));
             }
