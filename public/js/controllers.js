@@ -282,6 +282,8 @@ angular.module('shortenerApp.controllers',[])
     {
         $scope.selectedsocial = [];
         $scope.sharedata = {};
+        $scope.success = false;
+        $scope.error = false;
         $scope.sharedata.message = shortener.message;
         User.accounts()
             .success(function(data)
@@ -303,7 +305,6 @@ angular.module('shortenerApp.controllers',[])
 
         $scope.postNow = function()
         {
-            console.log($scope.selectedsocial);
             $scope.data = {
                 'message': $scope.sharedata.message,
                 'socialaccounts': $scope.selectedsocial
@@ -312,11 +313,13 @@ angular.module('shortenerApp.controllers',[])
             User.share($scope.data)
                 .success(function(data)
                 {
-
+                    $scope.success = true;
+                    $scope.error = false;
                 })
                 .error(function(data)
                 {
-
+                    $scope.success = false;
+                    $scope.error  = true;
                 });
         }
     });

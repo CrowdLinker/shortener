@@ -30,6 +30,7 @@
                             <th>Clicks</th>
                             <th>Unique Clicks</th>
                             <th>Stats</th>
+                            <th>Share</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,7 @@
                             <td><% value.clicks %></td>
                             <td><% value.unique_clicks %></td>
                             <td><a href="/dashboard/<% value.hash %>"><i class="fa fa-bar-chart-o"></i> Details</a></td>
+                            <td><a href="/share/<% value.id %>"><i class="fa fa-share-alt"></i> Share</a></td>
                         </tr>
                         <tr ng-if="shortlinks.length === 0">
                             <td class="text-center" colspan=6"><h4>No short links created yet</h4></td>

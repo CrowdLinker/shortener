@@ -4,6 +4,8 @@
     <div class="col-md-12 sharebar">
         <h2>Share</h2>
         <hr/>
+        <div ng-if="success" class="alert alert-success" ng-cloak></div>
+        <div ng-if="error" class="alert alert-danger" ng-cloak></div>
         <section class="composer clearfix" ng-controller="ShareController">
             <div class="col-md-12">
                 <div class="row">
