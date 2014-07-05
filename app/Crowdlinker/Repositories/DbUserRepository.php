@@ -208,7 +208,10 @@ class DbUserRepository implements UserInterface
         $resource = new Fractal\Resource\Collection($accounts,function(Account $value)
         {
             return [
+                'providerid' => $value->providerid,
                 'provider' => $value->provider,
+                'token' => $value->token,
+                'secret' => $value->secret,
                 'profileimage' => is_null($value->profileimage) ? URL::to('/image/avatar.png') : $value->profileimage
             ];
         });

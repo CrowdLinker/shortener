@@ -281,15 +281,18 @@ angular.module('shortenerApp.controllers',[])
     function($scope,User)
     {
         $scope.selectedsocial = [];
+        $scope.sharedata = {};
+        $scope.sharedata.message = shortener.message;
         User.accounts()
             .success(function(data)
             {
                 $scope.socialaccounts = data.data;
             })
 
+
+
         $scope.selectAccount = function(index,data,selected)
         {
-           console.log(index);
             if(selected)
             {
                 $scope.selectedsocial.push(data);

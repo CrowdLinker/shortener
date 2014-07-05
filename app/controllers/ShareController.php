@@ -34,7 +34,7 @@ class ShareController extends \BaseController {
 	public function show($id)
 	{
         $title = 'Share';
-        JavaScript::put(['url' => URL::to('/'),'csrf' => csrf_token()]);
+        JavaScript::put(['url' => URL::to('/'),'csrf' => csrf_token(),'message' => $id->pagetitle.' - '.'http://'.$_ENV['SHORT_DOMAIN'].'/'.$id->hash]);
 		return View::make('share',compact('title'));
 	}
 
