@@ -7,16 +7,19 @@ use ShortLink,Referrer,Location,LinkView;
 use Crowdlinker\GeoIP\geoipApi as GeoApi;
 use Crowdlinker\SnowPlow\snowplowApi as SnowPlow;
 use League\Fractal;
+use Crowdlinker\Twitter\Service as Twitter;
 class DbLinkRepository implements LinkRepositoryInterface
 {
     /**
      * @param GeoApi $geoapi
      * @param SnowPlow $snowplow
+     * @param Twitter $twitter
      */
-    public function __construct(GeoApi $geoapi,SnowPlow $snowplow)
+    public function __construct(GeoApi $geoapi,SnowPlow $snowplow,Twitter $twitter)
     {
         $this->geoip = $geoapi;
         $this->snowplow = $snowplow;
+        $this->twitter = $twitter;
     }
 
     /**

@@ -169,4 +169,9 @@ class ShortenerService
     {
         return $this->linkRepo->getMapData($data,$shortlink);
     }
+
+    public function share($data)
+    {
+        return $this->linkRepo->share($data);
+    }
 }

@@ -24,7 +24,7 @@ return array(
         'Facebook' => array(
             'client_id'     => $_ENV['FACEBOOK_ID'],
             'client_secret' => $_ENV['FACEBOOK_SECRET'],
-            'scope'         => array('email'),
+            'scope'         => array('email,publish_actions'),
         ),		
 
 	)
