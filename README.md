@@ -32,6 +32,8 @@ Features
 * Single Sign On - Currently supports Facebook,Twitter and username/password.
 * Track clicks (Including unique clicks)
 * Track Location - Countries and City
+* Share to your social network.
+* Scheduling post to social network (coming soon).
 * SafeBrowsing
 
 
