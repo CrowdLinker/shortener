@@ -315,11 +315,13 @@ angular.module('shortenerApp.controllers',[])
                 {
                     $scope.success = true;
                     $scope.error = false;
+                    $scope.successmessage = data.message;
                 })
                 .error(function(data)
                 {
                     $scope.success = false;
                     $scope.error  = true;
+                    $scope.errormessage = data.message;
                 });
         }
     });

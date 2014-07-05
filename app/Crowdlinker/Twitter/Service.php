@@ -25,7 +25,7 @@ class Service
         );
 
         $client->addSubscriber($auth);
-        $request = $client->post('statuses/update.json',null,
+        $request = $client->post('statuses/update.json?include_entities=true',null,
         [
             'status' => $data
         ]);
