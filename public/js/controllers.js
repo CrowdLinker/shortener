@@ -313,6 +313,7 @@ angular.module('shortenerApp.controllers',[])
             User.share($scope.data)
                 .success(function(data)
                 {
+                    console.log(data);
                     $scope.success = true;
                     $scope.error = false;
                     $scope.successmessage = data.message;
