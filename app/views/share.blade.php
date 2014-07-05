@@ -21,7 +21,7 @@
                        <span class="characterlimit"><% 140 - sharedata.message.length %> left</span>
                     </div>
                     <div class="pull-right">
-                        <button class="btn btn-success">Post Now</button>
+                        <button class="btn btn-success" ng-click="postNow()">Post Now</button>
                     </div>
                 </div>
             </div>

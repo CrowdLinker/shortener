@@ -298,8 +298,12 @@ angular.module('shortenerApp.controllers',[])
             {
                 $scope.selectedsocial.splice(index,1);
             }
-            console.log($scope.selectedsocial);
         };
+
+        $scope.postNow = function()
+        {
+            console.log($scope.selectedsocial);
+        }
     });
 
 
