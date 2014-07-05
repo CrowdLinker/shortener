@@ -3,7 +3,7 @@ use GuzzleHttp\Client;
 class Service
 {
     /**
-     * Post on wall.
+     * Post on wall
      * @param $token
      * @param $data
      * @param $link
@@ -12,7 +12,7 @@ class Service
     public function post($token,$data,$link)
     {
         $client = new Client(['base_url' => 'https://graph.facebook.com']);
-        $params = ['access_token' => $token,'message' => $data,'link' => $link];
+        $params = ['access_token' => $token,'message' => $data];
         $request = $client->post('/v2.0/me/feed?'.http_build_query($params));
         $response = json_encode($request->json());
         return $response;
