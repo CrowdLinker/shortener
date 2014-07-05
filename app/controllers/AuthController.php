@@ -109,7 +109,15 @@ class AuthController extends ApiController {
         }
         else
         {
-            list($firstname,$lastname) = explode(" ",Session::get('name'));
+            if(strpos($string, " ") !== false)
+            {
+                list($firstname,$lastname) = explode(" ",Session::get('name'));
+            }
+            else
+            {
+                $firstname = Session::get('name');
+                $lastname = 'NONE';
+            }
             $data =
                 [
                    'email' => Input::get('email'),
