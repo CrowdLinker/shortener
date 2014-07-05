@@ -276,6 +276,15 @@ angular.module('shortenerApp.controllers',[])
                     $scope.error = true;
                 });
         }
+    })
+    .controller('ShareController',
+    function($scope,User)
+    {
+        User.accounts()
+            .success(function(data)
+            {
+                $scope.socialaccounts = data.data;
+            })
     });
 
 
