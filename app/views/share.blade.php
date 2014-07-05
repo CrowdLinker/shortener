@@ -7,7 +7,7 @@
         <section class="composer clearfix" ng-controller="ShareController">
             <div class="col-md-12">
                 <div class="row">
-                    <div ng-repeat="value in socialaccounts" class="profile share avatar <% value.provider %> selected clearfix">
+                    <div ng-repeat="value in socialaccounts" ng-class="(value.selected) ? 'selected' : ''" class="profile share avatar <% value.provider %> clearfix">
                         <img width="48" ng-src="<% value.profileimage %>">
                         <span></span>
                     </div>

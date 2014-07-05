@@ -284,6 +284,8 @@ angular.module('shortenerApp.controllers',[])
             .success(function(data)
             {
                 $scope.socialaccounts = data.data;
+                $scope.socialaccounts[0].selected = true;
+                console.log($scope.socialaccounts);
             })
     });
 
