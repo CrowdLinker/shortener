@@ -286,6 +286,7 @@ angular.module('shortenerApp.controllers',[])
         $scope.error = false;
         $scope.successmessage = '';
         $scope.errormessage = '';
+        $scope.limitext = false;
         $scope.sharedata.message = shortener.message;
         User.accounts()
             .success(function(data)
