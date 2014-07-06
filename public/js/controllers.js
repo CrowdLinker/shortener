@@ -301,7 +301,7 @@ angular.module('shortenerApp.controllers',[])
             }
             else
             {
-                if($scope.selectedsocial[0].provider == data.provider)
+                if($scope.selectedsocial.length > 0 && $scope.selectedsocial[0].provider == data.provider)
                 {
                     $scope.selectedsocial.splice(0,1);
                 }
@@ -315,21 +315,17 @@ angular.module('shortenerApp.controllers',[])
             {
                 if($scope.selectedsocial[0].provider == 'facebook')
                 {
-                    //console.log('facebook');
+                    console.log('facebook');
                 }
                 if($scope.selectedsocial[0].provider == 'twitter')
                 {
-                   // console.log('twitter');
+                   console.log('twitter');
                 }
-            }
-            else
-            {
-
             }
 
             if($scope.selectedsocial.length > 1)
             {
-                //console.log('both');
+                console.log('both');
             }
         };
 
