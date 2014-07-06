@@ -302,8 +302,9 @@ angular.module('shortenerApp.controllers',[])
             }
             else
             {
-                $scope.selectedsocial.splice(index,2);
+                $scope.selectedsocial.pop();
             }
+            console.log($scope.selectedsocial);
             if($scope.selectedsocial.length < 2)
             {
                 if($scope.selectedsocial[0].provider == 'facebook')
