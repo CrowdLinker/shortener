@@ -305,21 +305,26 @@ angular.module('shortenerApp.controllers',[])
             }
 
             console.log($scope.selectedsocial.length);
+            console.log($scope.selectedsocial);
             if($scope.selectedsocial.length < 2)
             {
                 if($scope.selectedsocial[0].provider == 'facebook')
                 {
-                    console.log('facebook');
+                    //console.log('facebook');
                 }
                 if($scope.selectedsocial[0].provider == 'twitter')
                 {
-                    console.log('twitter');
+                   // console.log('twitter');
                 }
+            }
+            else
+            {
+
             }
 
             if($scope.selectedsocial.length > 1)
             {
-                console.log('both');
+                //console.log('both');
             }
         };
 
