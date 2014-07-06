@@ -311,12 +311,13 @@ angular.module('shortenerApp.controllers',[])
                 {
                     console.log('facebook');
                 }
-                else
+                if($scope.selectedsocial[0].provider == 'twitter')
                 {
                     console.log('twitter');
                 }
             }
-            else
+
+            if($scope.selectedsocial.length == 2)
             {
                 console.log('both');
             }
