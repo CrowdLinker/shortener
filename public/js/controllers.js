@@ -304,6 +304,22 @@ angular.module('shortenerApp.controllers',[])
             {
                 $scope.selectedsocial.splice(index,1);
             }
+
+            if($scope.selectedsocial.length < 2)
+            {
+                if($scope.selectedsocial[0].provider == 'facebook')
+                {
+                    console.log('facebook');
+                }
+                else
+                {
+                    console.log('twitter');
+                }
+            }
+            else
+            {
+                console.log('both');
+            }
         };
 
         $scope.postNow = function()
