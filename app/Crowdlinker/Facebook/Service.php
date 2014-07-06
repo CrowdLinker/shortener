@@ -13,11 +13,13 @@ class Service
     {
         $client = new Client(['base_url' => 'https://graph.facebook.com']);
         $params = [
+            'method' => 'POST',
+            'format' => 'json',
             'access_token' => $token,
             'message' => $data,
-            'link' => 'http://www.google.com'
+            'link' => $link
         ];
-        $request = $client->post('/v2.0/me/feed?'.http_build_query($params));
+        $request = $client->get('/v2.0/me/feed?'.http_build_query($params));
         $response = json_encode($request->json());
         return $response;
     }
