@@ -295,17 +295,15 @@ angular.module('shortenerApp.controllers',[])
 
         $scope.selectAccount = function(index,data,selected)
         {
+            console.log(index);
             if(selected)
             {
                 $scope.selectedsocial.push(data);
             }
             else
             {
-                $scope.selectedsocial.splice(index,1);
+                $scope.selectedsocial.splice(index,2);
             }
-
-            console.log($scope.selectedsocial.length);
-            console.log($scope.selectedsocial);
             if($scope.selectedsocial.length < 2)
             {
                 if($scope.selectedsocial[0].provider == 'facebook')
