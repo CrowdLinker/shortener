@@ -312,7 +312,6 @@ angular.module('shortenerApp.controllers',[])
             }
             if($scope.selectedsocial.length == 1 && $scope.selectedsocial[0].provider == 'facebook')
             {
-                console.log('facebook');
                $scope.limitext = false;
             }
             else if($scope.selectedsocial.length == 1 && $scope.selectedsocial[0].provider == 'twitter')
