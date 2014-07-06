@@ -15,12 +15,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <textarea class="form-control" rows="3" ng-model="sharedata.message" ng-trim="false" maxlength="140" placeholder="Write your post here"></textarea>
+                    <textarea ng-if="limitext" class="form-control" rows="3" ng-model="sharedata.message" ng-trim="false" maxlength="140" placeholder="Write your post here"></textarea>
+                    <textarea ng-if="!limitext" class="form-control" rows="3" ng-model="sharedata.message" ng-trim="false" placeholder="Write your post here"></textarea>
                 </div>
                 <div class="row">
                     <br/>
                     <div class="pull-left">
-                       <span class="characterlimit"><% 140 - sharedata.message.length %> left</span>
+                       <span ng-if="limitext" class="characterlimit"><% 140 - sharedata.message.length %> left</span>
                     </div>
                     <div class="pull-right">
                         <button class="btn btn-success" ng-click="postNow()">Post Now</button>

@@ -310,18 +310,17 @@ angular.module('shortenerApp.controllers',[])
                     $scope.selectedsocial.splice(1,1);
                 }
             }
-            console.log($scope.selectedsocial);
             if($scope.selectedsocial.length == 1 && $scope.selectedsocial[0].provider == 'facebook')
             {
-                console.log('facebook');
+               $scope.limittext = false;
             }
             else if($scope.selectedsocial.length == 1 && $scope.selectedsocial[0].provider == 'twitter')
             {
-                console.log('twitter');
+                $scope.limitext = true;
             }
             else
             {
-                console.log('both');
+               $scope.limittext = true;
             }
         };
 
