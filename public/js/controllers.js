@@ -297,7 +297,6 @@ angular.module('shortenerApp.controllers',[])
         {
             if(selected)
             {
-                console.log(data);
                 $scope.selectedsocial.push(data);
             }
             else
@@ -305,6 +304,7 @@ angular.module('shortenerApp.controllers',[])
                 $scope.selectedsocial.splice(index,1);
             }
 
+            console.log($scope.selectedsocial.length);
             if($scope.selectedsocial.length < 2)
             {
                 if($scope.selectedsocial[0].provider == 'facebook')
@@ -317,7 +317,7 @@ angular.module('shortenerApp.controllers',[])
                 }
             }
 
-            if($scope.selectedsocial.length == 2)
+            if($scope.selectedsocial.length > 1)
             {
                 console.log('both');
             }
