@@ -297,7 +297,7 @@ angular.module('shortenerApp.controllers',[])
         {
             if(selected)
             {
-                console.log(data[index]);
+                console.log(data);
                 $scope.selectedsocial.push(data);
             }
             else
