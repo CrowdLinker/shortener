@@ -11,7 +11,7 @@
 |
 */
 //CSRF PROTECTION
-Route::when('*', 'serviceCSRF', array('post','put'));
+Route::when('api/*', 'serviceCSRF', array('post','put'));
 // Process Short Link Urls
 Route::group(['domain' => $_ENV['SHORT_DOMAIN']],function()
 {
